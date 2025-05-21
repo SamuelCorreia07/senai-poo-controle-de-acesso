@@ -1,44 +1,18 @@
 package com.senai.model.usuario.aluno;
+import com.senai.model.usuario.Usuario;
 import java.util.Objects;
 
-public class Aluno {
-    private int id;
-    private String nome;
+public class Aluno extends Usuario {
     private int idade;
 
     public Aluno(int id, String nome, int idade) {
-        this.id = id;
-        this.nome = nome;
+        super(nome, id);
         this.idade = idade;
     }
 
     public Aluno(String nome, int idade) {
-        this.nome = nome;
+        super(nome, 0);
         this.idade = idade;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        if (id > 0) {
-            this.id = id;
-        } else {
-            System.out.println("ID inválido.");
-        }
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        if (nome != null && !nome.trim().isEmpty()) {
-            this.nome = nome;
-        } else {
-            System.out.println("Nome inválido.");
-        }
     }
 
     public int getIdade() {
@@ -49,13 +23,13 @@ public class Aluno {
         if (idade > 0) {
             this.idade = idade;
         } else {
-            System.out.println("Idade inválida.");
+            System.out.println("\nIdade inválida!");
         }
     }
 
     @Override
     public String toString() {
-        return String.format("ID: %d | Nome: %s | Idade: %d", id, nome, idade);
+        return String.format("ID: %d | Nome: %s | Idade: %d", getId(), getNome(), idade);
     }
 
     @Override
@@ -63,11 +37,11 @@ public class Aluno {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Aluno aluno = (Aluno) o;
-        return id == aluno.id;
+        return getId() == aluno.getId();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(getId());
     }
 }

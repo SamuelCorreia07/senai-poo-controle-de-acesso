@@ -1,9 +1,7 @@
 package com.senai.model.usuario.aluno.dao;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
-import com.senai.model.Administrador;
-import com.senai.model.Aluno;
-
+import com.senai.model.usuario.aluno.Aluno;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -62,12 +60,7 @@ public class AlunoDAO {
         return alunos.stream().filter(a -> a.getId() == id).findFirst();
     }
 
-    public Optional<Aluno> buscarPorLogin(String login) {
-        return alunos.stream().filter(a -> a.getLogin().equals(login)).findFirst();
-    }
-
     public List<Aluno> listarTodos() {
         return alunos;
     }
 }
-

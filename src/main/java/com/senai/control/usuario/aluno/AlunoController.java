@@ -10,36 +10,32 @@ public class AlunoController {
         this.alunoDAO = new AlunoDAO();
     }
 
-    // Método para cadastrar aluno
     public String cadastrarAluno(String nome, int idade) {
         Aluno novoAluno = new Aluno(0, nome, idade);  // O ID será gerado no DAO
         alunoDAO.inserir(novoAluno);
-        return "Aluno cadastrado com sucesso!";
+        return "\nAlun@ cadastrad@ com sucesso!";
     }
 
-    // Método para atualizar aluno
     public String atualizarAluno(int id, String nome, int idade) {
         Aluno aluno = alunoDAO.buscarPorId(id).orElse(null);
         if (aluno == null) {
-            return "Aluno não encontrado!";
+            return "\nAlun@ não encontrad@!";
         }
         aluno.setNome(nome);
         aluno.setIdade(idade);
         alunoDAO.atualizar(aluno);
-        return "Aluno atualizado com sucesso!";
+        return "\nAlun@ atualizad@ com sucesso!";
     }
 
-    // Método para remover aluno
     public String removerAluno(int id) {
         Aluno aluno = alunoDAO.buscarPorId(id).orElse(null);
         if (aluno == null) {
-            return "Aluno não encontrado!";
+            return "\nAlun@ não encontrad@!";
         }
         alunoDAO.remover(id);
-        return "Aluno removido com sucesso!";
+        return "\nAlun@ removid@ com sucesso!";
     }
 
-    // Método para listar alunos
     public List<Aluno> listarAlunos() {
         return alunoDAO.listarTodos();
     }

@@ -29,47 +29,46 @@ public class AlunoView {
                 case "2" -> atualizarAluno();
                 case "3" -> removerAluno();
                 case "4" -> listarAlunos();
-                case "0" -> System.out.println("Voltando ao menu principal...");
-                default -> System.out.println("Opção inválida.");
+                case "0" -> System.out.println("\nVoltando ao menu principal...");
+                default -> System.out.println("\nOpção inválida!");
             }
         } while (!opcao.equals("0"));
     }
 
-    // Métodos relacionados aos alunos
     private void cadastrarAluno() {
-        String nome = scannerPromptString("Nome do aluno: ");
-        int idade = scannerPromptInt("Idade do aluno: ", "Por favor, insira uma idade válida.");
+        String nome = scannerPromptString("\tNome do aluno: ");
+        int idade = scannerPromptInt("\tIdade do aluno: ", "\nPor favor, insira uma idade válida.");
         String resultado = controller.cadastrarAluno(nome, idade);
-        System.out.println(resultado);  // Exibe o resultado do cadastro
+        System.out.println(resultado);
     }
 
     private void atualizarAluno() {
-        int id = scannerPromptInt("ID do aluno: ", "Por favor, insira um ID válido.");
-        String nome = scannerPromptString("Novo nome do aluno: ");
-        int idade = scannerPromptInt("Nova idade do aluno: ", "Por favor, insira uma idade válida.");
+        int id = scannerPromptInt("\tID do aluno: ", "\nPor favor, insira um ID válido.");
+        String nome = scannerPromptString("\tNovo nome do aluno: ");
+        int idade = scannerPromptInt("\tNova idade do aluno: ", "\nPor favor, insira uma idade válida.");
         String resultado = controller.atualizarAluno(id, nome, idade);
         System.out.println(resultado);
     }
 
     private void removerAluno() {
-        int id = scannerPromptInt("ID do aluno: ", "Por favor, insira um ID válido.");
-        System.out.print("Tem certeza que deseja remover o aluno com ID " + id + "? (S/N): ");
+        int id = scannerPromptInt("\tID do aluno: ", "\nPor favor, insira um ID válido.");
+        System.out.print("\nTem certeza que deseja remover o aluno com ID " + id + "? (S/N): ");
         String confirmacao = scanner.nextLine().trim().toUpperCase();
         if (confirmacao.equals("S")) {
             String resultado = controller.removerAluno(id);
-            System.out.println(resultado);  // Exibe o resultado da remoção
+            System.out.println(resultado);
         } else {
-            System.out.println("Remoção cancelada.");
+            System.out.println("\nRemoção cancelada!");
         }
     }
 
     private void listarAlunos() {
         List<Aluno> alunos = controller.listarAlunos();
         if (alunos.isEmpty()) {
-            System.out.println("Nenhum aluno encontrado.");
+            System.out.println("\nNenhum alun@ encontrad@!");
         } else {
             for (Aluno a : alunos) {
-                System.out.println(a);  // Exibe cada aluno listado
+                System.out.println(a);
             }
         }
     }
@@ -89,7 +88,7 @@ public class AlunoView {
                 numero = Integer.parseInt(scanner.nextLine().trim());
                 valido = true;
             } catch (NumberFormatException e) {
-                System.out.println(erroMsg);  // Mensagem personalizada de erro
+                System.out.println(erroMsg);
             }
         }
         return numero;
