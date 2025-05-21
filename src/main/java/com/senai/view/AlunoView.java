@@ -11,14 +11,17 @@ public class AlunoView {
     public void menu() {
         String opcao;
         String menuPrincipal = """
-                --- MENU PRINCIPAL ---
                 
-                    1 - Cadastrar aluno
-                    2 - Atualizar aluno
-                    3 - Remover aluno
-                    4 - Listar alunos
-                    0 - Voltar
-                    
+                _____________________________________________________________
+                |   Escolha uma opção:                                      |
+                |                                                           |
+                |       1 - Cadastrar alun@                                 |
+                |       2 - Atualizar alun@                                 |
+                |       3 - Remover alun@                                   |
+                |       4 - Listar alun@s                                   |
+                |       0 - Voltar                                          |
+                |___________________________________________________________|
+                
                 """;
         do {
             System.out.print(menuPrincipal);
@@ -36,23 +39,23 @@ public class AlunoView {
     }
 
     private void cadastrarAluno() {
-        String nome = scannerPromptString("\tNome do aluno: ");
-        int idade = scannerPromptInt("\tIdade do aluno: ", "\nPor favor, insira uma idade válida.");
+        String nome = scannerPromptString("\tNome d@ alun@: ");
+        int idade = scannerPromptInt("\tIdade d@ alun@: ", "\nPor favor, insira uma idade válida.");
         String resultado = controller.cadastrarAluno(nome, idade);
         System.out.println(resultado);
     }
 
     private void atualizarAluno() {
-        int id = scannerPromptInt("\tID do aluno: ", "\nPor favor, insira um ID válido.");
-        String nome = scannerPromptString("\tNovo nome do aluno: ");
-        int idade = scannerPromptInt("\tNova idade do aluno: ", "\nPor favor, insira uma idade válida.");
+        int id = scannerPromptInt("\tID d@ alun@: ", "\nPor favor, insira um ID válido.");
+        String nome = scannerPromptString("\tNovo nome d@ alun@: ");
+        int idade = scannerPromptInt("\tNova idade d@ alun@: ", "\nPor favor, insira uma idade válida.");
         String resultado = controller.atualizarAluno(id, nome, idade);
         System.out.println(resultado);
     }
 
     private void removerAluno() {
-        int id = scannerPromptInt("\tID do aluno: ", "\nPor favor, insira um ID válido.");
-        System.out.print("\nTem certeza que deseja remover o aluno com ID " + id + "? (S/N): ");
+        int id = scannerPromptInt("\tID d@ alun@: ", "\nPor favor, insira um ID válido.");
+        System.out.print("\nTem certeza que deseja remover o cadastro d@ alun@ com ID '" + id + "'? (S/N): ");
         String confirmacao = scanner.nextLine().trim().toUpperCase();
         if (confirmacao.equals("S")) {
             String resultado = controller.removerAluno(id);

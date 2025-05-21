@@ -11,7 +11,7 @@ public class AlunoController {
     }
 
     public String cadastrarAluno(String nome, int idade) {
-        Aluno novoAluno = new Aluno(0, nome, idade);  // O ID será gerado no DAO
+        Aluno novoAluno = new Aluno(0, nome, idade);
         alunoDAO.inserir(novoAluno);
         return "\nAlun@ cadastrad@ com sucesso!";
     }
