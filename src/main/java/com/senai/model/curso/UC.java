@@ -7,7 +7,7 @@ import java.util.List;
 
 public class UC {
     private String nome;
-    private List<Professor> professores = new ArrayList<>();
+    private List<Professor> professores;
     private int cargaHoraria;
     private int qtdSemestres;
 
@@ -15,6 +15,7 @@ public class UC {
         this.nome = nome;
         this.cargaHoraria = cargaHoraria;
         this.qtdSemestres = qtdSemestres;
+        this.professores = new ArrayList<>();
     }
 
     public String getNome() {

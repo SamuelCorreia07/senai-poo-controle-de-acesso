@@ -3,6 +3,7 @@ package com.senai.model.turma;
 import java.util.List;
 
 public class Turma {
+    private int idTurma;
     private String nome;
     private String curso;
     private List<Subturma> subturmas;
@@ -10,7 +11,8 @@ public class Turma {
     private int qtdSemestre;
     private String horarioEntrada;
 
-    public Turma(String nome, String curso, String dataInicio, int qtdSemestre, String horarioEntrada, List<Subturma> subturmas) {
+    public Turma(int idTurma, String nome, String curso, String dataInicio, int qtdSemestre, String horarioEntrada, List<Subturma> subturmas) {
+        this.idTurma = idTurma;
         this.nome = nome;
         this.curso = curso;
         this.dataInicio = dataInicio;
@@ -65,5 +67,13 @@ public class Turma {
 
     public void setHorarioEntrada(String horarioEntrada) {
         this.horarioEntrada = horarioEntrada;
+    }
+
+    public int getIdTurma() {
+        return idTurma;
+    }
+
+    public void setIdTurma(int idTurma) {
+        this.idTurma = idTurma;
     }
 }

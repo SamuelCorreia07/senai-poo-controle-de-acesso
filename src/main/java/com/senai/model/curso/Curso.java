@@ -3,13 +3,15 @@ package com.senai.model.curso;
 import java.util.List;
 
 public class Curso {
+    private int idCurso;
     private String titulo;
     private List<UC> ucs;
     private int cargaHoraria;
     private String tipo;
     private int tolerancia;
 
-    public Curso(String titulo, List<UC> ucs, int cargaHoraria, String tipo, int tolerancia) {
+    public Curso(int idCurso, String titulo, List<UC> ucs, int cargaHoraria, String tipo, int tolerancia) {
+        this.idCurso = idCurso;
         this.titulo = titulo;
         this.ucs = ucs;
         this.cargaHoraria = cargaHoraria;
@@ -55,5 +57,13 @@ public class Curso {
 
     public void setTolerancia(int tolerancia) {
         this.tolerancia = tolerancia;
+    }
+
+    public int getIdCurso() {
+        return idCurso;
+    }
+
+    public void setIdCurso(int idCurso) {
+        this.idCurso = idCurso;
     }
 }

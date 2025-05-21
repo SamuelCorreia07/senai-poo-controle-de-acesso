@@ -7,12 +7,13 @@ import java.util.List;
 
 public class Subturma {
     private String nome;
-    private List<Aluno> alunos = new ArrayList<>();
+    private List<Aluno> alunos;
     private String horario;
 
     public Subturma(String nome, String horario) {
         this.nome = nome;
         this.horario = horario;
+        this.alunos = new ArrayList<>();
     }
 
     public String getNome() {
