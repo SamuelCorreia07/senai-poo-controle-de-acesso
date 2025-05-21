@@ -9,7 +9,7 @@ public abstract class Usuario {
         this.id = id;
     }
 
-    public int getNome() {
+    public String getNome() {
         return nome;
     }
 

@@ -6,21 +6,25 @@ public class Coordenador extends Usuario {
     private String email;
     private String setorResponsavel;
 
-    public Coordenador(int id, String nome, String email, String setorResponsavel) {
-        this.id = id;
-        this.nome = nome;
+    public Coordenador(int nome, int id, int id1, String nome1, String email, String setorResponsavel) {
+        super(nome, id);
+        this.id = id1;
+        this.nome = nome1;
         this.email = email;
         this.setorResponsavel = setorResponsavel;
     }
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }
 
+    @Override
     public String getNome() {
         return nome;
     }
@@ -43,5 +47,16 @@ public class Coordenador extends Usuario {
 
     public void setSetorResponsavel(String setorResponsavel) {
         this.setorResponsavel = setorResponsavel;
+    }
+
+    @Override
+    public String toString() {
+        return "Coordenador{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", setorResponsavel='" + setorResponsavel + '\'' +
+                '}';
+
     }
 }
