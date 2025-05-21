@@ -1,19 +1,19 @@
 package com.senai.model.usuario;
 
 public abstract class Usuario {
-    private int nome;
+    private String nome;
     private int id;
 
-    public Usuario(int nome, int id) {
+    public Usuario(String nome, int id) {
         this.nome = nome;
         this.id = id;
     }
 
-    public int getNome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(int nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
