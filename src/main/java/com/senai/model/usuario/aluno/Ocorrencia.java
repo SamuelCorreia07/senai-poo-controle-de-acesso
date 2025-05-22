@@ -9,11 +9,11 @@ public class Ocorrencia {
     private String status; //PENDENTE AQV, PENDENTE PROFESSOR,
     private LocalDateTime dataHora;
 
-    public Ocorrencia(int id, String tipo, String descricao, String status, LocalDateTime dataHora) {
+    public Ocorrencia(int id, String tipo, String descricao, LocalDateTime dataHora) {
         this.id = id;
         this.tipo = tipo;
         this.descricao = descricao;
-        this.status = status;
+        this.status = "Pendente AQV";
         this.dataHora = dataHora;
     }
 
