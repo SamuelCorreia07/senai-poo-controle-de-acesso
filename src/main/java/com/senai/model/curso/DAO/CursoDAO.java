@@ -39,6 +39,8 @@ public class CursoDAO {
     }
 
     public void inserir(Curso curso){
+        int novoId = cursos.stream().mapToInt(Curso::getIdCurso).max().orElse(0) + 1;
+        curso.setIdCurso(novoId);
         cursos.add(curso);
         salvarJson();
     }

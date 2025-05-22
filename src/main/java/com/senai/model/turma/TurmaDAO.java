@@ -39,6 +39,8 @@ public class TurmaDAO {
     }
 
     public void inserir(Turma turma){
+        int novoId = turmas.stream().mapToInt(Turma::getIdTurma).max().orElse(0) + 1;
+        turma.setIdTurma(novoId);
         turmas.add(turma);
         salvarJson();
     }
