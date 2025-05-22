@@ -76,7 +76,6 @@ public class AlunoView {
         }
     }
 
-    // Métodos auxiliares
     private String scannerPromptString(String msg) {
         System.out.print(msg);
         return scanner.nextLine().trim();
