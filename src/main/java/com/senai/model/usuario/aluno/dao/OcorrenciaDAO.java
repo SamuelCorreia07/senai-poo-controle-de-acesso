@@ -59,10 +59,6 @@ public class OcorrenciaDAO {
         salvar(ocorrencias);
     }
 
-    public Optional<Ocorrencia> buscarPorId(int id) {
-        return carregar().stream().filter(p -> p.getId() == id).findFirst();
-    }
-
     public List<Ocorrencia> listarTodos() {
         return ocorrencias;
     }

@@ -1,6 +1,7 @@
 package com.senai.view;
 
 import com.senai.control.usuario.aluno.OcorrenciaController;
+import com.senai.model.usuario.aluno.Ocorrencia;
 
 import java.util.Scanner;
 
@@ -39,28 +40,38 @@ public class OcorrenciaView {
     }
 
     private void cadastrar() {
-        tipo();
-        String descricao = scannerPrompt("Descrição: ");
-
-    }
-
-    private String tipo(){
-        String opcaoTipo;
-        String menuTipo = """
+        String tipo = scannerPrompt("""
                 Tipo da ocorrência:
                     1. Entrada
                     2. Saída
-                """;
+                """);
+        String descricao = scannerPrompt("Descrição: ");
+        System.out.println(controller.cadastrarOcorrencia(tipo, descricao));
+    }
 
-        System.out.println(menuTipo);
-        opcaoTipo = scanner.nextLine();
+    private void atualizar() {
+        int id = scannerPromptInt("ID: ");
+        String tipo = scannerPrompt("Tipo: ");
+        String descricao = scannerPrompt("Descrição: ");
+        System.out.println(controller.atualizarOcorrencia(id, tipo, descricao));
+    }
 
-        if (opcaoTipo.equals("1")) {
-            return "Entrada";
-        } else if (opcaoTipo.equals("2")) {
-            return "Saida";
-        } else {
-            return "";
+    private void remover() {
+        int id = scannerPromptInt("ID: ");
+        System.out.println(controller.removerOcorrencia(id));
+    }
+
+    private void listar() {
+        System.out.println("--- Ocorrências ---");
+        for (Ocorrencia o : controller.listarOcorrencias()) {
+            System.out.printf("""
+                ID: %d
+                Tipo: %s
+                Descrição: %s
+                Status: %s
+                Data/Hora: %s
+                
+                """, o.getId(), o.getTipo(), o.getDescricao(), o.getStatus(), o.getDataHora());
         }
     }
 

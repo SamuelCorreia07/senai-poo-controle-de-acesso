@@ -6,15 +6,15 @@ public class Ocorrencia {
     private int id;
     private String tipo; //ENTRADA, SAÍDA
     private String descricao;
-    private String status; //PENDENTE AQV, PENDENTE PROFESSOR,
+    private String status; //PENDENTE AQV, PENDENTE PROFESSOR, APROVADO, REPROVADO
     private LocalDateTime dataHora;
 
-    public Ocorrencia(int id, String tipo, String descricao, LocalDateTime dataHora) {
+    public Ocorrencia(int id, String tipo, String descricao) {
         this.id = id;
         this.tipo = tipo;
         this.descricao = descricao;
         this.status = "Pendente AQV";
-        this.dataHora = dataHora;
+        this.dataHora = LocalDateTime.now();
     }
 
     public int getId() {
