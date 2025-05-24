@@ -2,17 +2,26 @@ package com.senai.model.usuario;
 
 public class AQV extends Usuario {
     private int id;
-    private String nomePessoa;
-    private String setor;
-    private String dataHoraAcesso;
+    private String nomeAluno;
+    private String matriculaAluno;
+    private String motivoAtraso;
+    private String dataRegistro;
+    private int idCoordenador;
 
-    public AQV(int nome, int id, int id1, String nomePessoa, String setor, String dataHoraAcesso) {
+    public AQV(int id, String nomeAluno, String matriculaAluno, String motivoAtraso, String dataRegistro, int idCoordenador) {
         super(nome, id);
         this.id = id1;
-        this.nomePessoa = nomePessoa;
-        this.setor = setor;
-        this.dataHoraAcesso = dataHoraAcesso;
+        this.nomeAluno = nomeAluno;
+        this.matriculaAluno = matriculaAluno;
+        this.motivoAtraso = motivoAtraso;
+        this.dataRegistro = dataRegistro;
+        this.idCoordenador = idCoordenador;
+
+
+
     }
+
+
 
     @Override
     public int getId() {
@@ -24,37 +33,45 @@ public class AQV extends Usuario {
         this.id = id;
     }
 
-    public String getNomePessoa() {
-        return nomePessoa;
+    public String getNomeAluno() {
+        return nomeAluno;
     }
 
-    public void setNomePessoa(String nomePessoa) {
-        this.nomePessoa = nomePessoa;
+    public void setNomeAluno(String nomeAluno) {
+        this.nomeAluno = nomeAluno;
     }
 
-    public String getSetor() {
-        return setor;
+    public String getMatriculaAluno() {
+        return matriculaAluno;
     }
 
-    public void setSetor(String setor) {
-        this.setor = setor;
+    public void setMatriculaAluno(String matriculaAluno) {
+        this.matriculaAluno = matriculaAluno;
     }
 
-    public String getDataHoraAcesso() {
-        return dataHoraAcesso;
+    public String getMotivoAtraso() {
+        return motivoAtraso;
     }
 
-    public void setDataHoraAcesso(String dataHoraAcesso) {
-        this.dataHoraAcesso = dataHoraAcesso;
+    public void setMotivoAtraso(String motivoAtraso) {
+        this.motivoAtraso = motivoAtraso;
     }
 
-    @Override
-    public String toString() {
-        return "AQV{" +
-                "id=" + id +
-                ", nomePessoa='" + nomePessoa + '\'' +
-                ", setor='" + setor + '\'' +
-                ", dataHoraAcesso='" + dataHoraAcesso + '\'' +
-                '}';
+    public String getDataRegistro() {
+        return dataRegistro;
     }
+
+    public void setDataRegistro(String dataRegistro) {
+        this.dataRegistro = dataRegistro;
+    }
+
+    public int getIdCoordenador() {
+        return idCoordenador;
+    }
+
+    public void setIdCoordenador(int idCoordenador) {
+        this.idCoordenador = idCoordenador;
+    }
+
+
 }

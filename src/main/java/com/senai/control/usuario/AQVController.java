@@ -6,21 +6,25 @@ import com.senai.model.usuario.dao.AQVDAO;
 import java.util.List;
 
 public class AQVController {
-    private AQVDAO dao = new AQVDAO();
+    private final AQVDAO dao = new AQVDAO();
 
-    public void adicionarAQV(AQV aqv) {
-        dao.add(aqv);
-        }
-        public List<AQV> listarTodos(){
-        return dao.getAll();
-        }
-        public void atualizarAQV(AQV aqv) {
-        dao.update(aqv);
-        }
-        public void removerAQV(int id){
-        dao.delete(id);
-        }
-
+    public void adicionar(AQV a) {
+        dao.adicionar(a);
     }
 
+    public List<AQV> listar() {
+        return dao.listar();
+    }
 
+    public void atualizar(int id, AQV a) {
+        dao.atualizar(id, a);
+    }
+
+    public void remover(int id) {
+        dao.remover(id);
+    }
+
+    public AQV buscarPorId(int id) {
+        return dao.buscarPorId(id);
+    }
+}

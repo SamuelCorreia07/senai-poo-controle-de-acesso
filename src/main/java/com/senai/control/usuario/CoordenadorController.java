@@ -6,21 +6,25 @@ import com.senai.model.usuario.dao.CoordenadorDAO;
 import java.util.List;
 
 public class CoordenadorController {
-    private CoordenadorDAO dao = new CoordenadorDAO();
+    private final CoordenadorDAO dao = new CoordenadorDAO();
 
-    public void adicionar(Coordenador c){
-        dao.add(c);
-    }
-    public List<Coordenador> listarTodos() {
-        return dao.getAll();
+    public void adicionar(Coordenador c) {
+        dao.adicionar(c);
     }
 
-    public void atualizar(Coordenador c) {
-        dao.update(c);
+    public List<Coordenador> listar() {
+        return dao.listar();
+    }
+
+    public void atualizar(int id, Coordenador c) {
+        dao.atualizar(id, c);
     }
 
     public void remover(int id) {
-        dao.delete(id);
+        dao.remover(id);
+    }
+
+    public Coordenador buscarPorId(int id) {
+        return dao.buscarPorId(id);
     }
 }
-

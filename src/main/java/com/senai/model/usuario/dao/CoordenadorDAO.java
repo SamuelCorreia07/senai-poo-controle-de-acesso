@@ -9,18 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoordenadorDAO {
-    private final String filePath = "data/coordenadores.json";
+    private final String filePath = "json_data/coordenadores.json";
     private final Gson gson = new Gson();
 
-    public List<Coordenador> getAll() {
+    public List<Coordenador> listar() {
         try (Reader reader = new FileReader(filePath)) {
-            return gson.fromJson(reader, new TypeToken<List<Coordenador>>() {}.getType());
+            List<Coordenador> lista = gson.fromJson(reader, new TypeToken<List<Coordenador>>(){}.getType());
+            return (lista != null) ? lista : new ArrayList<>();
         } catch (IOException e) {
             return new ArrayList<>();
         }
     }
 
-    public void Salvar(List<Coordenador> lista) {
+    public void salvar(List<Coordenador> lista) {
         try (Writer writer = new FileWriter(filePath)) {
             gson.toJson(lista, writer);
         } catch (IOException e) {
@@ -28,30 +29,34 @@ public class CoordenadorDAO {
         }
     }
 
-    public void add(Coordenador c) {
-        List<Coordenador> lista = getAll();
+    public void adicionar(Coordenador c) {
+        List<Coordenador> lista = listar();
+        c.setId(lista.size() + 1);
         lista.add(c);
-        Salvar(lista);
+        salvar(lista);
     }
 
-    public void update(Coordenador atualizado) {
-        List<Coordenador> lista = getAll();
+    public void atualizar(int id, Coordenador c) {
+        List<Coordenador> lista = listar();
         for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getId() == atualizado.getId()) {
-                lista.set(i, atualizado);
-                break;
+            if (lista.get(i).getId() == id) {
+                c.setId(id);
+                lista.set(i, c);
+                salvar(lista);
+                return;
             }
         }
-        Salvar(lista);
     }
 
-    public void delete(int id) {
-        List<Coordenador> lista = getAll();
+    public void remover(int id) {
+        List<Coordenador> lista = listar();
         lista.removeIf(c -> c.getId() == id);
-        Salvar(lista);
+        salvar(lista);
+    }
+
+    public Coordenador buscarPorId(int id) {
+        return listar().stream().filter(c -> c.getId() == id).findFirst().orElse(null);
     }
 }
-
-
 
 

@@ -3,16 +3,8 @@ package com.senai.model.usuario;
 public class Coordenador extends Usuario {
     private int id;
     private String nome;
-    private String email;
-    private String setorResponsavel;
-
-    public Coordenador(int nome, int id, int id1, String nome1, String email, String setorResponsavel) {
-        super(nome, id);
-        this.id = id1;
-        this.nome = nome1;
-        this.email = email;
-        this.setorResponsavel = setorResponsavel;
-    }
+    private String cpf;
+    private String departamento;
 
     @Override
     public int getId() {
@@ -33,30 +25,31 @@ public class Coordenador extends Usuario {
         this.nome = nome;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public String getSetorResponsavel() {
-        return setorResponsavel;
+    public String getDepartamento() {
+        return departamento;
     }
 
-    public void setSetorResponsavel(String setorResponsavel) {
-        this.setorResponsavel = setorResponsavel;
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
     }
 
-    @Override
-    public String toString() {
-        return "Coordenador{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", email='" + email + '\'' +
-                ", setorResponsavel='" + setorResponsavel + '\'' +
-                '}';
+    public Coordenador( String nome, String nome1, String cpf, String departamento) {
+        super(nome, 0);
+        int id1 = 0;
+        this.id = id1;
+        this.nome = nome1;
+        this.cpf = cpf;
+        this.departamento = departamento;
+
+
 
     }
 }

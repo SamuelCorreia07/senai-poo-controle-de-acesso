@@ -9,48 +9,52 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AQVDAO {
-    private final String filePath = "data/aqvs.json";
+    private final String filePath = "json_data/aqvs.json";
     private final Gson gson = new Gson();
 
-    public List<AQV> getAll() {
+    public List<AQV> listar() {
         try (Reader reader = new FileReader(filePath)) {
-            return gson.fromJson(reader, new TypeToken<List<AQV>>() {
-            }.getType());
+            List<AQV> lista = gson.fromJson(reader, new TypeToken<List<AQV>>(){}.getType());
+            return (lista != null) ? lista : new ArrayList<>();
         } catch (IOException e) {
             return new ArrayList<>();
         }
-
     }
 
-    public void salvar(List<AQV> aqvs) {
+    public void salvar(List<AQV> lista) {
         try (Writer writer = new FileWriter(filePath)) {
-            gson.toJson(aqvs, writer);
+            gson.toJson(lista, writer);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void add(AQV aqv) {
-        List<AQV> lista = getAll();
-        lista.add(aqv);
+    public void adicionar(AQV a) {
+        List<AQV> lista = listar();
+        a.setId(lista.size() + 1);
+        lista.add(a);
         salvar(lista);
     }
 
-    public void update(AQV atualizado) {
-        List<AQV> lista = getAll();
+    public void atualizar(int id, AQV a) {
+        List<AQV> lista = listar();
         for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getId() == atualizado.getId()) {
-                lista.set(i, atualizado);
-                break;
+            if (lista.get(i).getId() == id) {
+                a.setId(id);
+                lista.set(i, a);
+                salvar(lista);
+                return;
             }
         }
-
     }
 
-    public void delete(int id) {
-        List<AQV> Lista = this.getAll();
-        Lista.removeIf(a -> a.getId() == id);
-        salvar(Lista);
-    }
+    public void remover(int id) {
+        List<AQV> lista = listar();
+        lista.removeIf(a -> a.getId() == id);
+        salvar(lista);
     }
 
+    public AQV buscarPorId(int id) {
+        return listar().stream().filter(a -> a.getId() == id).findFirst().orElse(null);
+    }
+}
