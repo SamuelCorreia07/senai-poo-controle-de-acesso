@@ -1,9 +1,7 @@
 package com.senai.view;
 
 import com.senai.control.usuario.AQVController;
-import com.senai.control.usuario.CoordenadorController;
 import com.senai.model.usuario.AQV;
-import com.senai.model.usuario.Coordenador;
 
 import java.util.List;
 import java.util.Scanner;

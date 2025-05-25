@@ -1,10 +1,10 @@
 package com.senai.model.usuario;
 
 public abstract class Usuario {
-    private String nome;
+    String nome;
     private int id;
 
-    public Usuario(String nome, int id) {
+    public Usuario() {
         this.nome = nome;
         this.id = id;
     }

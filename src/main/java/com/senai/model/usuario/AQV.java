@@ -1,36 +1,21 @@
 package com.senai.model.usuario;
 
 public class AQV extends Usuario {
-    private int id;
+
     private String nomeAluno;
     private String matriculaAluno;
     private String motivoAtraso;
     private String dataRegistro;
     private int idCoordenador;
 
-    public AQV(int id, String nomeAluno, String matriculaAluno, String motivoAtraso, String dataRegistro, int idCoordenador) {
-        super(nome, id);
-        this.id = id1;
+    public AQV(int i, String nomeAluno, String matriculaAluno, String motivoAtraso, String dataRegistro, int idCoordenador) {
+        super();
+
         this.nomeAluno = nomeAluno;
         this.matriculaAluno = matriculaAluno;
         this.motivoAtraso = motivoAtraso;
         this.dataRegistro = dataRegistro;
         this.idCoordenador = idCoordenador;
-
-
-
-    }
-
-
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNomeAluno() {
@@ -73,5 +58,14 @@ public class AQV extends Usuario {
         this.idCoordenador = idCoordenador;
     }
 
-
+    @Override
+    public String toString() {
+        return "AQV{" +
+                "nomeAluno='" + nomeAluno + '\'' +
+                ", matriculaAluno='" + matriculaAluno + '\'' +
+                ", motivoAtraso='" + motivoAtraso + '\'' +
+                ", dataRegistro='" + dataRegistro + '\'' +
+                ", idCoordenador=" + idCoordenador +
+                '}';
+    }
 }
