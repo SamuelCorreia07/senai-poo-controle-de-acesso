@@ -15,7 +15,7 @@ public class AQVDAO {
     private final Gson gson = new Gson();
 
     public AQVDAO() {
-        // Cria diretório e arquivo se não existirem
+
         File file = new File(filePath);
         if (!file.exists()) {
             try {
@@ -24,7 +24,7 @@ public class AQVDAO {
                     dir.mkdirs();
                 }
                 file.createNewFile();
-                // Escreve lista vazia no arquivo
+
                 try (Writer writer = new FileWriter(filePath)) {
                     gson.toJson(new ArrayList<>(), writer);
                 }

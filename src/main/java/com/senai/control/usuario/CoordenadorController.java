@@ -8,16 +8,16 @@ import java.util.List;
 public class CoordenadorController {
     private final CoordenadorDAO dao = new CoordenadorDAO();
 
-    public void adicionar(Coordenador c) {
-        dao.adicionar(c);
+    public void adicionar(Coordenador a) {
+        dao.adicionar(a);
     }
 
     public List<Coordenador> listar() {
         return dao.listar();
     }
 
-    public void atualizar(int id, Coordenador c) {
-        dao.atualizar(id, c);
+    public void atualizar(int id, Coordenador a) {
+        dao.atualizar(id, a);
     }
 
     public void remover(int id) {
