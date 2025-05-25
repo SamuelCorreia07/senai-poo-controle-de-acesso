@@ -27,4 +27,8 @@ public class AQVController {
     public AQV buscarPorId(int id) {
         return dao.buscarPorId(id);
     }
+
+    public List<AQV> listarPorCoordenador(int id) {
+        return null;
+    }
 }

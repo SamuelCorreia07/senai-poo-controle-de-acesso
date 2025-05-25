@@ -29,7 +29,7 @@ public class CoordenadorView {
 
             try {
                 op = scanner.nextInt();
-                scanner.nextLine(); // Limpa o buffer do scanner
+                scanner.nextLine();
 
                 switch (op) {
                     case 1 -> {
@@ -42,12 +42,12 @@ public class CoordenadorView {
 
                         Coordenador c = new Coordenador(0, nome, cpf, dept);
                         coordenadorController.adicionar(c);
-                        System.out.println("✅ Coordenador cadastrado com sucesso!");
+                        System.out.println("Coordenador cadastrado com sucesso!");
                     }
                     case 2 -> {
                         List<Coordenador> lista = coordenadorController.listar();
                         if (lista.isEmpty()) {
-                            System.out.println("⚠️ Nenhum coordenador cadastrado.");
+                            System.out.println(" Nenhum coordenador cadastrado.");
                         } else {
                             System.out.println("\n--- Lista de Coordenadores ---");
                             for (Coordenador c : lista) {
@@ -72,9 +72,9 @@ public class CoordenadorView {
 
                             Coordenador novo = new Coordenador(id, nome, cpf, dept);
                             coordenadorController.atualizar(id, novo);
-                            System.out.println("✅ Coordenador atualizado.");
+                            System.out.println(" Coordenador atualizado.");
                         } else {
-                            System.out.println("⚠️ Coordenador não encontrado.");
+                            System.out.println(" Coordenador não encontrado.");
                         }
                     }
                     case 4 -> {
@@ -84,10 +84,15 @@ public class CoordenadorView {
 
                         Coordenador c = coordenadorController.buscarPorId(id);
                         if (c != null) {
-                            coordenadorController.remover(id);
-                            System.out.println("🗑️ Coordenador removido.");
+                            List<AQV> atrasos = aqvController.listarPorCoordenador(id);
+                            if (!atrasos.isEmpty()) {
+                                System.out.println(" Este coordenador possui atrasos registrados. Remova os atrasos primeiro.");
+                            } else {
+                                coordenadorController.remover(id);
+                                System.out.println(" Coordenador removido com sucesso.");
+                            }
                         } else {
-                            System.out.println("⚠️ Coordenador não encontrado.");
+                            System.out.println("️ Coordenador não encontrado.");
                         }
                     }
                     case 5 -> {
@@ -97,7 +102,7 @@ public class CoordenadorView {
 
                         Coordenador coord = coordenadorController.buscarPorId(idCoord);
                         if (coord == null) {
-                            System.out.println("⚠️ Coordenador não encontrado. Cadastre primeiro.");
+                            System.out.println("️ Coordenador não encontrado. Cadastre primeiro.");
                             break;
                         }
 
@@ -116,30 +121,32 @@ public class CoordenadorView {
                         AQV atraso = new AQV(0, nomeAluno, matriculaAluno, motivo, data, idCoord);
                         aqvController.adicionar(atraso);
 
-                        System.out.println("✅ Atraso registrado com sucesso!");
+                        System.out.println(" Atraso registrado com sucesso!");
                     }
                     case 6 -> {
                         List<AQV> atrasos = aqvController.listar();
                         if (atrasos.isEmpty()) {
-                            System.out.println("⚠️ Nenhum atraso registrado.");
+                            System.out.println(" Nenhum atraso registrado.");
                         } else {
                             System.out.println("\n--- Lista de Atrasos ---");
                             for (AQV a : atrasos) {
                                 Coordenador c = coordenadorController.buscarPorId(a.getIdCoordenador());
-                                String nomeCoord = (c != null && c.getNome() != null) ? c.getNome() : "Desconhecido";
-                                System.out.printf("%d - Aluno: %s | Matrícula: %s | Motivo: %s | Data: %s | Registrado por: %s%n",
-                                        a.getId(), a.getNomeAluno(), a.getMatriculaAluno(), a.getMotivoAtraso(), a.getDataRegistro(), nomeCoord);
+                                String nomeCoord = (c != null) ? c.getNome() : "Coordenador não encontrado";
+                                System.out.printf("%d - Aluno: %s | Matrícula: %s | Motivo: %s | Data: %s | Registrado por: %s (ID: %d)%n",
+                                        a.getId(), a.getNomeAluno(), a.getMatriculaAluno(),
+                                        a.getMotivoAtraso(), a.getDataRegistro(), nomeCoord, a.getIdCoordenador());
                             }
                         }
                     }
                     case 0 -> System.out.println("Saindo do menu Coordenador...");
-                    default -> System.out.println("❌ Opção inválida!");
+                    default -> System.out.println(" Opção inválida!");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("❌ Entrada inválida. Digite um número inteiro.");
+                System.out.println("Entrada inválida. Digite um número inteiro.");
                 scanner.nextLine();
             } catch (Exception e) {
-                System.out.println("❌ Erro inesperado: " + e.getMessage());
+                System.out.println(" Erro inesperado: " + e.getMessage());
+                e.printStackTrace(); // Adicionado para ajudar no diagnóstico
                 scanner.nextLine();
             }
         }

@@ -13,6 +13,7 @@ import java.util.List;
 public class CoordenadorDAO {
     private final String filePath = "json_data/coordenadores.json";
     private final Gson gson = new Gson();
+    private Coordenador[] coordenadores;
 
     public CoordenadorDAO() {
         File file = new File(filePath);
@@ -24,7 +25,7 @@ public class CoordenadorDAO {
                 }
                 file.createNewFile();
 
-                // Inicializa com uma lista vazia
+
                 try (Writer writer = new FileWriter(filePath)) {
                     gson.toJson(new ArrayList<Coordenador>(), writer);
                 }
@@ -59,7 +60,7 @@ public class CoordenadorDAO {
     public void adicionar(Coordenador coordenador) {
         List<Coordenador> lista = listar();
 
-        // Garante ID único
+
         int nextId = lista.stream()
                 .map(Coordenador::getId)
                 .max(Comparator.naturalOrder())
@@ -89,9 +90,11 @@ public class CoordenadorDAO {
     }
 
     public Coordenador buscarPorId(int id) {
-        return listar().stream()
-                .filter(c -> c.getId() == id)
-                .findFirst()
-                .orElse(null);
+        for (Coordenador c : coordenadores) {
+            if (c.getId() == id) {
+                return c;
+            }
+        }
+        return null;
     }
 }
