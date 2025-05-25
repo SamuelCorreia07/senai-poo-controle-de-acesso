@@ -24,7 +24,7 @@ public class ProfessorView {
                 |       1 - Cadastrar professor                             |
                 |       2 - Atualizar professor                             |
                 |       3 - Deletar professor                               |
-                |       4 - Listar professor                                |
+                |       4 - Listar professores                              |
                 |       0 - Voltar                                          |
                 _____________________________________________________________
                 """;
