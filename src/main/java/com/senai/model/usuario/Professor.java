@@ -16,12 +16,5 @@ public class Professor extends Usuario {
     public void setDisciplina(String disciplina) {
         this.disciplina = disciplina;
     }
-
-    @Override
-    public String toString() {
-        return "Professor{" +
-                "disciplina='" + disciplina + '\'' +
-                '}';
-    }
 }
 
