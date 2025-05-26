@@ -10,13 +10,15 @@ public class OcorrenciaView {
     private final OcorrenciaController controller = new OcorrenciaController();
 
     public static void main(String[] args) {
-
+        OcorrenciaView view = new OcorrenciaView();
+        view.menu();
     }
 
     private void menu() {
         String opcao;
         String menuOcorrencia = """
-                --- MENU DE OCORRÊNCIAS ---
+                
+                ------ MENU OCORRÊNCIA ------
                 
                     1. Cadastrar ocorrência
                     2. Atualizar ocorrência
@@ -51,7 +53,11 @@ public class OcorrenciaView {
 
     private void atualizar() {
         int id = scannerPromptInt("ID: ");
-        String tipo = scannerPrompt("Tipo: ");
+        String tipo = scannerPrompt("""
+                Tipo da ocorrência:
+                    1. Entrada
+                    2. Saída
+                """);
         String descricao = scannerPrompt("Descrição: ");
         System.out.println(controller.atualizarOcorrencia(id, tipo, descricao));
     }
@@ -62,7 +68,7 @@ public class OcorrenciaView {
     }
 
     private void listar() {
-        System.out.println("--- Ocorrências ---");
+        System.out.println("--- OCORRÊNCIAS ---");
         for (Ocorrencia o : controller.listarOcorrencias()) {
             System.out.printf("""
                 ID: %d
@@ -71,12 +77,12 @@ public class OcorrenciaView {
                 Status: %s
                 Data/Hora: %s
                 
-                """, o.getId(), o.getTipo(), o.getDescricao(), o.getStatus(), o.getDataHora());
+                """, o.getId(), o.getTipo(), o.getDescricao(), o.getStatus(), o.getDataHoraFormatada());
         }
     }
 
     private String scannerPrompt(String msg) {
-        System.out.println(msg);
+        System.out.print(msg);
         return scanner.nextLine();
     }
 

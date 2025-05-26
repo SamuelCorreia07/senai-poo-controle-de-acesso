@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "tipo": "Falta",
+    "descricao": "eu faltei pq quero aula online",
+    "status": "Pendente",
+    "dataJustificada": "20/05/2025",
+    "dataHora": "25/05/2025 23:45",
+    "qtdDias": 1,
+    "prazoAceite": 15
+  },
+  {
+    "id": 2,
+    "tipo": "Ocorrencia",
+    "descricao": "blablabla",
+    "status": "Pendente",
+    "dataJustificada": "21/05/2025",
+    "dataHora": "25/05/2025 23:49",
+    "qtdDias": 1,
+    "prazoAceite": 7
+  }
+]

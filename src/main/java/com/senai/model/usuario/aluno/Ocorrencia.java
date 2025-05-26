@@ -1,6 +1,7 @@
 package com.senai.model.usuario.aluno;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Ocorrencia {
     private int id;
@@ -55,5 +56,10 @@ public class Ocorrencia {
 
     public void setDataHora(LocalDateTime dataHora) {
         this.dataHora = dataHora;
+    }
+
+    public String getDataHoraFormatada() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return dataHora.format(formatter);
     }
 }

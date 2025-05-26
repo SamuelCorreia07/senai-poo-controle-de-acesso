@@ -1,6 +1,7 @@
 package com.senai.model.usuario.aluno.dao;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.senai.model.usuario.aluno.Ocorrencia;
 
@@ -8,13 +9,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class OcorrenciaDAO {
     private final String caminho = "ocorrencias.json";
-    private final Gson gson = new Gson();
+    private final Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).setPrettyPrinting().create();
     private final List<Ocorrencia> ocorrencias;
 
     public OcorrenciaDAO() {ocorrencias = carregar();}
@@ -37,7 +39,6 @@ public class OcorrenciaDAO {
     }
 
     public void inserir(Ocorrencia ocorrencia) {
-
         int novoId = ocorrencias.stream().mapToInt(Ocorrencia::getId).max().orElse(0) + 1;
         ocorrencia.setId(novoId);
         ocorrencias.add(ocorrencia);
@@ -55,11 +56,15 @@ public class OcorrenciaDAO {
     }
 
     public void remover(int id) {
-        ocorrencias.removeIf(p -> p.getId() == id);
+        ocorrencias.removeIf(o -> o.getId() == id);
         salvar(ocorrencias);
     }
 
     public List<Ocorrencia> listarTodos() {
         return ocorrencias;
+    }
+
+    public Optional<Ocorrencia> buscarPorId(int id) {
+        return ocorrencias.stream().filter(o -> o.getId() == id).findFirst();
     }
 }
