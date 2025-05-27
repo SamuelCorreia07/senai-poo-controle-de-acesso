@@ -1,0 +1,22 @@
+[
+  {
+    "id": 2,
+    "tipo": "Ocorrencia",
+    "descricao": "blablabla",
+    "status": "Pendente",
+    "dataJustificada": "21/05/2025",
+    "dataHora": "25/05/2025 23:49",
+    "qtdDias": 1,
+    "prazoAceite": 7
+  },
+  {
+    "id": 3,
+    "tipo": "Falta",
+    "descricao": "blablabla",
+    "status": "Pendente",
+    "dataJustificada": "20/05/2025",
+    "dataHora": "25/05/2025 23:54",
+    "qtdDias": 3,
+    "prazoAceite": 15
+  }
+]
