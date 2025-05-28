@@ -7,85 +7,62 @@ import com.senai.model.usuario.AQV;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 public class AQVDAO {
-    private final String filePath = "json_data/aqvs.json";
+    private final String caminho = "json_data/aqvs.json";
     private final Gson gson = new Gson();
+    private final List<AQV> aqvs;
 
     public AQVDAO() {
-
-        File file = new File(filePath);
-        if (!file.exists()) {
-            try {
-                File dir = new File(file.getParent());
-                if (!dir.exists()) {
-                    dir.mkdirs();
-                }
-                file.createNewFile();
-
-                try (Writer writer = new FileWriter(filePath)) {
-                    gson.toJson(new ArrayList<>(), writer);
-                }
-            } catch (IOException e) {
-                System.err.println("Erro ao criar arquivo de dados: " + e.getMessage());
-            }
-        }
+        aqvs = carregar();
     }
 
-    public List<AQV> listar() {
-        try (Reader reader = new FileReader(filePath)) {
+    public List<AQV> carregar() {
+        try (FileReader reader = new FileReader(caminho)) {
             Type listType = new TypeToken<List<AQV>>() {}.getType();
-            List<AQV> lista = gson.fromJson(reader, listType);
-            return (lista != null) ? lista : new ArrayList<>();
+            return gson.fromJson(reader, listType);
         } catch (IOException e) {
-            System.err.println("Erro ao ler arquivo AQV: " + e.getMessage());
             return new ArrayList<>();
         }
     }
 
     public void salvar(List<AQV> lista) {
-        try (Writer writer = new FileWriter(filePath)) {
+        try (FileWriter writer = new FileWriter(caminho)) {
             gson.toJson(lista, writer);
         } catch (IOException e) {
-            System.err.println("Erro ao salvar arquivo AQV: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    public void adicionar(AQV a) {
-        List<AQV> lista = listar();
-
-        // Garante que o ID seja único
-        int nextId = lista.stream()
-                .map(AQV::getId)
-                .max(Comparator.naturalOrder())
-                .orElse(0) + 1;
-        a.setId(nextId);
-
-        lista.add(a);
-        salvar(lista);
+    public List<AQV> listarTodos() {
+        return aqvs;
     }
 
-    public void atualizar(int id, AQV a) {
-        List<AQV> lista = listar();
-        for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getId() == id) {
-                a.setId(id);
-                lista.set(i, a);
-                salvar(lista);
-                return;
+    public void inserir(AQV aqv) {
+        int nextId = aqvs.stream().mapToInt(AQV::getId).max().orElse(0) + 1;
+        aqv.setId(nextId);
+        aqvs.add(aqv);
+        salvar(aqvs);
+    }
+
+    public void atualizar(AQV aqv) {
+        for (int i = 0; i < aqvs.size(); i++) {
+            if (aqvs.get(i).getId() == aqv.getId()) {
+                aqvs.set(i, aqv);
+                break;
             }
         }
+        salvar(aqvs);
     }
 
     public void remover(int id) {
-        List<AQV> lista = listar();
-        lista.removeIf(a -> a.getId() == id);
-        salvar(lista);
+        aqvs.removeIf(a -> a.getId() == id);
+        salvar(aqvs);
     }
 
-    public AQV buscarPorId(int id) {
-        return listar().stream().filter(a -> a.getId() == id).findFirst().orElse(null);
+    public Optional<AQV> buscarPorId(int id) {
+        return aqvs.stream().filter(a -> a.getId() == id).findFirst();
     }
 }

@@ -9,11 +9,11 @@ public class AQVController {
     private final AQVDAO dao = new AQVDAO();
 
     public void adicionar(AQV a) {
-        dao.adicionar(a);
+        dao.inserir(a);
     }
 
     public List<AQV> listar() {
-        return dao.listar();
+        return dao.listarTodos();
     }
 
     public void atualizar(int id, AQV a) {
