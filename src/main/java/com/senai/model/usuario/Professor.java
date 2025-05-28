@@ -3,8 +3,8 @@ package com.senai.model.usuario;
 public class Professor extends Usuario {
     private String disciplina;
 
-    public Professor(String nome, int id, String disciplina) {
-        super(nome, id);
+    public Professor(int id, String nome, String disciplina) {
+        super(id, nome);
         this.disciplina = disciplina;
 
     }

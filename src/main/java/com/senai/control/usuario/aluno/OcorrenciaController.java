@@ -1,7 +1,7 @@
 package com.senai.control.usuario.aluno;
 
 import com.senai.model.usuario.aluno.Ocorrencia;
-import com.senai.model.usuario.aluno.dao.OcorrenciaDAO;
+import com.senai.model.usuario.aluno.dao.json.OcorrenciaDAO;
 
 import java.util.List;
 import java.util.Optional;

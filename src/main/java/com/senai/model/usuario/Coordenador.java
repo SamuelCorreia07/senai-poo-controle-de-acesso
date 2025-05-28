@@ -1,20 +1,11 @@
 package com.senai.model.usuario;
 
 public class Coordenador extends Usuario {
-    private String cpf;
     private String departamento;
 
-    public Coordenador(int i, String cpf, String departamento, String dept) {
-        this.cpf = cpf;
+    public Coordenador(int id, String nome, String departamento) {
+        super(id, nome);
         this.departamento = departamento;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public String getDepartamento() {
@@ -28,8 +19,7 @@ public class Coordenador extends Usuario {
     @Override
     public String toString() {
         return "Coordenador{" +
-                "cpf='" + cpf + '\'' +
-                ", departamento='" + departamento + '\'' +
+                "departamento='" + departamento + '\'' +
                 '}';
     }
 }

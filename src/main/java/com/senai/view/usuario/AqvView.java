@@ -16,10 +16,10 @@ public class AqvView {
             int opcao;
             do {
                 System.out.println("\n=== MENU AQV ===");
-                System.out.println("1 - Registrar atraso");
-                System.out.println("2 - Listar atrasos");
-                System.out.println("3 - Atualizar atraso");
-                System.out.println("4 - Remover atraso");
+                System.out.println("1 - Cadastrar AQV");
+                System.out.println("2 - Listar AQV");
+                System.out.println("3 - Atualizar AQV");
+                System.out.println("4 - Remover AQV");
                 System.out.println("0 - Sair");
                 System.out.print("Escolha uma opção: ");
                 opcao = scanner.nextInt();
@@ -27,19 +27,10 @@ public class AqvView {
 
                 switch (opcao) {
                     case 1 -> {
-                        System.out.print("Nome do aluno: ");
+                        System.out.print("Nome AQV: ");
                         String nome = scanner.nextLine();
 
-                        System.out.print("Matrícula do aluno: ");
-                        String matricula = scanner.nextLine();
-
-                        System.out.print("Motivo do atraso: ");
-                        String motivo = scanner.nextLine();
-
-                        System.out.print("Data do atraso (yyyy-mm-dd): ");
-                        String data = scanner.nextLine();
-
-                        AQV atraso = new AQV(0, nome, matricula, motivo, data, -1);
+                        AQV atraso = new AQV(0, nome);
                         aqvController.adicionar(atraso);
                         System.out.println("Atraso registrado com sucesso.");
                     }

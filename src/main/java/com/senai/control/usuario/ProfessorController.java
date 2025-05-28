@@ -9,12 +9,12 @@ public class ProfessorController {
         private final ProfessorDAO professorDAO = new ProfessorDAO();
 
         public String cadastrarProfessor(String nome, String disciplina) {
-            professorDAO.inserir(new Professor(nome, 0, disciplina));
+            professorDAO.inserir(new Professor(0, nome, disciplina));
             return "Professor cadastrado!";
         }
 
-        public String atualizarProfessor(int id, String nome, String disciplina) {
-            professorDAO.atualizar(new Professor(nome, id, disciplina));
+        public String atualizarProfessor(String nome, String disciplina) {
+            professorDAO.atualizar(new Professor(0, nome, disciplina));
             return "Professor atualizado!";
         }
 

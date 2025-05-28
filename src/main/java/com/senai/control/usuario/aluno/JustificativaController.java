@@ -1,7 +1,7 @@
 package com.senai.control.usuario.aluno;
 
 import com.senai.model.usuario.aluno.Justificativa;
-import com.senai.model.usuario.aluno.dao.JustificativaDAO;
+import com.senai.model.usuario.aluno.dao.json.JustificativaDAO;
 
 import java.time.LocalDate;
 import java.util.List;

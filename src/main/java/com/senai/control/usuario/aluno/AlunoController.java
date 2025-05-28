@@ -1,6 +1,6 @@
 package com.senai.control.usuario.aluno;
 import com.senai.model.usuario.aluno.Aluno;
-import com.senai.model.usuario.aluno.dao.AlunoDAO;
+import com.senai.model.usuario.aluno.dao.json.AlunoDAO;
 import java.util.List;
 
 public class AlunoController {

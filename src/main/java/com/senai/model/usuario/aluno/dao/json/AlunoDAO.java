@@ -1,4 +1,4 @@
-package com.senai.model.usuario.aluno.dao;
+package com.senai.model.usuario.aluno.dao.json;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.senai.model.usuario.aluno.Aluno;

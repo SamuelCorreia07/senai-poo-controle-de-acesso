@@ -22,8 +22,6 @@ public class CoordenadorView {
             System.out.println("2 - Listar coordenadores");
             System.out.println("3 - Atualizar coordenador");
             System.out.println("4 - Remover coordenador");
-            System.out.println("5 - Registrar atraso de aluno");
-            System.out.println("6 - Listar atrasos registrados");
             System.out.println("0 - Voltar");
             System.out.print("Escolha: ");
 
@@ -35,12 +33,10 @@ public class CoordenadorView {
                     case 1 -> {
                         System.out.print("Nome: ");
                         String nome = scanner.nextLine();
-                        System.out.print("CPF: ");
-                        String cpf = scanner.nextLine();
                         System.out.print("Departamento: ");
                         String dept = scanner.nextLine();
 
-                        Coordenador c = new Coordenador(0, nome, cpf, dept);
+                        Coordenador c = new Coordenador(0, nome, dept);
                         coordenadorController.adicionar(c);
                         System.out.println("Coordenador cadastrado com sucesso!");
                     }
@@ -51,8 +47,8 @@ public class CoordenadorView {
                         } else {
                             System.out.println("\n--- Lista de Coordenadores ---");
                             for (Coordenador c : lista) {
-                                System.out.printf("%d - %s | CPF: %s | Dept: %s%n",
-                                        c.getId(), c.getNome(), c.getCpf(), c.getDepartamento());
+                                System.out.printf("ID: %d - Nome: %s | Dept: %s%n",
+                                        c.getId(), c.getNome(), c.getDepartamento());
                             }
                         }
                     }
@@ -65,12 +61,10 @@ public class CoordenadorView {
                         if (c != null) {
                             System.out.print("Novo nome: ");
                             String nome = scanner.nextLine();
-                            System.out.print("Novo CPF: ");
-                            String cpf = scanner.nextLine();
                             System.out.print("Novo departamento: ");
                             String dept = scanner.nextLine();
 
-                            Coordenador novo = new Coordenador(id, nome, cpf, dept);
+                            Coordenador novo = new Coordenador(id, nome, dept);
                             coordenadorController.atualizar(id, novo);
                             System.out.println(" Coordenador atualizado.");
                         } else {
@@ -93,49 +87,6 @@ public class CoordenadorView {
                             }
                         } else {
                             System.out.println("️ Coordenador não encontrado.");
-                        }
-                    }
-                    case 5 -> {
-                        System.out.print("ID do coordenador que está registrando o atraso: ");
-                        int idCoord = scanner.nextInt();
-                        scanner.nextLine();
-
-                        Coordenador coord = coordenadorController.buscarPorId(idCoord);
-                        if (coord == null) {
-                            System.out.println("️ Coordenador não encontrado. Cadastre primeiro.");
-                            break;
-                        }
-
-                        System.out.print("Nome do aluno: ");
-                        String nomeAluno = scanner.nextLine();
-
-                        System.out.print("Matrícula do aluno: ");
-                        String matriculaAluno = scanner.nextLine();
-
-                        System.out.print("Motivo do atraso: ");
-                        String motivo = scanner.nextLine();
-
-                        System.out.print("Data do atraso (yyyy-mm-dd): ");
-                        String data = scanner.nextLine();
-
-                        AQV atraso = new AQV(0, nomeAluno, matriculaAluno, motivo, data, idCoord);
-                        aqvController.adicionar(atraso);
-
-                        System.out.println(" Atraso registrado com sucesso!");
-                    }
-                    case 6 -> {
-                        List<AQV> atrasos = aqvController.listar();
-                        if (atrasos.isEmpty()) {
-                            System.out.println(" Nenhum atraso registrado.");
-                        } else {
-                            System.out.println("\n--- Lista de Atrasos ---");
-                            for (AQV a : atrasos) {
-                                Coordenador c = coordenadorController.buscarPorId(a.getIdCoordenador());
-                                String nomeCoord = (c != null) ? c.getNome() : "Coordenador não encontrado";
-                                System.out.printf("%d - Aluno: %s | Matrícula: %s | Motivo: %s | Data: %s | Registrado por: %s (ID: %d)%n",
-                                        a.getId(), a.getNomeAluno(), a.getMatriculaAluno(),
-                                        a.getMotivoAtraso(), a.getDataRegistro(), nomeCoord, a.getIdCoordenador());
-                            }
                         }
                     }
                     case 0 -> System.out.println("Saindo do menu Coordenador...");
