@@ -1,4 +1,4 @@
-package com.senai.view;
+package com.senai.view.usuario.aluno;
 import com.senai.control.usuario.aluno.AlunoController;
 import com.senai.model.usuario.aluno.Aluno;
 import java.util.List;

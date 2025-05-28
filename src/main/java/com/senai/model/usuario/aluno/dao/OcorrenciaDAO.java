@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class OcorrenciaDAO {
-    private final String caminho = "ocorrencias.json";
+    private final String caminho = "json_data/ocorrencias.json";
     private final Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).setPrettyPrinting().create();
     private final List<Ocorrencia> ocorrencias;
 

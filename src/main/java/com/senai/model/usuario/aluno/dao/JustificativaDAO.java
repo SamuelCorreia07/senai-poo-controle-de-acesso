@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class JustificativaDAO {
-    private final String caminho = "justificativas.json";
+    private final String caminho = "json_data/justificativas.json";
     private final Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).setPrettyPrinting().create();
     private final List<Justificativa> justificativas;
 

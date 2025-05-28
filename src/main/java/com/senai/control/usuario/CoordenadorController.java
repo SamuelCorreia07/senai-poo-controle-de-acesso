@@ -1,7 +1,7 @@
 package com.senai.control.usuario;
 
 import com.senai.model.usuario.Coordenador;
-import com.senai.model.usuario.dao.CoordenadorDAO;
+import com.senai.model.usuario.dao.json.CoordenadorDAO;
 
 import java.util.List;
 

@@ -1,8 +1,7 @@
 package com.senai.control.curso;
 
 import com.senai.model.curso.Curso;
-import com.senai.model.curso.DAO.CursoDAO;
-import com.senai.model.curso.UC;
+import com.senai.model.curso.DAO.json.CursoDAO;
 
 import java.util.ArrayList;
 import java.util.List;

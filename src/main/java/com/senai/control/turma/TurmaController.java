@@ -2,9 +2,8 @@ package com.senai.control.turma;
 
 
 
-import com.senai.model.turma.Subturma;
 import com.senai.model.turma.Turma;
-import com.senai.model.turma.TurmaDAO;
+import com.senai.model.turma.DAO.json.TurmaDAO;
 
 import java.util.ArrayList;
 import java.util.List;

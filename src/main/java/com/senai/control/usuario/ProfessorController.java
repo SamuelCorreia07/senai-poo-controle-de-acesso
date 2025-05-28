@@ -1,7 +1,7 @@
 package com.senai.control.usuario;
 
 import com.senai.model.usuario.Professor;
-import com.senai.model.usuario.dao.ProfessorDAO;
+import com.senai.model.usuario.dao.json.ProfessorDAO;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.senai.view;
+package com.senai.view.usuario.aluno;
 
 import com.senai.control.usuario.aluno.JustificativaController;
 import com.senai.model.usuario.aluno.Justificativa;

@@ -1,4 +1,4 @@
-package com.senai.view;
+package com.senai.view.usuario;
 
 import com.senai.control.usuario.AQVController;
 import com.senai.control.usuario.CoordenadorController;

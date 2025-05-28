@@ -9,7 +9,7 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 public class AlunoDAO {
-    private final String caminho = "alunos.json";
+    private final String caminho = "json_data/alunos.json";
     private final Gson gson = new Gson();
     private final List<Aluno> alunos;
 

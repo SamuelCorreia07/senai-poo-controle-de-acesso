@@ -1,4 +1,4 @@
-package com.senai.view;
+package com.senai.view.usuario;
 
 import com.senai.control.usuario.ProfessorController;
 import com.senai.model.usuario.Professor;

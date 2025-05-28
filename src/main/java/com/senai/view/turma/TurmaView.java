@@ -1,4 +1,4 @@
-package com.senai.view;
+package com.senai.view.turma;
 
 import com.senai.control.turma.TurmaController;
 import com.senai.model.turma.Turma;

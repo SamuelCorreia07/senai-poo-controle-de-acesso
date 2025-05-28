@@ -1,9 +1,10 @@
-package com.senai.model.turma;
+package com.senai.model.turma.DAO.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.senai.model.curso.Curso;
+import com.senai.model.turma.Turma;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class TurmaDAO {
     private List<Turma> turmas;
-    private final String caminho = "turmas.json";
+    private final String caminho = "json_data/turmas.json";
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     private List<Turma> carregar(){

@@ -1,7 +1,7 @@
 package com.senai.control.usuario;
 
 import com.senai.model.usuario.AQV;
-import com.senai.model.usuario.dao.AQVDAO;
+import com.senai.model.usuario.dao.json.AQVDAO;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.senai.view;
+package com.senai.view.curso;
 
 import com.senai.control.curso.AmbienteController;
 import com.senai.model.curso.Ambiente;

@@ -1,4 +1,4 @@
-package com.senai.model.usuario.dao;
+package com.senai.model.usuario.dao.json;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class ProfessorDAO {
 
-    private final String caminho = "professores.json";
+    private final String caminho = "json_data/professores.json";
     private final Gson gson = new Gson();
     private final List<Professor> professores;
 

@@ -1,4 +1,4 @@
-package com.senai.model.curso.DAO;
+package com.senai.model.curso.DAO.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class CursoDAO {
     private List<Curso> cursos;
-    private final String caminho = "cursos.json";
+    private final String caminho = "json_data/cursos.json";
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     private List<Curso> carregar(){

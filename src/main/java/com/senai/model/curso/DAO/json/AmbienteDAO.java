@@ -1,4 +1,4 @@
-package com.senai.model.curso.DAO;
+package com.senai.model.curso.DAO.json;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class AmbienteDAO {
-        private final String caminho = "ambientes.json";
+        private final String caminho = "json_data/ambientes.json";
         private final Gson gson = new Gson();
         private final List<Ambiente> ambientes;
 

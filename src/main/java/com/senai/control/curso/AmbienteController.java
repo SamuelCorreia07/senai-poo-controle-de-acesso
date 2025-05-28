@@ -1,7 +1,7 @@
 package com.senai.control.curso;
 
 import com.senai.model.curso.Ambiente;
-import com.senai.model.curso.DAO.AmbienteDAO;
+import com.senai.model.curso.DAO.json.AmbienteDAO;
 
 import java.util.List;
 import java.util.Optional;
