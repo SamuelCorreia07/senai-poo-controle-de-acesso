@@ -17,7 +17,7 @@ public abstract class Usuario {
         this.nome = nome;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

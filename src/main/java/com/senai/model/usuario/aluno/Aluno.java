@@ -6,12 +6,7 @@ public class Aluno extends Usuario {
     private int idade;
 
     public Aluno(int id, String nome, int idade) {
-        super(nome, id);
-        this.idade = idade;
-    }
-
-    public Aluno(String nome, int idade) {
-        super(nome, 0);
+        super(id, nome);
         this.idade = idade;
     }
 
