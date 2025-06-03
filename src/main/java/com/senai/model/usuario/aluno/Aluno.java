@@ -4,15 +4,12 @@ import java.util.Objects;
 
 public class Aluno extends Usuario {
     private int idade;
+    private String idCartaoRfid;
 
-    public Aluno(int id, String nome, int idade) {
-        super(nome, id);
+    public Aluno(int id, String nome, String login, String senha, int idade, String idCartaoRfid) {
+        super(id, nome, login, senha);
         this.idade = idade;
-    }
-
-    public Aluno(String nome, int idade) {
-        super(nome, 0);
-        this.idade = idade;
+        this.idCartaoRfid = idCartaoRfid;
     }
 
     public int getIdade() {
@@ -20,11 +17,15 @@ public class Aluno extends Usuario {
     }
 
     public void setIdade(int idade) {
-        if (idade > 0) {
-            this.idade = idade;
-        } else {
-            System.out.println("\nIdade inválida!");
-        }
+        this.idade = idade;
+    }
+
+    public String getIdCartaoRfid() {
+        return idCartaoRfid;
+    }
+
+    public void setIdCartaoRfid(String idCartaoRfid) {
+        this.idCartaoRfid = idCartaoRfid;
     }
 
     @Override

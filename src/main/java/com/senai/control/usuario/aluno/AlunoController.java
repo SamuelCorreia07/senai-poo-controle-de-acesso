@@ -36,6 +36,15 @@ public class AlunoController {
         return "\nAlun@ removid@ com sucesso!";
     }
 
+    public String buscarPorRfid(String rfid) {
+        Aluno aluno = alunoDAO.buscarPorId(id).orElse(null);
+        if (aluno == null) {
+            return "\nAlun@ não encontrad@!";
+        }
+        alunoDAO.remover(id);
+        return "\nAlun@ removid@ com sucesso!";
+    }
+
     public List<Aluno> listarAlunos() {
         return alunoDAO.listarTodos();
     }
