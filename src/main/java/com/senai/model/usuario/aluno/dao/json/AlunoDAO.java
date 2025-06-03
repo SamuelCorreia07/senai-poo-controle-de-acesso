@@ -1,4 +1,4 @@
-package com.senai.model.usuario.aluno.dao;
+package com.senai.model.usuario.aluno.dao.json;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.senai.model.usuario.aluno.Aluno;
@@ -9,7 +9,7 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 public class AlunoDAO {
-    private final String caminho = "alunos.json";
+    private final String caminho = "json_data/alunos.json";
     private final Gson gson = new Gson();
     private final List<Aluno> alunos;
 
