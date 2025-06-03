@@ -3,7 +3,8 @@ import com.senai.model.usuario.AQV;
 import com.senai.model.usuario.aluno.Aluno;
 import com.senai.model.usuario.Professor;
 import com.senai.model.usuario.Usuario;
-import com.senai.model.usuario.dao.AQVDAO;
+com.senai.model.usuario.dao.json.AQVDAO;
+import com.senai.model.usuario.dao.json.AQVDAO;
 import com.senai.util.CriptografiaUtil;
 import com.senai.view.usuario.AqvView;
 import com.senai.view.usuario.aluno.JustificativaView;
@@ -33,7 +34,7 @@ public class MenuPrincipal {
 
     public static void criarAqv() {
         AQV aqv = new AQV(1, "Rafael", "aqv", CriptografiaUtil.hash("1234"));
-        AqvDAO aqvDAO = new AqvDAO();
+        AQVDAO aqvDAO = new AQVDAO();
         aqvDAO.inserir(aqv);
     }
 

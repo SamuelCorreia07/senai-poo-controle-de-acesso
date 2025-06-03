@@ -2,6 +2,7 @@ package com.senai.model.usuario.dao.json;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.senai.model.usuario.Administrador;
 import com.senai.model.usuario.Coordenador;
 
 import java.io.*;
@@ -64,5 +65,9 @@ public class CoordenadorDAO {
 
     public Optional<Coordenador> buscarPorId(int id) {
         return coordenadores.stream().filter(c -> c.getId() == id).findFirst();
+    }
+
+    public Optional<Coordenador> buscarPorLogin(String login) {
+        return coordenadores.stream().filter(a -> a.getLogin().equals(login)).findFirst();
     }
 }

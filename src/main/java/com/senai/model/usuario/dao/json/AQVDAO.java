@@ -3,6 +3,7 @@ package com.senai.model.usuario.dao.json;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.senai.model.usuario.AQV;
+import com.senai.model.usuario.Coordenador;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -64,5 +65,9 @@ public class AQVDAO {
 
     public Optional<AQV> buscarPorId(int id) {
         return aqvs.stream().filter(a -> a.getId() == id).findFirst();
+    }
+
+    public Optional<AQV> buscarPorLogin(String login) {
+        return aqvs.stream().filter(a -> a.getLogin().equals(login)).findFirst();
     }
 }

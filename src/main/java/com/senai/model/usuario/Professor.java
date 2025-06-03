@@ -6,7 +6,6 @@ public class Professor extends Usuario {
     public Professor(int id, String nome, String disciplina) {
         super(id, nome);
         this.disciplina = disciplina;
-
     }
 
     public String getDisciplina() {
@@ -17,4 +16,3 @@ public class Professor extends Usuario {
         this.disciplina = disciplina;
     }
 }
-

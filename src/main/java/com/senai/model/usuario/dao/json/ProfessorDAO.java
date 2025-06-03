@@ -2,6 +2,7 @@ package com.senai.model.usuario.dao.json;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.senai.model.usuario.Coordenador;
 import com.senai.model.usuario.Professor;
 
 import java.io.FileReader;
@@ -13,7 +14,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class ProfessorDAO {
-
     private final String caminho = "json_data/professores.json";
     private final Gson gson = new Gson();
     private final List<Professor> professores;
@@ -69,7 +69,10 @@ public class ProfessorDAO {
         return carregar().stream().filter(professor -> professor.getId() == id).findFirst();
     }
 
+    public Optional<Professor> buscarPorLogin(String login) {
+        return professores.stream().filter(a -> a.getLogin().equals(login)).findFirst();
     }
+}
 
 
 

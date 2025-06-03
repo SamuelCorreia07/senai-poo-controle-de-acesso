@@ -1,12 +1,10 @@
 package com.senai.control.usuario;
-import com.senai.model.usuario.aluno.dao.AlunoDAO;
-import com.senai.model.usuario.dao.ProfessorDAO;
-import com.senai.model.usuario.dao.AQVDAO;
-import com.senai.model.usuario.dao.CoordenadorDAO;
+import com.senai.model.usuario.aluno.dao.json.AlunoDAO;
+import com.senai.model.usuario.dao.json.CoordenadorDAO;
+import com.senai.model.usuario.dao.json.ProfessorDAO;
+import com.senai.model.usuario.dao.json.AQVDAO;
 import com.senai.model.usuario.aluno.Aluno;
 import com.senai.model.usuario.Professor;
-import com.senai.model.usuario.AQV;
-import com.senai.model.usuario.Coordenador;
 import com.senai.util.CriptografiaUtil;
 
 import java.util.List;
@@ -14,6 +12,8 @@ import java.util.List;
 public class UsuarioController {
     private final AlunoDAO alunoDAO = new AlunoDAO();
     private final ProfessorDAO professorDAO = new ProfessorDAO();
+    private final AQVDAO aqvDAO = new AQVDAO();
+    private final CoordenadorDAO coordenadorDAO = new CoordenadorDAO();
 
     public String cadastrarUsuario(String tipo, String nome, String dadoExtra, String login, String senha) {
         if (tipo.equals("1")) {
