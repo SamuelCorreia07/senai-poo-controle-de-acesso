@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class TurmaDAO {
     private List<Turma> turmas;
@@ -65,4 +66,7 @@ public class TurmaDAO {
         salvarJson();
     }
 
+    public Optional<Turma> buscarPorId(int id) {
+        return turmas.stream().filter(t -> t.getIdTurma() == id).findFirst();
+    }
 }

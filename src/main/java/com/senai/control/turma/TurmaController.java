@@ -7,6 +7,7 @@ import com.senai.model.turma.DAO.json.TurmaDAO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class TurmaController {
     private final TurmaDAO turmaDAO = new TurmaDAO();
@@ -17,13 +18,25 @@ public class TurmaController {
     }
 
     public String atualizarTurma(int idTurma, String nome, String curso, String dataInicio, int qtdSemestre, String horarioEntrada) {
-        turmaDAO.atualizar(new Turma(idTurma, nome, curso, dataInicio, qtdSemestre, horarioEntrada, new ArrayList<>()));
-        return "Turma atualizada.";
+        Optional<Turma> encontrada = turmaDAO.buscarPorId(idTurma);
+        if (encontrada.isPresent()) {
+            Turma atualizada = encontrada.get();
+            atualizada.setNome(nome);
+            atualizada.setCurso(curso);
+            atualizada.setDataInicio(dataInicio);
+            atualizada.setQtdSemestre(qtdSemestre);
+            atualizada.setHorarioEntrada(horarioEntrada);
+            turmaDAO.atualizar(atualizada);
+            return "Turma atualizada.";
+        } else return "Turma com ID " + idTurma + " não encontrada.";
     }
 
     public String removerTurma(int idTurma) {
-        turmaDAO.deletar(idTurma);
-        return "Turma removida.";
+        Optional<Turma> encontrada = turmaDAO.buscarPorId(idTurma);
+        if (encontrada.isPresent()) {
+            turmaDAO.deletar(idTurma);
+            return "Turma removida.";
+        } else return "Turma com ID " + idTurma + " não encontrada.";
     }
 
     public List<Turma> listarTurmas(){

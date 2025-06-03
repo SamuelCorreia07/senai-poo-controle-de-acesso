@@ -37,11 +37,11 @@ public class CoordenadorView {
                         String dept = scanner.nextLine();
 
                         Coordenador c = new Coordenador(0, nome, dept);
-                        coordenadorController.adicionar(c);
+                        coordenadorController.inserirCoordenador(c);
                         System.out.println("Coordenador cadastrado com sucesso!");
                     }
                     case 2 -> {
-                        List<Coordenador> lista = coordenadorController.listar();
+                        List<Coordenador> lista = coordenadorController.listarCoordenadores();
                         if (lista.isEmpty()) {
                             System.out.println(" Nenhum coordenador cadastrado.");
                         } else {
@@ -53,7 +53,7 @@ public class CoordenadorView {
                         }
                     }
                     case 3 -> {
-                        System.out.print("ID do coordenador a atualizar: ");
+                        System.out.print("ID do coordenador a atualizarCoordenador: ");
                         int id = scanner.nextInt();
                         scanner.nextLine();
 
@@ -65,14 +65,14 @@ public class CoordenadorView {
                             String dept = scanner.nextLine();
 
                             Coordenador novo = new Coordenador(id, nome, dept);
-                            coordenadorController.atualizar(id, novo);
+                            coordenadorController.atualizarCoordenador(id, novo);
                             System.out.println(" Coordenador atualizado.");
                         } else {
                             System.out.println(" Coordenador não encontrado.");
                         }
                     }
                     case 4 -> {
-                        System.out.print("ID do coordenador a remover: ");
+                        System.out.print("ID do coordenador a removerCoordenador: ");
                         int id = scanner.nextInt();
                         scanner.nextLine();
 
@@ -82,7 +82,7 @@ public class CoordenadorView {
                             if (!atrasos.isEmpty()) {
                                 System.out.println(" Este coordenador possui atrasos registrados. Remova os atrasos primeiro.");
                             } else {
-                                coordenadorController.remover(id);
+                                coordenadorController.removerCoordenador(id);
                                 System.out.println(" Coordenador removido com sucesso.");
                             }
                         } else {

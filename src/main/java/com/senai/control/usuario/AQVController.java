@@ -4,31 +4,35 @@ import com.senai.model.usuario.AQV;
 import com.senai.model.usuario.dao.json.AQVDAO;
 
 import java.util.List;
+import java.util.Optional;
 
 public class AQVController {
-    private final AQVDAO dao = new AQVDAO();
+    private final AQVDAO aqvDAO = new AQVDAO();
 
-    public void adicionar(AQV a) {
-        dao.inserir(a);
+    public String inserirAQV(String nome) {
+        aqvDAO.inserir(new AQV(0, nome));
+        return "AQV cadastrado com sucesso!";
     }
 
-    public List<AQV> listar() {
-        return dao.listarTodos();
+    public List<AQV> listarAQVs() {
+        return aqvDAO.listarTodos();
     }
 
-    public void atualizar(int id, AQV a) {
-        dao.atualizar(id, a);
+    public String atualizarAQV(int id, String nome) {
+        Optional<AQV> encontrado = aqvDAO.buscarPorId(id);
+        if (encontrado.isPresent()) {
+            AQV atualizado = encontrado.get();
+            atualizado.setNome(nome);
+            aqvDAO.atualizar(atualizado);
+            return "AQV atualizado com sucesso!";
+        } else return "AQV com ID " + id + " não encontrado.";
     }
 
-    public void remover(int id) {
-        dao.remover(id);
-    }
-
-    public AQV buscarPorId(int id) {
-        return dao.buscarPorId(id);
-    }
-
-    public List<AQV> listarPorCoordenador(int id) {
-        return null;
+    public String removerAQV(int id) {
+        Optional<AQV> encontrado = aqvDAO.buscarPorId(id);
+        if (encontrado.isPresent()) {
+            aqvDAO.remover(id);
+            return "AQV removido com sucesso!";
+        } else return "AQV com ID " + id + " não encontrado.";
     }
 }

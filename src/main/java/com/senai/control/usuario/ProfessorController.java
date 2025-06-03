@@ -4,6 +4,7 @@ import com.senai.model.usuario.Professor;
 import com.senai.model.usuario.dao.json.ProfessorDAO;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ProfessorController {
         private final ProfessorDAO professorDAO = new ProfessorDAO();
@@ -13,14 +14,23 @@ public class ProfessorController {
             return "Professor cadastrado!";
         }
 
-        public String atualizarProfessor(String nome, String disciplina) {
-            professorDAO.atualizar(new Professor(0, nome, disciplina));
-            return "Professor atualizado!";
+        public String atualizarProfessor(int id, String nome, String disciplina) {
+            Optional<Professor> encontrado = professorDAO.buscarPorId(id);
+            if (encontrado.isPresent()) {
+                Professor atualizado = encontrado.get();
+                atualizado.setNome(nome);
+                atualizado.setDisciplina(disciplina);
+                professorDAO.atualizar(atualizado);
+                return "Professor atualizado!";
+            } else return "Professor com ID " + id + " não encontrado.";
         }
 
         public String deletarProfessor(int id) {
-            professorDAO.deletar(id);
-            return "Professor removido!";
+            Optional<Professor> encontrado = professorDAO.buscarPorId(id);
+            if (encontrado.isPresent()) {
+                professorDAO.deletar(id);
+                return "Professor removido!";
+            } else return "Professor com ID " + id + " não encontrado.";
         }
 
         public List<Professor> listarProfessores() {

@@ -55,7 +55,7 @@ public class AlunoView {
 
     private void removerAluno() {
         int id = scannerPromptInt("\tID d@ alun@: ", "\nPor favor, insira um ID válido.");
-        System.out.print("\nTem certeza que deseja remover o cadastro d@ alun@ com ID '" + id + "'? (S/N): ");
+        System.out.print("\nTem certeza que deseja removerCoordenador o cadastro d@ alun@ com ID '" + id + "'? (S/N): ");
         String confirmacao = scanner.nextLine().trim().toUpperCase();
         if (confirmacao.equals("S")) {
             String resultado = controller.removerAluno(id);
