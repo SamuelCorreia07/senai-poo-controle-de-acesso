@@ -2,9 +2,11 @@ package com.senai.control.turma;
 
 
 
+import com.senai.model.curso.Curso;
 import com.senai.model.turma.Turma;
 import com.senai.model.turma.DAO.json.TurmaDAO;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -12,12 +14,12 @@ import java.util.Optional;
 public class TurmaController {
     private final TurmaDAO turmaDAO = new TurmaDAO();
 
-    public String cadastrarTurma(String nome, String curso, String dataInicio, int qtdSemestre, String horarioEntrada) {
+    public String cadastrarTurma(String nome, Curso curso, String dataInicio, int qtdSemestre, LocalTime horarioEntrada) {
         turmaDAO.inserir(new Turma(0, nome, curso, dataInicio, qtdSemestre, horarioEntrada, new ArrayList<>()));
         return "Turma cadastrada.";
     }
 
-    public String atualizarTurma(int idTurma, String nome, String curso, String dataInicio, int qtdSemestre, String horarioEntrada) {
+    public String atualizarTurma(int idTurma, String nome, Curso curso, String dataInicio, int qtdSemestre, LocalTime horarioEntrada) {
         Optional<Turma> encontrada = turmaDAO.buscarPorId(idTurma);
         if (encontrada.isPresent()) {
             Turma atualizada = encontrada.get();

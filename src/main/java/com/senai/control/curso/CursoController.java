@@ -3,6 +3,7 @@ package com.senai.control.curso;
 import com.senai.model.curso.Curso;
 import com.senai.model.curso.DAO.json.CursoDAO;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,12 +11,12 @@ import java.util.Optional;
 public class CursoController {
     private final CursoDAO cursoDAO = new CursoDAO();
 
-    public String cadastrarCurso(String titulo, int cargaHoraria, String tipo, int tolerancia) {
+    public String cadastrarCurso(String titulo, int cargaHoraria, String tipo, LocalTime tolerancia) {
         cursoDAO.inserir(new Curso(0, titulo, new ArrayList<>(), cargaHoraria, tipo, tolerancia));
         return "Curso cadastrado.";
     }
 
-    public String atualizarCurso(int idCurso, String titulo, int cargaHoraria, String tipo, int tolerancia ) {
+    public String atualizarCurso(int idCurso, String titulo, int cargaHoraria, String tipo, LocalTime tolerancia ) {
         Optional<Curso> encontrado = cursoDAO.buscarPorId(idCurso);
         if (encontrado.isPresent()) {
             Curso atualizado = encontrado.get();

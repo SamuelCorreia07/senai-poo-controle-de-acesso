@@ -1,10 +1,12 @@
 package com.senai.model.turma.DAO.json;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.senai.model.curso.Curso;
+
+import com.senai.model.turma.Subturma;
 import com.senai.model.turma.Turma;
+import com.senai.model.usuario.aluno.Aluno;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -17,7 +19,7 @@ import java.util.Optional;
 public class TurmaDAO {
     private List<Turma> turmas;
     private final String caminho = "json_data/turmas.json";
-    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private final Gson gson = new Gson();
 
     private List<Turma> carregar(){
         try(FileReader reader = new FileReader(caminho)){
@@ -43,6 +45,14 @@ public class TurmaDAO {
     public void inserir(Turma turma){
         int novoId = turmas.stream().mapToInt(Turma::getIdTurma).max().orElse(0) + 1;
         turma.setIdTurma(novoId);
+
+        turma.setSubturmas(new ArrayList<>());
+
+        Subturma subturma = new Subturma();
+        subturma.setAlunos(new ArrayList<>());
+
+        turma.getSubturmas().add(subturma);
+
         turmas.add(turma);
         salvarJson();
     }
@@ -68,5 +78,30 @@ public class TurmaDAO {
 
     public Optional<Turma> buscarPorId(int id) {
         return turmas.stream().filter(t -> t.getIdTurma() == id).findFirst();
+    }
+
+    public Optional<Turma> buscarPorAluno(Aluno aluno) {
+        return turmas.stream()
+                .filter(t ->
+                        t.getSubturmas().stream()
+                                .anyMatch(subTurma ->
+                                        subTurma.getAlunos().stream()
+                                                .anyMatch(a -> a.equals(aluno))
+                                )
+                ).findFirst();
+    }
+
+    public void adicionarAlunosNaSubturma(Subturma subTurma, List<Aluno> alunos) {
+        turmas.stream()
+                .filter(turma ->
+                        turma.getSubturmas().contains(subTurma)
+                ).findFirst().flatMap(
+                        turma -> turma.getSubturmas().stream()
+                                .filter(
+                                        s -> s.equals(subTurma)
+                                ).findFirst()
+                ).ifPresent(
+                        s -> s.getAlunos().addAll(alunos)
+                );
     }
 }

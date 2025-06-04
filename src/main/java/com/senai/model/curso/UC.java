@@ -11,12 +11,6 @@ public class UC {
     private int cargaHoraria;
     private int qtdSemestres;
 
-    public UC(String nome, int cargaHoraria, int qtdSemestres) {
-        this.nome = nome;
-        this.cargaHoraria = cargaHoraria;
-        this.qtdSemestres = qtdSemestres;
-        this.professores = new ArrayList<>();
-    }
 
     public String getNome() {
         return nome;
