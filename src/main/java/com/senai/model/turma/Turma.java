@@ -1,17 +1,20 @@
 package com.senai.model.turma;
 
+import com.senai.model.curso.Curso;
+
+import java.time.LocalTime;
 import java.util.List;
 
 public class Turma {
     private int idTurma;
     private String nome;
-    private String curso;
+    private Curso curso;
     private List<Subturma> subturmas;
     private String dataInicio;
     private int qtdSemestre;
-    private String horarioEntrada;
+    private LocalTime horarioEntrada;
 
-    public Turma(int idTurma, String nome, String curso, String dataInicio, int qtdSemestre, String horarioEntrada, List<Subturma> subturmas) {
+    public Turma(int idTurma, String nome, Curso curso, String dataInicio, int qtdSemestre, LocalTime horarioEntrada, List<Subturma> subturmas) {
         this.idTurma = idTurma;
         this.nome = nome;
         this.curso = curso;
@@ -19,6 +22,10 @@ public class Turma {
         this.qtdSemestre = qtdSemestre;
         this.horarioEntrada = horarioEntrada;
         this.subturmas = subturmas;
+    }
+
+    public Turma() {
+
     }
 
     public String getNome() {
@@ -29,11 +36,11 @@ public class Turma {
         this.nome = nome;
     }
 
-    public String getCurso() {
+    public Curso getCurso() {
         return curso;
     }
 
-    public void setCurso(String curso) {
+    public void setCurso(Curso curso) {
         this.curso = curso;
     }
 
@@ -61,11 +68,11 @@ public class Turma {
         this.qtdSemestre = qtdSemestre;
     }
 
-    public String getHorarioEntrada() {
+    public LocalTime getHorarioEntrada() {
         return horarioEntrada;
     }
 
-    public void setHorarioEntrada(String horarioEntrada) {
+    public void setHorarioEntrada(LocalTime horarioEntrada) {
         this.horarioEntrada = horarioEntrada;
     }
 

@@ -1,5 +1,6 @@
 package com.senai.model.curso;
 
+import java.time.LocalTime;
 import java.util.List;
 
 public class Curso {
@@ -8,9 +9,9 @@ public class Curso {
     private List<UC> ucs;
     private int cargaHoraria;
     private String tipo;
-    private int tolerancia;
+    private LocalTime tolerancia;
 
-    public Curso(int idCurso, String titulo, List<UC> ucs, int cargaHoraria, String tipo, int tolerancia) {
+    public Curso(int idCurso, String titulo, List<UC> ucs, int cargaHoraria, String tipo, LocalTime tolerancia) {
         this.idCurso = idCurso;
         this.titulo = titulo;
         this.ucs = ucs;
@@ -51,11 +52,11 @@ public class Curso {
         this.tipo = tipo;
     }
 
-    public int getTolerancia() {
+    public LocalTime getTolerancia() {
         return tolerancia;
     }
 
-    public void setTolerancia(int tolerancia) {
+    public void setTolerancia(LocalTime tolerancia) {
         this.tolerancia = tolerancia;
     }
 
