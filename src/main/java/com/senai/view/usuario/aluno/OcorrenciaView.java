@@ -18,13 +18,16 @@ public class OcorrenciaView {
         String opcao;
         String menuOcorrencia = """
                 
-                ------ MENU OCORRÊNCIA ------
+                _____________________________________________________________
+                |   Escolha uma opção:                                      |
+                |                                                           |
+                |       1 - Cadastrar ocorrência                            |
+                |       2 - Atualizar ocorrência                            |
+                |       3 - Remover ocorrência                              |
+                |       4 - Listar ocorrências                              |
+                |       0 - Voltar                                          |
+                |___________________________________________________________|
                 
-                    1. Cadastrar ocorrência
-                    2. Atualizar ocorrência
-                    3. Remover ocorrência
-                    4. Listar ocorrências
-                    0. Sair
                 """;
         do {
             System.out.println(menuOcorrencia);

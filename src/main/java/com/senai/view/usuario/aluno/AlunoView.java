@@ -8,7 +8,12 @@ public class AlunoView {
     private final Scanner scanner = new Scanner(System.in);
     private final AlunoController controller = new AlunoController();
 
-    public void menu() {
+    public static void main(String[] args) {
+        AlunoView view = new AlunoView();
+        menuAlunoView();
+    }
+
+    public void menuAlunoView() {
         String opcao;
         String menuPrincipal = """
                 

@@ -12,13 +12,18 @@ public class UsuarioView {
     public void menu() {
         String opcao;
         String menuUsuario = """
-                    --- MENU DE USUÁRIOS ---
-                1. Cadastrar usuário
-                2. Atualizar usuário
-                3. Remover usuário
-                4. Listar usuários
-                5. Atribuir/Alterar RFID
-                0. Voltar
+                
+                _____________________________________________________________
+                |   Escolha uma opção:                                      |
+                |                                                           |
+                |       1 - Cadastrar usuário                               |
+                |       2 - Atualizar usuário                               |
+                |       3 - Remover usuário                                 |
+                |       4 - Listar usuários                                 |
+                |       5 - Atribuir/Alterar RFID                           |
+                |       0 - Voltar                                          |
+                |___________________________________________________________|
+                
                 """;
         do {
 

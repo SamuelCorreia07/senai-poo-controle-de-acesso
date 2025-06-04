@@ -21,13 +21,15 @@ public class JustificativaView {
         String opcao;
         String menuJustificativa = """
                 
-                --- MENU JUSTIFICATIVA ---
-                
-                    1. Cadastrar justificativa
-                    2. Atualizar justificativa
-                    3. Remover justificativa
-                    4. Listar justificativas
-                    0. Sair
+                _____________________________________________________________
+                |   Escolha uma opção:                                      |
+                |                                                           |
+                |       1 - Cadastrar justificativa                         |
+                |       2 - Atualizar justificativa                         |
+                |       3 - Deletar justificativa                           |
+                |       4 - Listar justificativas                           |
+                |       0 - Voltar                                          |
+                |___________________________________________________________|
                 """;
         do {
             System.out.println(menuJustificativa);

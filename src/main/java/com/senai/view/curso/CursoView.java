@@ -17,16 +17,18 @@ public class CursoView {
     public static void menu() {
         String opcao;
         String menuCurso = """
-                
-                --- MENU DE CURSOS ---
-                
-                    1. Cadastrar curso
-                    2. Atualizar curso
-                    3. Remover curso
-                    4. Listar cursos
-                    0. Voltar
-                    
-                """;
+               
+               _____________________________________________________________
+               |   Escolha uma opção:                                      |
+               |                                                           |
+               |       1 - Cadastrar curso                                 |
+               |       2 - Atualizar curso                                 |
+               |       3 - Remover curso                                   |
+               |       4 - Listar cursos                                   |
+               |       0 - Voltar                                          |
+               |___________________________________________________________|
+                   
+               """;
         do {
             System.out.print(menuCurso);
             opcao = scanner.nextLine();
@@ -76,7 +78,7 @@ public class CursoView {
 
     public static void listar() {
         for (Curso c : cursoController.listarCursos()){
-            System.out.printf("ID: %d | Título: %s | Carga Horária: %d Horas| Tipo(CAI, TEC): %s | Tolerância: %d Minutos|\n",
+            System.out.printf("ID: %d | Título: %s | Carga Horária: %d Horas| Tipo(CAI, TEC): %s | Tolerância: %d Minuto(s)|\n",
                     c.getIdCurso(), c.getTitulo(), c.getCargaHoraria(), c.getTipo(), c.getTolerancia());
         }
     }

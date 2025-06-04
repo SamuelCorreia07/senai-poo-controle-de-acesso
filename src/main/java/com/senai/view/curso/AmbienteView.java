@@ -2,6 +2,7 @@ package com.senai.view.curso;
 
 import com.senai.control.curso.AmbienteController;
 import com.senai.model.curso.Ambiente;
+import com.senai.view.usuario.aluno.JustificativaView;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,10 +13,11 @@ public class AmbienteView {
         private static final AmbienteController ambienteController = new AmbienteController();
 
         public static void main(String[] args) {
-            menu();
+            AmbienteView view = new AmbienteView();
+            menuAmbiente();
         }
 
-        public static void menu() {
+        public static void menuAmbiente() {
             String opcao;
             String menuAmbiente = """
                 
@@ -27,7 +29,7 @@ public class AmbienteView {
                 |       3 - Deletar Ambiente                                |
                 |       4 - Listar Ambientes                                |
                 |       0 - Voltar                                          |
-                _____________________________________________________________
+                |___________________________________________________________|
                     
                 """;
             do {
@@ -39,8 +41,8 @@ public class AmbienteView {
                     case "2" -> atualizar();
                     case "3" -> deletar();
                     case "4" -> listar();
-                    case "0" -> System.out.println("Voltando...");
-                    default -> System.out.println("Opção inválida!");
+                    case "0" -> System.out.println("Voltando...\n");
+                    default -> System.out.println("Opção inválida!\n");
                 }
             } while (!opcao.equals("0"));
         }

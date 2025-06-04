@@ -8,8 +8,6 @@ import java.util.Scanner;
 
 public class AqvView {
     public static void main(String[] args) {
-
-
             AQVController aqvController = new AQVController();
             Scanner scanner = new Scanner(System.in);
 

@@ -1,12 +1,13 @@
-package com.senai.view;
-import com.senai.model.usuario.AQV;
 import com.senai.model.usuario.aluno.Aluno;
 import com.senai.model.usuario.Professor;
+import com.senai.model.usuario.AQV;
+import com.senai.model.usuario.Coordenador;
 import com.senai.model.usuario.Usuario;
-com.senai.model.usuario.dao.json.AQVDAO;
 import com.senai.model.usuario.dao.json.AQVDAO;
 import com.senai.util.CriptografiaUtil;
-import com.senai.view.usuario.AqvView;
+import com.senai.view.LoginView;
+import com.senai.view.UsuarioView;
+import com.senai.view.HorarioView;
 import com.senai.view.usuario.aluno.JustificativaView;
 import com.senai.websocket.WebSocketClienteConsole;
 
@@ -52,18 +53,19 @@ public class MenuPrincipal {
         System.out.printf("Bem vind@ %s \n", aqv.getNome());
         executarMenu(
                 "===== MENU AQV =====\n" +
-                        "1. Gerenciar Usuários (Aluno/Professor)\n" +
-                        "2. Deslogar\n" +
-                        "0. Sair\n",
+                "1. Gerenciar Usuários (Aluno/Professor)\n" +
+                "2. Deslogar\n" +
+                "0. Sair\n",
                 opcao -> {
                     switch (opcao) {
                         case "1" -> usuarioView.menu();
                         case "2" -> logar();
                         case "0" -> {
-                            System.out.println("Saindo...");
+
+                            System.out.println("\nSaindo...");
                             System.exit(0);
                         }
-                        default -> System.out.println("Opção inválida.");
+                        default -> System.out.println("\nOpção inválida.");
                     }
                 });
     }
@@ -73,13 +75,13 @@ public class MenuPrincipal {
         HorarioView horarioView = new HorarioView();
         executarMenu(
                 "===== MENU PROFESSOR =====\n" +
-                        "1. Gerenciar Horários\n" +
-                        "2. Receber notificações de atraso\n" +
-                        "3. Deslogar\n" +
-                        "0. Sair\n",
+                "1. Gerenciar Horários\n" +
+                "2. Receber notificações de atraso\n" +
+                "3. Deslogar\n" +
+                "0. Sair\n",
                 opcao -> {
                     switch (opcao) {
-                        case "1" -> horarioView.menu();
+                        case "1" -> horarioView.menuHorario();
                         case "2" -> WebSocketClienteConsole.conectar();
                         case "3" -> {
                             WebSocketClienteConsole.desconectar();
@@ -101,10 +103,10 @@ public class MenuPrincipal {
         JustificativaView justificativaView = new JustificativaView(aluno);
         executarMenu(
                 "===== MENU ALUNO =====\n" +
-                        "1. Visualizar Horários\n" +
-                        "2. Gerenciar Justificativas\n" +
-                        "3. Deslogar\n" +
-                        "0. Sair\n",
+                "1. Visualizar Horários\n" +
+                "2. Gerenciar Justificativas\n" +
+                "3. Deslogar\n" +
+                "0. Sair\n",
                 opcao -> {
                     switch (opcao) {
                         case "1" -> horarioView.listar();

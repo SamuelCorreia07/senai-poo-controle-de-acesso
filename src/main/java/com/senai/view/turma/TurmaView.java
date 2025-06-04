@@ -17,13 +17,15 @@ public class TurmaView {
         String opcao;
         String menuTurma = """
                 
-                --- MENU DE TURMAS ---
-                
-                    1. Cadastrar turma
-                    2. Atualizar turma
-                    3. Remover turma
-                    4. Listar turmas
-                    0. Voltar
+                _____________________________________________________________
+                |   Escolha uma opção:                                      |
+                |                                                           |
+                |       1 - Cadastrar turma                                 |
+                |       2 - Atualizar turma                                 |
+                |       3 - Remover turma                                   |
+                |       4 - Listar turmas                                   |
+                |       0 - Voltar                                          |
+                |___________________________________________________________|
                     
                 """;
         do {
@@ -35,42 +37,53 @@ public class TurmaView {
                 case "2" -> atualizar();
                 case "3" -> remover();
                 case "4" -> listar();
-                case "0" -> System.out.println("Voltando...");
-                default -> System.out.println("Opção inválida.");
+                case "0" -> System.out.println("\nVoltando...");
+                default -> System.out.println("\nOpção inválida.");
             }
         } while (!opcao.equals("0"));
     }
 
     private static void cadastrar() {
-        String nome = scannerPrompt("Nome da turma: ");
-        String curso = scannerPrompt("Curso: ");
-        String dataInicio = scannerPrompt("Data de inicio: ");
-        int qtdSemestre = scannerPromptInt("Numero de semestres: ");
-        String horaEntrada = scannerPrompt("Hora de entrada: ");
+        System.out.println("\nPreencha as informações a seguir:");
+        String nome = scannerPrompt("\tNome da turma: ");
+        String curso = scannerPrompt("\tCurso: ");
+        String dataInicio = scannerPrompt("\tData de inicio: ");
+        int qtdSemestre = scannerPromptInt("\tNumero de semestres: ");
+        String horaEntrada = scannerPrompt("\tHora de entrada: ");
+        System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------\n");
         System.out.println(turmaController.cadastrarTurma(nome, curso, dataInicio, qtdSemestre, horaEntrada));
+        System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------\n");
     }
 
     private static void atualizar() {
         listar();
-        int idTurma = scannerPromptInt("idTurma: ");
-        String nome = scannerPrompt("Nome da turma: ");
-        String curso = scannerPrompt("Curso: ");
-        String dataInicio = scannerPrompt("Data de inicio: ");
-        int qtdSemestre = scannerPromptInt("Numero de semestres: ");
-        String horaEntrada = scannerPrompt("Hora de entrada: ");
+        System.out.println("\nPreencha as informações a seguir:");
+        int idTurma = scannerPromptInt("\tidTurma: ");
+        String nome = scannerPrompt("\tNome da turma: ");
+        String curso = scannerPrompt("\tCurso: ");
+        String dataInicio = scannerPrompt("\tData de inicio: ");
+        int qtdSemestre = scannerPromptInt("\tNumero de semestres: ");
+        String horaEntrada = scannerPrompt("\tHora de entrada: ");
+        System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------\n");
         turmaController.atualizarTurma(idTurma, nome, curso, dataInicio, qtdSemestre, horaEntrada);
+        System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------\n");
     }
 
     private static void remover() {
         listar();
-        int id = scannerPromptInt("ID da turma: ");
+        System.out.println("\nPreencha as informações a seguir:");
+        int id = scannerPromptInt("\tID da turma: ");
+        System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------\n");
         System.out.println(turmaController.removerTurma(id));
+        System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------\n");
     }
 
     public static void listar() {
         for (Turma t : turmaController.listarTurmas()){
+            System.out.println(" --- LISTA DE TURMAS ---- ");
             System.out.printf("ID: %d | Nome: %s | Curso: %s | Data Inicio: %s | Semestres: %d | Hora Entrada: %s\n",
                     t.getIdTurma(),t.getNome(), t.getCurso(),  t.getDataInicio(), t.getQtdSemestre(), t.getHorarioEntrada());
+            System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------\n");
         }
     }
 

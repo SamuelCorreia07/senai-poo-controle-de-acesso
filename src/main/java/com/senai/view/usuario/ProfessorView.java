@@ -26,7 +26,7 @@ public class ProfessorView {
                 |       3 - Deletar professor                               |
                 |       4 - Listar professores                              |
                 |       0 - Voltar                                          |
-                _____________________________________________________________
+                |___________________________________________________________|
                 """;
             do {
                 System.out.print(menuProfessor);

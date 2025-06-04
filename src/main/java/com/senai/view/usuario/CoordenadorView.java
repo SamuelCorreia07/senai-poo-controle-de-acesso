@@ -18,12 +18,25 @@ public class CoordenadorView {
         int op = -1;
         while (op != 0) {
             System.out.println("\n--- Menu Coordenador ---");
-            System.out.println("1 - Cadastrar coordenador");
+            System.out.println("1 - Cadastrar ");
             System.out.println("2 - Listar coordenadores");
             System.out.println("3 - Atualizar coordenador");
             System.out.println("4 - Remover coordenador");
             System.out.println("0 - Voltar");
             System.out.print("Escolha: ");
+
+            """
+                
+                _____________________________________________________________
+                |   Escolha uma opção:                                      |
+                |                                                           |
+                |       1 - Cadastrar coordenador                           |
+                |       2 - Atualizar coordenador                           |
+                |       3 - Deletar coordenador                             |
+                |       4 - Listar coordenadores                            |
+                |       0 - Voltar                                          |
+                |___________________________________________________________|
+                """;
 
             try {
                 op = scanner.nextInt();

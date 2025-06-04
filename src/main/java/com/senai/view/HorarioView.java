@@ -2,6 +2,7 @@ package com.senai.view;
 
 import com.senai.control.HorarioController;
 import com.senai.model.turma.horario.Horario;
+import com.senai.view.usuario.aluno.JustificativaView;
 
 import java.time.LocalTime;
 import java.util.Scanner;
@@ -10,7 +11,12 @@ public class HorarioView {
     private final Scanner scanner = new Scanner(System.in);
     private final HorarioController controller = new HorarioController();
 
-    public void menu() {
+    public static void main(String[] args) {
+        HorarioView view = new HorarioView();
+        menuHorario();
+    }
+
+    public static void menuHorario() {
         String opcao;
         String menuHorario = """
                 --- MENU DE HORÁRIOS ---
