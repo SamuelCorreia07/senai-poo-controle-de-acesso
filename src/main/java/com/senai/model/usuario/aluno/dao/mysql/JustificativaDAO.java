@@ -1,7 +1,6 @@
 package com.senai.model.usuario.aluno.dao.mysql;
 
 import com.senai.model.conexaoMySQL.ConexaoMySQL;
-import com.senai.model.usuario.AQV;
 import com.senai.model.usuario.aluno.Justificativa;
 
 import java.sql.*;
@@ -12,9 +11,16 @@ import java.util.Optional;
 public class JustificativaDAO {
     public void inserir(Justificativa justificativa) {
         try (Connection conn = ConexaoMySQL.conectar()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO justificativa (id,nome) VALUES (?, ?)");
-            stmt.setString(1, justificativa.getId());
-            stmt.setString(2, justificativa.getNome());
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO justificativa (id, tipo, descricao, status, dataJustificada, DataHora, qtdDias, prazoAceite ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            stmt.setInt(1, justificativa.getId());
+            stmt.setString(2, justificativa.getTipo());
+            stmt.setString(3, justificativa.getDescricao());
+            stmt.setString(4, justificativa.getStatus());
+            stmt.setString(5, justificativa.getDataJustificada());
+            stmt.setString(6, justificativa.getDataHora());
+            stmt.setInt(7, justificativa.getQtdDias());
+            stmt.setInt(8, justificativa.getPrazoAceite());
+
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -24,8 +30,14 @@ public class JustificativaDAO {
     public void atualizar(Justificativa justificativa) {
         try (Connection conn = ConexaoMySQL.conectar()) {
             PreparedStatement stmt = conn.prepareStatement("UPDATE justificativa SET id = ?,nome = ? WHERE id = ?");
-            stmt.setString(1, justificativa.getId());
-            stmt.setString(2, justificativa.getNome());
+            stmt.setInt(1, justificativa.getId());
+            stmt.setString(2, justificativa.getTipo());
+            stmt.setString(3, justificativa.getDescricao());
+            stmt.setString(4, justificativa.getStatus());
+            stmt.setString(5, justificativa.getDataJustificadaFormatada());
+            stmt.setString(6, justificativa.getDataHoraFormatada());
+            stmt.setInt(7, justificativa.getQtdDias());
+            stmt.setInt(8, justificativa.getPrazoAceite());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -47,9 +59,16 @@ public class JustificativaDAO {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return Optional.of(new AQV(
+                return Optional.of(new Justificativa(
                         rs.getInt("id"),
-                        rs.getString("nome")
+                        rs.getString("tipo"),
+                        rs.getString("descricao"),
+                        rs.getString("status"),
+                        rs.getString("dataJustificada"),
+                        rs.getInt("DataHoraFormatada"),
+                        rs.getInt("qtdDias"),
+                        rs.getInt("prazoAceite")
+
                 ));
             }
         } catch (SQLException e) {
@@ -65,7 +84,13 @@ public class JustificativaDAO {
             while (rs.next()) {
                 lista.add(new Justificativa(
                         rs.getInt("id"),
-                        rs.getString("nome")
+                        rs.getString("tipo"),
+                        rs.getString("descricao"),
+                        rs.getString("status"),
+                        rs.getInt("dataJustificadaFormatada"),
+                        rs.getInt("DataHoraFormatada"),
+                        rs.getInt("qtdDias"),
+                        rs.getInt("prazoAceite")
 
                 ));
             }
@@ -76,4 +101,4 @@ public class JustificativaDAO {
     }
 }
 
-}
+

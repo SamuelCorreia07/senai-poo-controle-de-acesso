@@ -14,7 +14,7 @@ public class Justificativa {
     private int qtdDias;
     private int prazoAceite;
 
-    public Justificativa(int id, String tipo, String descricao, LocalDate dataJustificada, int qtdDias, int prazoAceite) {
+    public Justificativa(int id, String tipo, String descricao, String status, LocalDate dataJustificada, int qtdDias, int prazoAceite) {
         this.id = id;
         this.tipo = tipo;
         this.descricao = descricao;
