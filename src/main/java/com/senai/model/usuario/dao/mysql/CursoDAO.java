@@ -17,7 +17,6 @@ public class CursoDAO {
             stmt.setString(2, curso.getTitulo());
             stmt.setInt(3, curso.getCargaHoraria());
             stmt.setString(4, curso.getTipo());
-            stmt.set(5, curso.getTolerancia());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
