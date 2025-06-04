@@ -17,19 +17,21 @@ public class CursoDAO {
             stmt.setString(2, curso.getTitulo());
             stmt.setInt(3, curso.getCargaHoraria());
             stmt.setString(4, curso.getTipo());
+            stmt.setTime(5, curso.getTolerancia());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void atualizar(Ambiente ambiente) {
+    public void atualizar(Curso curso) {
         try (Connection conn = ConexaoMySQL.conectar()) {
-            PreparedStatement stmt = conn.prepareStatement("UPDATE ambiente SET id = ?, nome = ?, tipo = ? WHERE id = ?");
-            stmt.setString(1, ambiente.getId());
-            stmt.setString(2, ambiente.getNome());
-            stmt.setString(3, ambiente.getTipo());
-
+            PreparedStatement stmt = conn.prepareStatement("UPDATE curso SET id = ?, titulo = ?, cargaHoraria = ?, tipo = ?, tolerancia = ? WHERE id = ?");
+            stmt.setInt(1, curso.getIdCurso());
+            stmt.setString(2, curso.getTitulo());
+            stmt.setInt(3, curso.getCargaHoraria());
+            stmt.setString(4, curso.getTipo());
+            stmt.setTime(5, curso.getTolerancia());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -38,7 +40,7 @@ public class CursoDAO {
 
     public void deletar(int id){
         try (Connection conn = ConexaoMySQL.conectar()) {
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM ambiente WHERE id = ?");
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM curso WHERE id = ?");
             stmt.setInt(1, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -46,16 +48,18 @@ public class CursoDAO {
         }
     }
 
-    public Optional<Ambiente> buscarPorId(int id){
+    public Optional<Curso> buscarPorId(int id){
         try (Connection conn = ConexaoMySQL.conectar()) {
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM ambiente WHERE id = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM curso WHERE id = ?");
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return Optional.of(new Ambiente(
+                return Optional.of(new Curso(
                         rs.getInt("id"),
-                        rs.getString("nome")
-                        rs.getString("tipo")
+                        rs.getString("titulo"),
+                        rs.getInt("cargaHoraria"),
+                        rs.getString("tipo"),
+                        rs.getTime("tolerancia")
 
                 ));
             }
@@ -65,16 +69,18 @@ public class CursoDAO {
         return Optional.empty();
     }
 
-    public List<Ambiente> listarTodos(){
-        List<Ambiente> lista = new ArrayList<>();
+    public List<Curso> listarTodos(){
+        List<Curso> lista = new ArrayList<>();
         try (Connection conn = ConexaoMySQL.conectar()) {
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM ambiente");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM curso");
             while (rs.next()) {
-                lista.add(new Ambiente(
+                lista.add(new Curso(
                         rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("tipo")
+                        rs.getString("titulo"),
+                        rs.getInt("cargaHoraria"),
+                        rs.getString("tipo"),
+                        rs.getTime("tolerancia")
                 ));
             }
         } catch (SQLException e) {
@@ -83,4 +89,4 @@ public class CursoDAO {
         return lista;
     }
 }
-}
+

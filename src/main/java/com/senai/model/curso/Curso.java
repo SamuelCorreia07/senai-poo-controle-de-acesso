@@ -1,5 +1,6 @@
 package com.senai.model.curso;
 
+import java.sql.Time;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class Curso {
         this.tipo = tipo;
     }
 
-    public LocalTime getTolerancia() {
+    public Time getTolerancia() {
         return tolerancia;
     }
 

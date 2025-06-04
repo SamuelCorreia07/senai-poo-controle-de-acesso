@@ -53,7 +53,7 @@ public class AmbienteDAO {
             if (rs.next()) {
                 return Optional.of(new Ambiente(
                         rs.getInt("id"),
-                        rs.getString("nome")
+                        rs.getString("nome"),
                         rs.getString("tipo")
 
                 ));
