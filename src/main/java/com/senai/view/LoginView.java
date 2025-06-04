@@ -12,10 +12,10 @@ public class LoginView {
 
     public Optional<Usuario> exibirLogin() {
         System.out.println("\n===== LOGIN DO SISTEMA =====");
-        System.out.print("Login: ");
+        System.out.print("\tLogin: ");
         String login = scanner.nextLine();
 
-        System.out.print("Senha: ");
+        System.out.print("\tSenha: ");
         String senha = scanner.nextLine();
 
         Optional<Usuario> usuario = controller.autenticar(login, CriptografiaUtil.hash(senha));

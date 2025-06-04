@@ -10,7 +10,7 @@ public class AlunoView {
 
     public static void main(String[] args) {
         AlunoView view = new AlunoView();
-        menuAlunoView();
+        view.menuAlunoView();
     }
 
     public void menuAlunoView() {

@@ -11,7 +11,8 @@ public class ProfessorView {
         private static final ProfessorController professorController = new ProfessorController();
 
         public static void main(String[] args) {
-            menu();
+            ProfessorView view = new ProfessorView();
+            view.menu();
         }
 
         public static void menu() {

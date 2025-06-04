@@ -13,7 +13,7 @@ public class HorarioView {
 
     public static void main(String[] args) {
         HorarioView view = new HorarioView();
-        menuHorario();
+        view.menuHorario();
     }
 
     public static void menuHorario() {
