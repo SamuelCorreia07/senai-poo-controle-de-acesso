@@ -11,7 +11,7 @@ public class Ambiente {
             this.tipo = tipo;
         }
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 
