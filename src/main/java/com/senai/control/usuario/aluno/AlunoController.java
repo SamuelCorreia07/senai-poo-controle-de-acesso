@@ -13,27 +13,27 @@ public class AlunoController {
     public String cadastrarAluno(String nome, int idade) {
         Aluno novoAluno = new Aluno(0, nome, idade);
         alunoDAO.inserir(novoAluno);
-        return "\nAlun@ cadastrad@ com sucesso!";
+        return "Alun@ cadastrad@ com sucesso!";
     }
 
     public String atualizarAluno(int id, String nome, int idade) {
         Aluno aluno = alunoDAO.buscarPorId(id).orElse(null);
         if (aluno == null) {
-            return "\nAlun@ não encontrad@!";
+            return "Alun@ não encontrad@!";
         }
         aluno.setNome(nome);
         aluno.setIdade(idade);
         alunoDAO.atualizar(aluno);
-        return "\nAlun@ atualizad@ com sucesso!";
+        return "Alun@ atualizad@ com sucesso!";
     }
 
     public String removerAluno(int id) {
         Aluno aluno = alunoDAO.buscarPorId(id).orElse(null);
         if (aluno == null) {
-            return "\nAlun@ não encontrad@!";
+            return "Alun@ não encontrad@!";
         }
         alunoDAO.remover(id);
-        return "\nAlun@ removid@ com sucesso!";
+        return "Alun@ removid@ com sucesso!";
     }
 
     public List<Aluno> listarAlunos() {

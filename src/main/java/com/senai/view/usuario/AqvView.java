@@ -31,11 +31,11 @@ public class AqvView {
                         String nome = scanner.nextLine();
 
                         AQV atraso = new AQV(0, nome);
-                        aqvController.adicionar(atraso);
+                        aqvController.inserir(atraso);
                         System.out.println("Atraso registrado com sucesso.");
                     }
                     case 2 -> {
-                        List<AQV> lista = aqvController.listar();
+                        List<AQV> lista = aqvController.listarAQVs();
                         if (lista.isEmpty()) {
                             System.out.println("Nenhum atraso registrado.");
                         } else {
@@ -46,7 +46,7 @@ public class AqvView {
                         }
                     }
                     case 3 -> {
-                        System.out.print("ID do atraso a atualizar: ");
+                        System.out.print("ID do atraso a atualizarCoordenador: ");
                         int id = scanner.nextInt();
                         scanner.nextLine();
 
@@ -73,7 +73,7 @@ public class AqvView {
                         System.out.println("Atraso atualizado com sucesso.");
                     }
                     case 4 -> {
-                        System.out.print("ID do atraso a remover: ");
+                        System.out.print("ID do atraso a removerCoordenador: ");
                         int id = scanner.nextInt();
                         scanner.nextLine();
 

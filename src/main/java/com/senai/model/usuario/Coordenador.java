@@ -1,25 +1,15 @@
 package com.senai.model.usuario;
 
 public class Coordenador extends Usuario {
-    private String departamento;
 
-    public Coordenador(int id, String nome, String departamento) {
+    public Coordenador(int id, String nome) {
         super(id, nome);
-        this.departamento = departamento;
-    }
-
-    public String getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;
     }
 
     @Override
     public String toString() {
-        return "Coordenador{" +
-                "departamento='" + departamento + '\'' +
-                '}';
+        return "Coordenador: " +
+                "ID: " + getId() +
+                "Nome: " + getNome();
     }
 }

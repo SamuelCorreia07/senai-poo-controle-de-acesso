@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.senai.model.usuario.aluno.Justificativa;
+import com.senai.util.LocalDateAdapter;
+import com.senai.util.LocalDateTimeAdapter;
 
 import java.io.FileReader;
 import java.io.FileWriter;

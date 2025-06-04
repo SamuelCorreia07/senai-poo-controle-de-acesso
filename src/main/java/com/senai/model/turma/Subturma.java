@@ -1,19 +1,22 @@
 package com.senai.model.turma;
 
+import com.senai.model.turma.horario.Horario;
 import com.senai.model.usuario.aluno.Aluno;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Subturma {
+    private int idSubTurma;
     private String nome;
     private List<Aluno> alunos;
-    private String horario;
+    private Horario horario;
 
-    public Subturma(String nome, String horario) {
-        this.nome = nome;
-        this.horario = horario;
-        this.alunos = new ArrayList<>();
+    public int getIdSubTurma() {
+        return idSubTurma;
+    }
+
+    public void setIdSubTurma(int idSubTurma) {
+        this.idSubTurma = idSubTurma;
     }
 
     public String getNome() {
@@ -32,11 +35,11 @@ public class Subturma {
         this.alunos = alunos;
     }
 
-    public String getHorario() {
+    public Horario getHorario() {
         return horario;
     }
 
-    public void setHorario(String horario) {
+    public void setHorario(Horario horario) {
         this.horario = horario;
     }
 }
