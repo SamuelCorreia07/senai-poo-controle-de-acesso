@@ -1,4 +1,4 @@
-package com.senai.model.usuario.aluno.dao.json;
+package com.senai.util;
 
 import com.google.gson.*;
 
