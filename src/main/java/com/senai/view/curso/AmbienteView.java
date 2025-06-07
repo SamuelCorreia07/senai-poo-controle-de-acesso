@@ -14,7 +14,7 @@ public class AmbienteView {
 
         public static void main(String[] args) {
             AmbienteView view = new AmbienteView();
-            menuAmbiente();
+            view.menuAmbiente();
         }
 
         public static void menuAmbiente() {

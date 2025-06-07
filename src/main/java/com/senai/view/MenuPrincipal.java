@@ -1,7 +1,8 @@
+package com.senai.view;
+
 import com.senai.model.usuario.aluno.Aluno;
 import com.senai.model.usuario.Professor;
 import com.senai.model.usuario.AQV;
-import com.senai.model.usuario.Coordenador;
 import com.senai.model.usuario.Usuario;
 import com.senai.model.usuario.dao.json.AQVDAO;
 import com.senai.util.CriptografiaUtil;
@@ -18,7 +19,6 @@ import static com.senai.mqtt.MqttSubscriber.iniciarMqtt;
 import static com.senai.websocket.WebSocketSender.iniciarWebSocket;
 
 public class MenuPrincipal {
-
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
@@ -29,7 +29,7 @@ public class MenuPrincipal {
     }
 
     public static void logar() {
-        Optional<Usuario> usuarioLogado = new LoginView().exibirLogin();
+        Optional<Usuario> usuarioLogado = new LoginView().menuLoginView();
         usuarioLogado.ifPresent(MenuPrincipal::redirecionarMenu);
     }
 
@@ -51,74 +51,92 @@ public class MenuPrincipal {
     private static void menuAqv(AQV aqv) {
         UsuarioView usuarioView = new UsuarioView();
         System.out.printf("Bem vind@ %s \n", aqv.getNome());
-        executarMenu(
-                "===== MENU AQV =====\n" +
-                "1. Gerenciar Usuários (Aluno/Professor)\n" +
-                "2. Deslogar\n" +
-                "0. Sair\n",
-                opcao -> {
-                    switch (opcao) {
-                        case "1" -> usuarioView.menu();
-                        case "2" -> logar();
-                        case "0" -> {
-
-                            System.out.println("\nSaindo...");
-                            System.exit(0);
-                        }
-                        default -> System.out.println("\nOpção inválida.");
-                    }
-                });
+        executarMenu("""
+                
+                _____________________________________________________________
+                |   MENU AQV - Escolha uma opção:                           |
+                |                                                           |
+                |       1 - Gerenciar Usuários (Aluno/Professor)           |
+                |       2 - Deslogar                                       |
+                |       0 - Sair                                           |
+                |___________________________________________________________|
+                
+                """, opcao -> {
+            switch (opcao) {
+                case "1" -> usuarioView.menu();
+                case "2" -> logar();
+                case "0" -> {
+                    System.out.println("\nSaindo...");
+                    System.exit(0);
+                }
+                default -> System.out.println("\nOpção inválida.");
+            }
+        });
     }
 
     private static void menuProfessor(Professor professor) {
         System.out.printf("Bem vind@ %s \n", professor.getNome());
         HorarioView horarioView = new HorarioView();
-        executarMenu(
-                "===== MENU PROFESSOR =====\n" +
-                "1. Gerenciar Horários\n" +
-                "2. Receber notificações de atraso\n" +
-                "3. Deslogar\n" +
-                "0. Sair\n",
-                opcao -> {
-                    switch (opcao) {
-                        case "1" -> horarioView.menuHorario();
-                        case "2" -> WebSocketClienteConsole.conectar();
-                        case "3" -> {
-                            WebSocketClienteConsole.desconectar();
-                            logar();
-                        }
-                        case "0" -> {
-                            System.out.println("Saindo...");
-                            WebSocketClienteConsole.desconectar();
-                            System.exit(0);
-                        }
-                        default -> System.out.println("Opção inválida.");
-                    }
-                });
+        executarMenu("""
+                
+                _____________________________________________________________
+                |   MENU PROFESSOR - Escolha uma opção:                     |
+                |                                                           |
+                |       1 - Gerenciar Horários                              |
+                |       2 - Receber notificações de atraso                  |
+                |       3 - Deslogar                                        |
+                |       0 - Sair                                            |
+                |___________________________________________________________|
+                
+                """, opcao -> {
+            switch (opcao) {
+                case "1" -> horarioView.menuHorarioView();
+                case "2" -> WebSocketClienteConsole.conectar();
+                case "3" -> {
+                    WebSocketClienteConsole.desconectar();
+                    logar();
+                }
+                case "0" -> {
+                    System.out.println("Saindo...");
+                    WebSocketClienteConsole.desconectar();
+                    System.exit(0);
+                }
+                default -> System.out.println("Opção inválida.");
+            }
+        });
     }
 
     private static void menuAluno(Aluno aluno) {
         System.out.printf("Bem vind@ %s \n", aluno.getNome());
         HorarioView horarioView = new HorarioView();
         JustificativaView justificativaView = new JustificativaView(aluno);
-        executarMenu(
-                "===== MENU ALUNO =====\n" +
-                "1. Visualizar Horários\n" +
-                "2. Gerenciar Justificativas\n" +
-                "3. Deslogar\n" +
-                "0. Sair\n",
-                opcao -> {
-                    switch (opcao) {
-                        case "1" -> horarioView.listar();
-                        case "2" -> justificativaView.listar();
-                        case "3" -> logar();
-                        case "0" -> {
-                            System.out.println("Saindo...");
-                            System.exit(0);
-                        }
-                        default -> System.out.println("Opção inválida.");
-                    }
-                });
+        executarMenu("""
+                
+                _____________________________________________________________
+                |   MENU ALUNO - Escolha uma opção:                         |
+                |                                                           |
+                |       1 - Visualizar Horários                             |
+                |       2 - Gerenciar Justificativas                        |
+                |       3 - Deslogar                                        |
+                |       0 - Sair                                            |
+                |___________________________________________________________|
+                
+                """, opcao -> {
+            switch (opcao) {
+                case "1" -> {
+                    horarioView.listar();
+                }
+                case "2" -> {
+                    justificativaView.listar();
+                }
+                case "3" -> logar();
+                case "0" -> {
+                    System.out.println("Saindo...");
+                    System.exit(0);
+                }
+                default -> System.out.println("Opção inválida.");
+            }
+        });
     }
 
     private static void executarMenu(String titulo, java.util.function.Consumer<String> acoes) {

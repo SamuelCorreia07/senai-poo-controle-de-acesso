@@ -1,4 +1,5 @@
 package com.senai.view;
+
 import com.senai.control.usuario.UsuarioController;
 import com.senai.model.usuario.aluno.Aluno;
 import com.senai.model.usuario.Professor;
@@ -26,7 +27,6 @@ public class UsuarioView {
                 
                 """;
         do {
-
             System.out.print(menuUsuario);
             opcao = scanner.nextLine();
 
@@ -36,67 +36,84 @@ public class UsuarioView {
                 case "3" -> remover();
                 case "4" -> listar();
                 case "5" -> atribuirRfid();
-                case "0" -> System.out.println("Voltando...");
-                default -> System.out.println("Opção inválida.");
+                case "0" -> System.out.println("\nVoltando ao menu anterior...\n");
+                default -> System.out.println("\nOpção inválida. Tente novamente.\n");
             }
         } while (!opcao.equals("0"));
     }
 
     private void cadastrar() {
-        String tipo = scannerPrompt("Tipo (1=Aluno, 2=Professor): ");
+        String tipo = scannerPrompt("\nTipo (1=Aluno, 2=Professor): ");
         String nome = scannerPrompt("Nome: ");
         String login = scannerPrompt("Login: ");
         String senha = scannerPrompt("Senha: ");
-        String dadoExtra = tipo.equals("1") ? scannerPrompt("ID do cartão RFID: ") : scannerPrompt("Disciplina: ");
-        System.out.println(controller.cadastrarUsuario(tipo, nome, dadoExtra, login, senha));
+        String dadoExtra = tipo.equals("1")
+                ? scannerPrompt("ID do cartão RFID: ")
+                : scannerPrompt("Disciplina: ");
+
+        System.out.println("\n" + controller.cadastrarUsuario(tipo, nome, dadoExtra, login, senha) + "\n");
     }
 
     private void atualizar() {
-        String tipo = scannerPrompt("Tipo (1=Aluno, 2=Professor): ");
-        int id = scannerPromptInt("ID: ");
-        String nome = scannerPrompt("Novo nome: ");
-        String login = scannerPrompt("Novo Login: ");
-        String senha = scannerPrompt("Nova Senha: ");
-        String dadoExtra = tipo.equals("1") ? scannerPrompt("Novo RFID: ") : scannerPrompt("Nova disciplina: ");
-        System.out.println(controller.atualizarUsuario(tipo, id, nome, dadoExtra, login, senha));
+        String tipo = scannerPrompt("\nTipo " +
+                "\n\t1 - Aluno" +
+                "\n\t2 -Professor");
+        int id = scannerPromptInt("\nID: ");
+        String nome = scannerPrompt("\tNovo nome: ");
+        String login = scannerPrompt("\tNovo Login: ");
+        String senha = scannerPrompt("\tNova Senha: ");
+        String dadoExtra = tipo.equals("1")
+                ? scannerPrompt("\tNovo RFID: ")
+                : scannerPrompt("\tNova disciplina: ");
+
+        System.out.println("\n" + controller.atualizarUsuario(tipo, id, nome, dadoExtra, login, senha) + "\n");
     }
 
     private void remover() {
-        System.out.print("Tipo (1=Aluno, 2=Professor): ");
-        String tipo = scanner.nextLine();
+        String tipo = scannerPrompt("\nTipo " +
+                "\n\t1 - Aluno" +
+                "\n\t2 -Professor");
         int id = scannerPromptInt("ID: ");
-        System.out.println(controller.removerUsuario(tipo, id));
+        System.out.println("\n" + controller.removerUsuario(tipo, id) + "\n");
     }
 
     private void listar() {
-        System.out.println("--- Alunos ---");
+        System.out.println("\n📚 --- Alunos Cadastrados ---");
         for (Aluno a : controller.listarAlunos()) {
             System.out.printf("ID: %d | Nome: %s | RFID: %s\n", a.getId(), a.getNome(), a.getIdCartaoRfid());
         }
-        System.out.println("--- Professores ---");
+
+        System.out.println("\n🧑‍🏫 --- Professores Cadastrados ---");
         for (Professor p : controller.listarProfessores()) {
             System.out.printf("ID: %d | Nome: %s | Disciplina: %s\n", p.getId(), p.getNome(), p.getDisciplina());
         }
+        System.out.println();
     }
 
     public void atribuirRfid() {
-        int id = scannerPromptInt("ID do aluno: ");
-        String rfid = scannerPrompt("Novo RFID: ");
-        System.out.println(controller.atribuirRfid(id, rfid));
+        System.out.println("\nAtribuir/Alterar RFID");
+        int id = scannerPromptInt("\tID do aluno: ");
+        String rfid = scannerPrompt("\tNovo RFID: ");
+        System.out.println("\n" + controller.atribuirRfid(id, rfid) + "\n");
     }
 
     public void mudarRfid(Aluno aluno) {
         String rfid = scannerPrompt("Novo RFID: ");
-        System.out.println(controller.atribuirRfid(aluno.getId(), rfid));
+        System.out.println("\n" + controller.atribuirRfid(aluno.getId(), rfid) + "\n");
     }
 
     private String scannerPrompt(String msg) {
         System.out.print(msg);
-        return scanner.nextLine();
+        return scanner.nextLine().trim();
     }
 
     private int scannerPromptInt(String msg) {
         System.out.print(msg);
-        return Integer.parseInt(scanner.nextLine());
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("\nEntrada inválida. Digite um número.");
+            return scannerPromptInt(msg);
+        }
     }
 }
