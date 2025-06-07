@@ -6,11 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UC {
+    private int id;
     private String nome;
     private List<Professor> professores;
     private int cargaHoraria;
     private int qtdSemestres;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
