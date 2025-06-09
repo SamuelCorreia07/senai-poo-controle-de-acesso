@@ -48,17 +48,22 @@ public class CoordenadorView {
 
     private void cadastrarCoordenador() {
         String nome = scannerPromptString("\tNome do coordenador(a): ");
+        String login = scannerPromptString("\tLogin: ");
+        String senha = scannerPromptString("\tSenha: ");
         String departamento = scannerPromptString("\tDepartamento: ");
-        String resultado = controller.inserirCoordenador(new Coordenador(0, nome, departamento));
+
+        String resultado = controller.inserirCoordenador(nome, login, senha, departamento);
         System.out.println(resultado);
     }
 
     private void atualizarCoordenador() {
         int id = scannerPromptInt("\tID do coordenador(a): ", "\nPor favor, insira um ID válido.");
         String nome = scannerPromptString("\tNovo nome: ");
+        String login = scannerPromptString("\tNovo login: ");
+        String senha = scannerPromptString("\tNova senha: ");
         String departamento = scannerPromptString("\tNovo departamento: ");
-        Coordenador atualizado = new Coordenador(id, nome, departamento);
-        String resultado = controller.atualizarCoordenador(id, atualizado);
+
+        String resultado = controller.atualizarCoordenador(id, nome, login, senha, departamento);
         System.out.println(resultado);
     }
 

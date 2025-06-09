@@ -2,7 +2,9 @@ package com.senai.view.turma;
 
 import com.senai.control.turma.TurmaController;
 import com.senai.model.turma.Turma;
+import com.senai.model.curso.Curso;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,6 +17,7 @@ public class TurmaView {
         view.menuTurmaView();
     }
 
+    // Exibição do menu de opções
     public void menuTurmaView() {
         String opcao;
         String menu = """
@@ -45,28 +48,41 @@ public class TurmaView {
         } while (!opcao.equals("0"));
     }
 
+    // Cadastro de uma nova turma
     private void cadastrarTurma() {
         String nome = promptString("\tNome da turma: ");
-        String curso = promptString("\tCurso: ");
+        int idCurso = promptInt("\tID do curso: ", "Por favor, insira um ID válido.");
+        Curso curso = controller.buscarCursoPorId(idCurso);  // Buscar o curso pelo ID
         String dataInicio = promptString("\tData de início (dd/mm/aaaa): ");
         int qtdSemestre = promptInt("\tNúmero de semestres: ", "\nPor favor, insira um número válido.");
-        String horaEntrada = promptString("\tHorário de entrada (HH:mm): ");
-        String resultado = controller.cadastrarTurma(nome, curso, dataInicio, qtdSemestre, horaEntrada);
+
+        // Entrada de horário
+        String horaEntradaStr = promptString("\tHorário de entrada (HH:mm): ");
+        LocalTime horarioEntrada = LocalTime.parse(horaEntradaStr);  // Convertendo para LocalTime
+
+        String resultado = controller.cadastrarTurma(nome, curso, dataInicio, qtdSemestre, horarioEntrada);
         System.out.println("\n" + resultado + "\n");
     }
 
+    // Atualização de uma turma existente
     private void atualizarTurma() {
         listarTurmas();
         int id = promptInt("\tID da turma a atualizar: ", "\nPor favor, insira um ID válido.");
         String nome = promptString("\tNovo nome da turma: ");
-        String curso = promptString("\tNovo curso: ");
+        int idCurso = promptInt("\tNovo ID do curso: ", "Por favor, insira um ID válido.");
+        Curso curso = controller.buscarCursoPorId(idCurso);  // Buscar o curso pelo ID
         String dataInicio = promptString("\tNova data de início (dd/mm/aaaa): ");
         int qtdSemestre = promptInt("\tNovo número de semestres: ", "\nPor favor, insira um número válido.");
-        String horaEntrada = promptString("\tNovo horário de entrada (HH:mm): ");
-        String resultado = controller.atualizarTurma(id, nome, curso, dataInicio, qtdSemestre, horaEntrada);
+
+        // Entrada de horário
+        String horaEntradaStr = promptString("\tNovo horário de entrada (HH:mm): ");
+        LocalTime horarioEntrada = LocalTime.parse(horaEntradaStr);
+
+        String resultado = controller.atualizarTurma(id, nome, curso, dataInicio, qtdSemestre, horarioEntrada);
         System.out.println("\n" + resultado + "\n");
     }
 
+    // Remover uma turma
     private void removerTurma() {
         listarTurmas();
         int id = promptInt("\tID da turma a remover: ", "\nPor favor, insira um ID válido.");
@@ -80,6 +96,7 @@ public class TurmaView {
         }
     }
 
+    // Listar todas as turmas cadastradas
     private void listarTurmas() {
         List<Turma> turmas = controller.listarTurmas();
         if (turmas.isEmpty()) {
@@ -87,18 +104,23 @@ public class TurmaView {
         } else {
             System.out.println("\n--- LISTA DE TURMAS ---");
             for (Turma t : turmas) {
+                // Ajustar a exibição para mostrar o nome do curso em vez de seu hashcode
+                String nomeCurso = t.getCurso() != null ? t.getCurso().getTitulo() : "Curso não encontrado";
+
                 System.out.printf("ID: %d | Nome: %s | Curso: %s | Início: %s | Semestres: %d | Entrada: %s\n",
-                        t.getIdTurma(), t.getNome(), t.getCurso(), t.getDataInicio(), t.getQtdSemestre(), t.getHorarioEntrada());
+                        t.getIdTurma(), t.getNome(), nomeCurso, t.getDataInicio(), t.getQtdSemestre(), t.getHorarioEntrada());
             }
             System.out.println();
         }
     }
 
+    // Função para solicitar uma String ao usuário
     private String promptString(String msg) {
         System.out.print(msg);
         return scanner.nextLine().trim();
     }
 
+    // Função para solicitar um número inteiro ao usuário
     private int promptInt(String msg, String erroMsg) {
         int numero = 0;
         boolean valido = false;

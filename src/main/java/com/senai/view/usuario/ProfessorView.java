@@ -29,7 +29,6 @@ public class ProfessorView {
                 |       4 - Listar professor@s                              |
                 |       0 - Voltar                                          |
                 |___________________________________________________________|
-                
                 """;
         do {
             System.out.print(menu);
@@ -48,16 +47,22 @@ public class ProfessorView {
 
     private void cadastrarProfessor() {
         String nome = scannerPromptString("\tNome do(a) professor(a): ");
+        String login = scannerPromptString("\tLogin: ");
+        String senha = scannerPromptString("\tSenha: ");
         String disciplina = scannerPromptString("\tDisciplina: ");
-        String resultado = controller.cadastrarProfessor(nome, disciplina);
+
+        String resultado = controller.cadastrarProfessor(nome, login, senha, disciplina);
         System.out.println(resultado);
     }
 
     private void atualizarProfessor() {
         int id = scannerPromptInt("\tID do(a) professor(a): ", "\nPor favor, insira um ID válido.");
         String nome = scannerPromptString("\tNovo nome: ");
+        String login = scannerPromptString("\tNovo login: ");
+        String senha = scannerPromptString("\tNova senha: ");
         String disciplina = scannerPromptString("\tNova disciplina: ");
-        String resultado = controller.atualizarProfessor(id, nome, disciplina);
+
+        String resultado = controller.atualizarProfessor(id, nome, login, senha, disciplina);
         System.out.println(resultado);
     }
 
@@ -78,6 +83,7 @@ public class ProfessorView {
         if (professores.isEmpty()) {
             System.out.println("\nNenhum professor(a) encontrad@!");
         } else {
+            System.out.println("\n======= LISTA DE PROFESSORES =======");
             for (Professor p : professores) {
                 System.out.printf("ID: %d | Nome: %s | Disciplina: %s%n", p.getId(), p.getNome(), p.getDisciplina());
             }

@@ -7,18 +7,16 @@ import com.senai.model.usuario.aluno.Justificativa;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Scanner;
 
 public class JustificativaView {
+    private final Aluno aluno;
     private final Scanner scanner = new Scanner(System.in);
     private final JustificativaController controller = new JustificativaController();
 
     public JustificativaView(Aluno aluno) {
-    }
-
-    public static void main(String[] args) {
-        JustificativaView view = new JustificativaView();
-        view.menu();
+        this.aluno = aluno;
     }
 
     private void menu() {
@@ -87,8 +85,14 @@ public class JustificativaView {
     }
 
     public void listar() {
+        List<Justificativa> justificativas = controller.listarJustificativas();
+        if (justificativas.isEmpty()) {
+            System.out.println("\nNenhuma justificativa encontrada.");
+            return;
+        }
+
         System.out.println("\n--- JUSTIFICATIVAS ---");
-        for (Justificativa j : controller.listarJustificativas()) {
+        for (Justificativa j : justificativas) {
             System.out.printf("""
                 ID: %d
                 Tipo: %s
@@ -140,20 +144,24 @@ public class JustificativaView {
 
     private String scannerPromptTipo() {
         while (true) {
-            System.out.print("""
+            System.out.print(""" 
                 Tipo da justificativa:
                     1. Falta
                     2. Ocorrência
                 Escolha: """);
             String opcao = scanner.nextLine().trim();
-            return switch (opcao) {
-                case "1" -> "Falta";
-                case "2" -> "Ocorrência";
+            switch (opcao) {
+                case "1" -> {
+                    return "Falta";
+                }
+                case "2" -> {
+                    return "Ocorrência";
+                }
                 default -> {
                     System.out.println("Opção inválida. Tente novamente.");
-                    yield null;
+                    continue;
                 }
-            };
+            }
         }
     }
 }

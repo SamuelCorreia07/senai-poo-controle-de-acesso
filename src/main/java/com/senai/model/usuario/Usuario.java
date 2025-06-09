@@ -1,8 +1,8 @@
 package com.senai.model.usuario;
 
 public abstract class Usuario {
-    protected int id;
-    protected String nome;
+    private int id;
+    private String nome;
     private String login;
     private String senha;
 
@@ -17,12 +17,12 @@ public abstract class Usuario {
         return id;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
     }
 
     public void setNome(String nome) {
@@ -46,4 +46,9 @@ public abstract class Usuario {
     }
 
     public abstract String getTipo();
+
+    @Override
+    public String toString() {
+        return "Usuario [id=" + id + ", nome=" + nome + ", login=" + login + "]";
+    }
 }

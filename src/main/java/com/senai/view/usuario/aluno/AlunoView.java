@@ -1,4 +1,5 @@
 package com.senai.view.usuario.aluno;
+
 import com.senai.control.usuario.aluno.AlunoController;
 import com.senai.model.usuario.aluno.Aluno;
 import java.util.List;
@@ -26,7 +27,6 @@ public class AlunoView {
                 |       4 - Listar alun@s                                   |
                 |       0 - Voltar                                          |
                 |___________________________________________________________|
-                
                 """;
         do {
             System.out.print(menuPrincipal);
@@ -46,7 +46,10 @@ public class AlunoView {
     private void cadastrarAluno() {
         String nome = scannerPromptString("\tNome d@ alun@: ");
         int idade = scannerPromptInt("\tIdade d@ alun@: ", "\nPor favor, insira uma idade válida.");
-        String resultado = controller.cadastrarAluno(nome, idade);
+        String login = scannerPromptString("\tLogin do alun@: ");
+        String senha = scannerPromptString("\tSenha do alun@: ");
+        String rfid = scannerPromptString("\tRFID do alun@: ");
+        String resultado = controller.cadastrarAluno(nome, idade, login, senha, rfid);
         System.out.println(resultado);
     }
 
@@ -54,13 +57,16 @@ public class AlunoView {
         int id = scannerPromptInt("\tID d@ alun@: ", "\nPor favor, insira um ID válido.");
         String nome = scannerPromptString("\tNovo nome d@ alun@: ");
         int idade = scannerPromptInt("\tNova idade d@ alun@: ", "\nPor favor, insira uma idade válida.");
-        String resultado = controller.atualizarAluno(id, nome, idade);
+        String login = scannerPromptString("\tNovo login d@ alun@: ");
+        String senha = scannerPromptString("\tNova senha d@ alun@: ");
+        String rfid = scannerPromptString("\tNovo RFID d@ alun@: ");
+        String resultado = controller.atualizarAluno(id, nome, idade, login, senha, rfid);
         System.out.println(resultado);
     }
 
     private void removerAluno() {
         int id = scannerPromptInt("\tID d@ alun@: ", "\nPor favor, insira um ID válido.");
-        System.out.print("\nTem certeza que deseja removerCoordenador o cadastro d@ alun@ com ID '" + id + "'? (S/N): ");
+        System.out.print("\nTem certeza que deseja remover o cadastro d@ alun@ com ID '" + id + "'? (S/N): ");
         String confirmacao = scanner.nextLine().trim().toUpperCase();
         if (confirmacao.equals("S")) {
             String resultado = controller.removerAluno(id);

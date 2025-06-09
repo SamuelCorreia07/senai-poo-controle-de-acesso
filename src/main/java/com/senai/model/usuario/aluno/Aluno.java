@@ -1,4 +1,5 @@
 package com.senai.model.usuario.aluno;
+
 import com.senai.model.usuario.Usuario;
 import java.util.Objects;
 
@@ -30,7 +31,7 @@ public class Aluno extends Usuario {
 
     @Override
     public String toString() {
-        return String.format("ID: %d | Nome: %s | Idade: %d", getId(), getNome(), idade);
+        return String.format("ID: %d | Nome: %s | Idade: %d | RFID: %s", getId(), getNome(), idade, idCartaoRfid);
     }
 
     @Override
@@ -44,5 +45,10 @@ public class Aluno extends Usuario {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
+    }
+
+    @Override
+    public String getTipo() {
+        return "Aluno";
     }
 }

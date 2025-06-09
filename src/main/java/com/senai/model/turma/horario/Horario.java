@@ -1,5 +1,7 @@
 package com.senai.model.turma.horario;
+
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Horario {
     private int id;
@@ -14,6 +16,13 @@ public class Horario {
         this.horaInicio = horaInicio;
     }
 
+    public Horario(int idAluno, int idProfessor, LocalTime horaInicio) {
+        this.idAluno = idAluno;
+        this.idProfessor = idProfessor;
+        this.horaInicio = horaInicio;
+    }
+
+    // Getters
     public int getId() {
         return id;
     }
@@ -30,6 +39,7 @@ public class Horario {
         return horaInicio;
     }
 
+    // Setters
     public void setId(int id) {
         this.id = id;
     }
@@ -44,5 +54,14 @@ public class Horario {
 
     public void setHoraInicio(LocalTime horaInicio) {
         this.horaInicio = horaInicio;
+    }
+
+    public String getHoraInicioFormatada() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        return horaInicio.format(formatter);
+    }
+
+    public boolean validarHorario() {
+        return horaInicio != null && idAluno > 0 && idProfessor > 0;
     }
 }

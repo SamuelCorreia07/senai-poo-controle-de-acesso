@@ -9,8 +9,9 @@ import java.util.Optional;
 public class AQVController {
     private final AQVDAO aqvDAO = new AQVDAO();
 
-    public String inserirAQV(String nome) {
-        aqvDAO.inserir(new AQV(0, nome));
+    public String inserirAQV(String nome, String login, String senha) {
+        AQV novoAQV = new AQV(0, nome, login, senha);
+        aqvDAO.inserir(novoAQV);
         return "AQV cadastrado com sucesso!";
     }
 
@@ -18,21 +19,31 @@ public class AQVController {
         return aqvDAO.listarTodos();
     }
 
-    public String atualizarAQV(int id, String nome) {
+    public String atualizarAQV(int id, String nome, String login, String senha) {
         Optional<AQV> encontrado = aqvDAO.buscarPorId(id);
         if (encontrado.isPresent()) {
             AQV atualizado = encontrado.get();
             atualizado.setNome(nome);
+            atualizado.setLogin(login);
+            atualizado.setSenha(senha);
             aqvDAO.atualizar(atualizado);
             return "AQV atualizado com sucesso!";
-        } else return "AQV com ID " + id + " não encontrado.";
+        } else {
+            return "AQV com ID " + id + " não encontrado.";
+        }
     }
 
     public String removerAQV(int id) {
         Optional<AQV> encontrado = aqvDAO.buscarPorId(id);
         if (encontrado.isPresent()) {
-            aqvDAO.remover(id);
+            aqvDAO.remover(id); // Remove o AQV pelo ID
             return "AQV removido com sucesso!";
-        } else return "AQV com ID " + id + " não encontrado.";
+        } else {
+            return "AQV com ID " + id + " não encontrado.";
+        }
+    }
+
+    public AQV buscarPorId(int id) {
+        return aqvDAO.buscarPorId(id).orElse(null);
     }
 }

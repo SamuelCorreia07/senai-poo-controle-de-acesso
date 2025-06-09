@@ -3,7 +3,6 @@ package com.senai.model.usuario.dao.json;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.senai.model.usuario.AQV;
-import com.senai.model.usuario.Coordenador;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -14,13 +13,13 @@ import java.util.Optional;
 public class AQVDAO {
     private final String caminho = "json_data/aqvs.json";
     private final Gson gson = new Gson();
-    private final List<AQV> aqvs;
+    private List<AQV> aqvs;
 
     public AQVDAO() {
-        aqvs = carregar();
+        this.aqvs = carregar();
     }
 
-    public List<AQV> carregar() {
+    private List<AQV> carregar() {
         try (FileReader reader = new FileReader(caminho)) {
             Type listType = new TypeToken<List<AQV>>() {}.getType();
             return gson.fromJson(reader, listType);
@@ -29,9 +28,9 @@ public class AQVDAO {
         }
     }
 
-    public void salvar(List<AQV> lista) {
+    private void salvar() {
         try (FileWriter writer = new FileWriter(caminho)) {
-            gson.toJson(lista, writer);
+            gson.toJson(aqvs, writer);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -45,7 +44,7 @@ public class AQVDAO {
         int nextId = aqvs.stream().mapToInt(AQV::getId).max().orElse(0) + 1;
         aqv.setId(nextId);
         aqvs.add(aqv);
-        salvar(aqvs);
+        salvar();
     }
 
     public void atualizar(AQV aqv) {
@@ -55,12 +54,12 @@ public class AQVDAO {
                 break;
             }
         }
-        salvar(aqvs);
+        salvar();
     }
 
     public void remover(int id) {
         aqvs.removeIf(a -> a.getId() == id);
-        salvar(aqvs);
+        salvar();
     }
 
     public Optional<AQV> buscarPorId(int id) {

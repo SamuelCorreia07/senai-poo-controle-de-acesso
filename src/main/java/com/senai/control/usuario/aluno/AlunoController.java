@@ -1,4 +1,5 @@
 package com.senai.control.usuario.aluno;
+
 import com.senai.model.usuario.aluno.Aluno;
 import com.senai.model.usuario.aluno.dao.json.AlunoDAO;
 import java.util.List;
@@ -10,19 +11,25 @@ public class AlunoController {
         this.alunoDAO = new AlunoDAO();
     }
 
-    public String cadastrarAluno(String nome, int idade) {
-        Aluno novoAluno = new Aluno(0, nome, idade);
+    // Cadastrar um aluno
+    public String cadastrarAluno(String nome, int idade, String login, String senha, String rfid) {
+        // O ID é gerado automaticamente na persistência, por isso passamos 0 para indicar um novo aluno
+        Aluno novoAluno = new Aluno(0, nome, login, senha, idade, rfid);
         alunoDAO.inserir(novoAluno);
         return "Alun@ cadastrad@ com sucesso!";
     }
 
-    public String atualizarAluno(int id, String nome, int idade) {
+    // Atualizar os dados de um aluno
+    public String atualizarAluno(int id, String nome, int idade, String login, String senha, String rfid) {
         Aluno aluno = alunoDAO.buscarPorId(id).orElse(null);
         if (aluno == null) {
             return "Alun@ não encontrad@!";
         }
         aluno.setNome(nome);
         aluno.setIdade(idade);
+        aluno.setLogin(login);
+        aluno.setSenha(senha);
+        aluno.setIdCartaoRfid(rfid);
         alunoDAO.atualizar(aluno);
         return "Alun@ atualizad@ com sucesso!";
     }
@@ -37,12 +44,11 @@ public class AlunoController {
     }
 
     public String buscarPorRfid(String rfid) {
-        Aluno aluno = alunoDAO.buscarPorId(id).orElse(null);
+        Aluno aluno = alunoDAO.buscarPorRfid(rfid).orElse(null);
         if (aluno == null) {
-            return "\nAlun@ não encontrad@!";
+            return "\nAlun@ com RFID não encontrad@!";
         }
-        alunoDAO.remover(id);
-        return "\nAlun@ removid@ com sucesso!";
+        return "\n" + aluno.toString();
     }
 
     public List<Aluno> listarAlunos() {

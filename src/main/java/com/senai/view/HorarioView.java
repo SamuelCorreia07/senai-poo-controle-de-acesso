@@ -51,8 +51,9 @@ public class HorarioView {
         int idAluno = scannerPromptInt("\tID do aluno: ", "\nPor favor, insira um ID válido.");
         int idProfessor = scannerPromptInt("\tID do professor: ", "\nPor favor, insira um ID válido.");
         LocalTime hora = scannerPromptHora("\tHora de início (HH:mm): ");
+
         String resultado = controller.cadastrarHorario(idAluno, idProfessor, hora);
-        System.out.println(resultado);
+        System.out.println(resultado);  // Exibe o resultado
     }
 
     private void atualizarHorario() {
@@ -60,6 +61,7 @@ public class HorarioView {
         int idAluno = scannerPromptInt("\tNovo ID do aluno: ", "\nPor favor, insira um ID válido.");
         int idProfessor = scannerPromptInt("\tNovo ID do professor: ", "\nPor favor, insira um ID válido.");
         LocalTime hora = scannerPromptHora("\tNova hora de início (HH:mm): ");
+
         String resultado = controller.atualizarHorario(id, idAluno, idProfessor, hora);
         System.out.println(resultado);
     }
@@ -67,7 +69,9 @@ public class HorarioView {
     private void removerHorario() {
         int id = scannerPromptInt("\tID do horário: ", "\nPor favor, insira um ID válido.");
         System.out.print("\nTem certeza que deseja remover o horário com ID '" + id + "'? (S/N): ");
+
         String confirmacao = scanner.nextLine().trim().toUpperCase();
+
         if (confirmacao.equals("S")) {
             String resultado = controller.removerHorario(id);
             System.out.println(resultado);
@@ -87,6 +91,19 @@ public class HorarioView {
             }
         }
     }
+
+    public void listar() {
+        System.out.println("\n--- HORÁRIOS ---");
+        for (Horario h : controller.listarHorarios()) {
+            System.out.printf("""
+            ID do Aluno: %d
+            ID do Professor: %d
+            Hora de Início: %s
+            
+            """, h.getIdAluno(), h.getIdProfessor(), h.getHoraInicioFormatada());
+        }
+    }
+
 
     private int scannerPromptInt(String msg, String erroMsg) {
         int numero = 0;

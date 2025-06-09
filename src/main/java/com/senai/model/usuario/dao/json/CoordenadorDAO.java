@@ -2,7 +2,6 @@ package com.senai.model.usuario.dao.json;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.senai.model.usuario.Administrador;
 import com.senai.model.usuario.Coordenador;
 
 import java.io.*;
@@ -44,6 +43,12 @@ public class CoordenadorDAO {
     public void inserir(Coordenador coordenador) {
         int nextId = coordenadores.stream().mapToInt(Coordenador::getId).max().orElse(0) + 1;
         coordenador.setId(nextId);
+
+        if (coordenador.getDepartamento() == null || coordenador.getDepartamento().isEmpty()) {
+            System.out.println("Departamento não informado!");
+            return;
+        }
+
         coordenadores.add(coordenador);
         salvar(coordenadores);
     }

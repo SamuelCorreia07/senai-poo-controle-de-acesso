@@ -43,22 +43,17 @@ public class AqvView {
     }
 
     private void cadastrar() {
-        System.out.print("Nome do aluno: ");
-        String nome = scanner.nextLine();
+        System.out.print("Nome do AQV: ");
+        String nome = scanner.nextLine().trim();
 
-        System.out.print("Matrícula: ");
-        String matricula = scanner.nextLine();
+        System.out.print("Login: ");
+        String login = scanner.nextLine().trim();
 
-        System.out.print("Motivo do atraso: ");
-        String motivo = scanner.nextLine();
+        System.out.print("Senha: ");
+        String senha = scanner.nextLine().trim();
 
-        System.out.print("Data do atraso (yyyy-mm-dd): ");
-        String data = scanner.nextLine();
-
-        AQV novo = new AQV(0, nome, matricula, motivo, data, -1);
-        controller.inserir(novo);
-
-        System.out.println("AQV cadastrado com sucesso.");
+        String resultado = controller.inserirAQV(nome, login, senha);
+        System.out.println(resultado);
     }
 
     private void listar() {
@@ -71,13 +66,12 @@ public class AqvView {
         System.out.println("\n======= LISTA DE AQVs =======");
         for (AQV a : lista) {
             System.out.printf("""
-                ID: %d
-                Aluno: %s
-                Matrícula: %s
-                Motivo: %s
-                Data: %s
-                ---------------------------------------
-                """, a.getId(), a.getNomeAluno(), a.getMatriculaAluno(), a.getMotivoAtraso(), a.getDataRegistro());
+            ID: %d
+            Nome: %s
+            Login: %s
+            Senha: %s
+            ---------------------------------------
+            """, a.getId(), a.getNome(), a.getLogin(), a.getSenha());
         }
     }
 
@@ -86,28 +80,23 @@ public class AqvView {
         System.out.print("ID do AQV a atualizar: ");
         int id = lerInt();
 
-        AQV existente = AQVController.buscarPorId(id);
+        AQV existente = controller.buscarPorId(id);
         if (existente == null) {
             System.out.println("AQV não encontrado.");
             return;
         }
 
-        System.out.print("Novo nome do aluno: ");
-        String nome = scanner.nextLine();
+        System.out.print("Novo nome do AQV: ");
+        String nome = scanner.nextLine().trim();
 
-        System.out.print("Nova matrícula: ");
-        String matricula = scanner.nextLine();
+        System.out.print("Novo login: ");
+        String login = scanner.nextLine().trim();
 
-        System.out.print("Novo motivo do atraso: ");
-        String motivo = scanner.nextLine();
+        System.out.print("Nova senha: ");
+        String senha = scanner.nextLine().trim();
 
-        System.out.print("Nova data do atraso (yyyy-mm-dd): ");
-        String data = scanner.nextLine();
-
-        AQV atualizado = new AQV(id, nome, matricula, motivo, data, -1);
-        controller.atualizar(id, atualizado);
-
-        System.out.println("AQV atualizado com sucesso.");
+        String resultado = controller.atualizarAQV(id, nome, login, senha);
+        System.out.println(resultado);
     }
 
     private void remover() {
@@ -119,8 +108,8 @@ public class AqvView {
         String confirmacao = scanner.nextLine().trim().toUpperCase();
 
         if (confirmacao.equals("S")) {
-            controller.remover(id);
-            System.out.println("AQV removido com sucesso.");
+            String resultado = controller.removerAQV(id);
+            System.out.println(resultado);
         } else {
             System.out.println("Remoção cancelada.");
         }

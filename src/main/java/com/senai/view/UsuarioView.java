@@ -78,12 +78,12 @@ public class UsuarioView {
     }
 
     private void listar() {
-        System.out.println("\n📚 --- Alunos Cadastrados ---");
+        System.out.println("\n--- Alunos Cadastrados ---");
         for (Aluno a : controller.listarAlunos()) {
             System.out.printf("ID: %d | Nome: %s | RFID: %s\n", a.getId(), a.getNome(), a.getIdCartaoRfid());
         }
 
-        System.out.println("\n🧑‍🏫 --- Professores Cadastrados ---");
+        System.out.println("\n--- Professores Cadastrados ---");
         for (Professor p : controller.listarProfessores()) {
             System.out.printf("ID: %d | Nome: %s | Disciplina: %s\n", p.getId(), p.getNome(), p.getDisciplina());
         }
