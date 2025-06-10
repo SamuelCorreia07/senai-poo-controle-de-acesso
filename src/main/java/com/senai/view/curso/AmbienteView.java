@@ -2,6 +2,7 @@ package com.senai.view.curso;
 
 import com.senai.control.curso.AmbienteController;
 import com.senai.model.curso.Ambiente;
+import com.senai.view.usuario.aluno.JustificativaView;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,10 +13,11 @@ public class AmbienteView {
         private static final AmbienteController ambienteController = new AmbienteController();
 
         public static void main(String[] args) {
-            menu();
+            AmbienteView view = new AmbienteView();
+            view.menuAmbiente();
         }
 
-        public static void menu() {
+        public static void menuAmbiente() {
             String opcao;
             String menuAmbiente = """
                 
@@ -27,7 +29,7 @@ public class AmbienteView {
                 |       3 - Deletar Ambiente                                |
                 |       4 - Listar Ambientes                                |
                 |       0 - Voltar                                          |
-                _____________________________________________________________
+                |___________________________________________________________|
                     
                 """;
             do {
@@ -39,25 +41,25 @@ public class AmbienteView {
                     case "2" -> atualizar();
                     case "3" -> deletar();
                     case "4" -> listar();
-                    case "0" -> System.out.println("Voltando...");
-                    default -> System.out.println("Opção inválida!");
+                    case "0" -> System.out.println("Voltando...\n");
+                    default -> System.out.println("Opção inválida!\n");
                 }
             } while (!opcao.equals("0"));
         }
 
         private static void cadastrar() {
             String nome = scannerPrompt("Nome do Ambiente: ");
-            String tipo = scannerPrompt("Tipo do Ambiente (Sala/Laboratório): ");
+            String tipo = scannerPrompt("\tTipo do Ambiente (Sala/Laboratório): ");
             System.out.println(ambienteController.cadastrarAmbiente(nome, tipo));
         }
 
         private static void atualizar() {
             listar();
-            int idAmbiente = scannerPromptInt("ID do Ambiente: ");
+            int idAmbiente = scannerPromptInt("\nID do Ambiente: ");
             Optional<Ambiente> ambienteOpt = ambienteController.buscarPorId(idAmbiente);
             if (ambienteOpt.isPresent()) {
-                String nome = scannerPrompt("Novo nome do Ambiente: ");
-                String tipo = scannerPrompt("Novo tipo do Ambiente (Sala/Laboratório): ");
+                String nome = scannerPrompt("\tNovo nome do Ambiente: ");
+                String tipo = scannerPrompt("\tNovo tipo do Ambiente (Sala/Laboratório): ");
                 System.out.println(ambienteController.atualizarAmbiente(idAmbiente, nome, tipo));
             } else {
                 System.out.println("Ambiente com ID " + idAmbiente + " não encontrado!");
@@ -73,7 +75,7 @@ public class AmbienteView {
         public static void listar() {
             List<Ambiente> ambientes = ambienteController.listarAmbientes();
             if (ambientes.isEmpty()) {
-                System.out.println("Nenhum ambiente cadastrado!");
+                System.out.println("\nNenhum ambiente cadastrado!");
             } else {
                 System.out.println("\nLista de Ambientes:");
                 for (Ambiente a : ambientes) {

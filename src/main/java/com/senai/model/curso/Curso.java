@@ -68,4 +68,3 @@ public class Curso {
         this.idCurso = idCurso;
     }
 }
-

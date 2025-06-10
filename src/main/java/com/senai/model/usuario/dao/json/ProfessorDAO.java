@@ -13,24 +13,23 @@ import java.util.List;
 import java.util.Optional;
 
 public class ProfessorDAO {
-
     private final String caminho = "json_data/professores.json";
     private final Gson gson = new Gson();
-    private final List<Professor> professores;
+    private List<Professor> professores;
 
-    public ProfessorDAO(){
-        professores = carregar();
+    public ProfessorDAO() {
+        this.professores = carregar();
     }
 
     private List<Professor> carregar() {
         try (FileReader reader = new FileReader(caminho)) {
-            Type listType = new TypeToken<List<Professor>>() {
-            }.getType();
+            Type listType = new TypeToken<List<Professor>>() {}.getType();
             return gson.fromJson(reader, listType);
         } catch (IOException e) {
             return new ArrayList<>();
         }
     }
+
     private void salvarJson(List<Professor> lista) {
         try (FileWriter writer = new FileWriter(caminho)) {
             gson.toJson(lista, writer);
@@ -40,12 +39,12 @@ public class ProfessorDAO {
     }
 
     public void inserir(Professor professor) {
-
         int novoId = professores.stream().mapToInt(Professor::getId).max().orElse(0) + 1;
         professor.setId(novoId);
         professores.add(professor);
         salvarJson(professores);
     }
+
     public List<Professor> listar() {
         return professores;
     }
@@ -54,10 +53,10 @@ public class ProfessorDAO {
         for (int i = 0; i < professores.size(); i++) {
             if (professores.get(i).getId() == professor.getId()) {
                 professores.set(i, professor);
+                salvarJson(professores);
                 break;
             }
         }
-        salvarJson(professores);
     }
 
     public void deletar(int id) {
@@ -66,10 +65,10 @@ public class ProfessorDAO {
     }
 
     public Optional<Professor> buscarPorId(int id) {
-        return carregar().stream().filter(professor -> professor.getId() == id).findFirst();
+        return professores.stream().filter(professor -> professor.getId() == id).findFirst();
     }
 
+    public Optional<Professor> buscarPorLogin(String login) {
+        return professores.stream().filter(professor -> professor.getLogin().equals(login)).findFirst();
     }
-
-
-
+}

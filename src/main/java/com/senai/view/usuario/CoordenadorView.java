@@ -1,107 +1,112 @@
 package com.senai.view.usuario;
 
-import com.senai.control.usuario.AQVController;
 import com.senai.control.usuario.CoordenadorController;
-import com.senai.model.usuario.AQV;
 import com.senai.model.usuario.Coordenador;
 
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class CoordenadorView {
+
+    private final Scanner scanner = new Scanner(System.in);
+    private final CoordenadorController controller = new CoordenadorController();
+
     public static void main(String[] args) {
-        CoordenadorController coordenadorController = new CoordenadorController();
-        AQVController aqvController = new AQVController();
-        Scanner scanner = new Scanner(System.in);
+        CoordenadorView view = new CoordenadorView();
+        view.menuCoordenadorView();
+    }
 
-        int op = -1;
-        while (op != 0) {
-            System.out.println("\n--- Menu Coordenador ---");
-            System.out.println("1 - Cadastrar coordenador");
-            System.out.println("2 - Listar coordenadores");
-            System.out.println("3 - Atualizar coordenador");
-            System.out.println("4 - Remover coordenador");
-            System.out.println("0 - Voltar");
-            System.out.print("Escolha: ");
+    public void menuCoordenadorView() {
+        String opcao;
+        String menu = """
+                
+                _____________________________________________________________
+                |   Escolha uma opção:                                      |
+                |                                                           |
+                |       1 - Cadastrar coordenador(a)                        |
+                |       2 - Atualizar coordenador(a)                        |
+                |       3 - Remover coordenador(a)                          |
+                |       4 - Listar coordenador@s                            |
+                |       0 - Voltar                                          |
+                |___________________________________________________________|
+                
+                """;
+        do {
+            System.out.print(menu);
+            opcao = scanner.nextLine().trim();
 
-            try {
-                op = scanner.nextInt();
-                scanner.nextLine();
+            switch (opcao) {
+                case "1" -> cadastrarCoordenador();
+                case "2" -> atualizarCoordenador();
+                case "3" -> removerCoordenador();
+                case "4" -> listarCoordenadores();
+                case "0" -> System.out.println("\nVoltando ao menu principal...");
+                default -> System.out.println("\nOpção inválida!");
+            }
+        } while (!opcao.equals("0"));
+    }
 
-                switch (op) {
-                    case 1 -> {
-                        System.out.print("Nome: ");
-                        String nome = scanner.nextLine();
-                        System.out.print("Departamento: ");
-                        String dept = scanner.nextLine();
+    private void cadastrarCoordenador() {
+        String nome = scannerPromptString("\tNome do coordenador(a): ");
+        String login = scannerPromptString("\tLogin: ");
+        String senha = scannerPromptString("\tSenha: ");
+        String departamento = scannerPromptString("\tDepartamento: ");
 
-                        Coordenador c = new Coordenador(0, nome, dept);
-                        coordenadorController.inserirCoordenador(c);
-                        System.out.println("Coordenador cadastrado com sucesso!");
-                    }
-                    case 2 -> {
-                        List<Coordenador> lista = coordenadorController.listarCoordenadores();
-                        if (lista.isEmpty()) {
-                            System.out.println(" Nenhum coordenador cadastrado.");
-                        } else {
-                            System.out.println("\n--- Lista de Coordenadores ---");
-                            for (Coordenador c : lista) {
-                                System.out.printf("ID: %d - Nome: %s | Dept: %s%n",
-                                        c.getId(), c.getNome(), c.getDepartamento());
-                            }
-                        }
-                    }
-                    case 3 -> {
-                        System.out.print("ID do coordenador a atualizarCoordenador: ");
-                        int id = scanner.nextInt();
-                        scanner.nextLine();
+        String resultado = controller.inserirCoordenador(nome, login, senha, departamento);
+        System.out.println(resultado);
+    }
 
-                        Coordenador c = coordenadorController.buscarPorId(id);
-                        if (c != null) {
-                            System.out.print("Novo nome: ");
-                            String nome = scanner.nextLine();
-                            System.out.print("Novo departamento: ");
-                            String dept = scanner.nextLine();
+    private void atualizarCoordenador() {
+        int id = scannerPromptInt("\tID do coordenador(a): ", "\nPor favor, insira um ID válido.");
+        String nome = scannerPromptString("\tNovo nome: ");
+        String login = scannerPromptString("\tNovo login: ");
+        String senha = scannerPromptString("\tNova senha: ");
+        String departamento = scannerPromptString("\tNovo departamento: ");
 
-                            Coordenador novo = new Coordenador(id, nome, dept);
-                            coordenadorController.atualizarCoordenador(id, novo);
-                            System.out.println(" Coordenador atualizado.");
-                        } else {
-                            System.out.println(" Coordenador não encontrado.");
-                        }
-                    }
-                    case 4 -> {
-                        System.out.print("ID do coordenador a removerCoordenador: ");
-                        int id = scanner.nextInt();
-                        scanner.nextLine();
+        String resultado = controller.atualizarCoordenador(id, nome, login, senha, departamento);
+        System.out.println(resultado);
+    }
 
-                        Coordenador c = coordenadorController.buscarPorId(id);
-                        if (c != null) {
-                            List<AQV> atrasos = aqvController.listarPorCoordenador(id);
-                            if (!atrasos.isEmpty()) {
-                                System.out.println(" Este coordenador possui atrasos registrados. Remova os atrasos primeiro.");
-                            } else {
-                                coordenadorController.removerCoordenador(id);
-                                System.out.println(" Coordenador removido com sucesso.");
-                            }
-                        } else {
-                            System.out.println("️ Coordenador não encontrado.");
-                        }
-                    }
-                    case 0 -> System.out.println("Saindo do menu Coordenador...");
-                    default -> System.out.println(" Opção inválida!");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Entrada inválida. Digite um número inteiro.");
-                scanner.nextLine();
-            } catch (Exception e) {
-                System.out.println(" Erro inesperado: " + e.getMessage());
-                e.printStackTrace(); // Adicionado para ajudar no diagnóstico
-                scanner.nextLine();
+    private void removerCoordenador() {
+        int id = scannerPromptInt("\tID do coordenador(a): ", "\nPor favor, insira um ID válido.");
+        System.out.print("\nTem certeza que deseja remover o coordenador com ID '" + id + "'? (S/N): ");
+        String confirmacao = scanner.nextLine().trim().toUpperCase();
+        if (confirmacao.equals("S")) {
+            String resultado = controller.removerCoordenador(id);
+            System.out.println(resultado);
+        } else {
+            System.out.println("\nRemoção cancelada!");
+        }
+    }
+
+    private void listarCoordenadores() {
+        List<Coordenador> coordenadores = controller.listarCoordenadores();
+        if (coordenadores.isEmpty()) {
+            System.out.println("\nNenhum coordenador(a) encontrad@!");
+        } else {
+            for (Coordenador c : coordenadores) {
+                System.out.println(c);
             }
         }
+    }
 
-        scanner.close();
+    private String scannerPromptString(String msg) {
+        System.out.print(msg);
+        return scanner.nextLine().trim();
+    }
+
+    private int scannerPromptInt(String msg, String erroMsg) {
+        int numero = 0;
+        boolean valido = false;
+        while (!valido) {
+            try {
+                System.out.print(msg);
+                numero = Integer.parseInt(scanner.nextLine().trim());
+                valido = true;
+            } catch (NumberFormatException e) {
+                System.out.println(erroMsg);
+            }
+        }
+        return numero;
     }
 }

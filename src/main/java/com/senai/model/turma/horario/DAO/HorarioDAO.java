@@ -29,6 +29,7 @@ public class HorarioDAO {
             Type listType = new TypeToken<List<Horario>>() {}.getType();
             return gson.fromJson(reader, listType);
         } catch (IOException e) {
+            System.out.println("Erro ao carregar os horários: " + e.getMessage());
             return new ArrayList<>();
         }
     }
@@ -37,7 +38,7 @@ public class HorarioDAO {
         try (FileWriter writer = new FileWriter(caminho)) {
             gson.toJson(lista, writer);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Erro ao salvar os horários: " + e.getMessage());
         }
     }
 
@@ -63,11 +64,13 @@ public class HorarioDAO {
         salvar(horarios);
     }
 
-    public Optional<Horario> buscarHorarioDaTurma(int idTurma) {
-        return horarios.stream().filter(h -> h.getIdTurma() == idTurma).findFirst();
-    }
-
     public List<Horario> listarTodos() {
         return horarios;
+    }
+
+    public Optional<Horario> buscarPorId(int id) {
+        return horarios.stream()
+                .filter(h -> h.getId() == id)
+                .findFirst();
     }
 }

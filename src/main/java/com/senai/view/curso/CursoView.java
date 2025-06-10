@@ -3,91 +3,140 @@ package com.senai.view.curso;
 import com.senai.control.curso.CursoController;
 import com.senai.model.curso.Curso;
 
+import java.time.LocalTime;
+import java.util.List;
 import java.util.Scanner;
 
-//Feito por Victor
 public class CursoView {
-    private static final Scanner scanner = new Scanner(System.in);
-    private static final CursoController cursoController = new CursoController();
+    private final Scanner scanner = new Scanner(System.in);
+    private final CursoController controller = new CursoController();
 
     public static void main(String[] args) {
-        menu();
+        CursoView view = new CursoView();
+        view.menuCursoView();
     }
 
-    public static void menu() {
+    public void menuCursoView() {
         String opcao;
-        String menuCurso = """
+        String menu = """
                 
-                --- MENU DE CURSOS ---
+                _____________________________________________________________
+                |   Escolha uma opção:                                      |
+                |                                                           |
+                |       1 - Cadastrar curso                                 |
+                |       2 - Atualizar curso                                 |
+                |       3 - Remover curso                                   |
+                |       4 - Listar cursos                                   |
+                |       0 - Voltar                                          |
+                |___________________________________________________________|
                 
-                    1. Cadastrar curso
-                    2. Atualizar curso
-                    3. Remover curso
-                    4. Listar cursos
-                    0. Voltar
-                    
                 """;
+
         do {
-            System.out.print(menuCurso);
-            opcao = scanner.nextLine();
+            System.out.print(menu);
+            opcao = scanner.nextLine().trim();
 
             switch (opcao) {
-                case "1" -> cadastrar();
-                case "2" -> atualizar();
-                case "3" -> remover();
-                case "4" -> listar();
-                case "0" -> System.out.println("Voltando...");
-                default -> System.out.println("Opção inválida.");
+                case "1" -> cadastrarCurso();
+                case "2" -> atualizarCurso();
+                case "3" -> removerCurso();
+                case "4" -> listarCursos();
+                case "0" -> System.out.println("\nVoltando ao menu principal...");
+                default -> System.out.println("\nOpção inválida!");
             }
         } while (!opcao.equals("0"));
     }
 
-    private static void cadastrar() {
-        String titulo = scannerPrompt("Titulo do Curso: ");
-        int cargaHoraria = scannerPromptInt("Carga horária do curso: ");
-        String tipo = scannerPrompt("Tipo do curso (1=CAI, 2=TEC): ");
-        switch (tipo){
-            case "1" -> tipo = "CAI";
-            case "2" -> tipo = "TEC";
+    private void cadastrarCurso() {
+        String titulo = scannerPromptString("\tTítulo do curso: ");
+        int cargaHoraria = scannerPromptInt("\tCarga horária do curso: ", "Por favor, insira um número válido.");
+        String tipo = scannerPromptTipo();
+
+        int toleranciaMinutos = scannerPromptInt("\tTolerância (minutos): ", "Por favor, insira um número válido.");
+        LocalTime tolerancia = LocalTime.of(0, toleranciaMinutos);
+
+        String resultado = controller.cadastrarCurso(titulo, cargaHoraria, tipo, tolerancia);
+        System.out.println(resultado);
+    }
+
+    private void atualizarCurso() {
+        listarCursos();
+        int id = scannerPromptInt("\n\tID do curso a atualizar: ", "Por favor, insira um ID válido.");
+        String titulo = scannerPromptString("\tNovo título do curso: ");
+        int cargaHoraria = scannerPromptInt("\tNova carga horária: ", "Por favor, insira um número válido.");
+        String tipo = scannerPromptTipo();
+
+        int toleranciaMinutos = scannerPromptInt("\tNova tolerância (minutos): ", "Por favor, insira um número válido.");
+        LocalTime tolerancia = LocalTime.of(0, toleranciaMinutos);
+
+        String resultado = controller.atualizarCurso(id, titulo, cargaHoraria, tipo, tolerancia);
+        System.out.println(resultado);
+    }
+
+    private void removerCurso() {
+        listarCursos();
+        int id = scannerPromptInt("\n\tID do curso a remover: ", "Por favor, insira um ID válido.");
+        System.out.print("\nTem certeza que deseja remover o curso com ID '" + id + "'? (S/N): ");
+        String confirmacao = scanner.nextLine().trim().toUpperCase();
+        if (confirmacao.equals("S")) {
+            String resultado = controller.removerCurso(id);
+            System.out.println(resultado);
+        } else {
+            System.out.println("\nRemoção cancelada!");
         }
-        int tolerancia = scannerPromptInt("Tolerância (minutos): ");
-        System.out.println(cursoController.cadastrarCurso(titulo, cargaHoraria, tipo, tolerancia));
     }
 
-    private static void atualizar() {
-        listar();
-        int idCurso = scannerPromptInt("idCurso: ");
-        String titulo = scannerPrompt("Titulo do Curso: ");
-        int cargaHoraria = scannerPromptInt("Carga horária do curso: ");
-        String tipo = scannerPrompt("Tipo do curso (1=CAI, 2=TEC): ");
-        switch (tipo){
-            case "1" -> tipo = "CAI";
-            case "2" -> tipo = "TEC";
-        }
-        int tolerancia = scannerPromptInt("Tolerância: ");
-        cursoController.atualizarCurso(idCurso, titulo, cargaHoraria, tipo, tolerancia);
-    }
-
-    private static void remover() {
-        listar();
-        int id = scannerPromptInt("ID do Curso: ");
-        System.out.println(cursoController.removerCurso(id));
-    }
-
-    public static void listar() {
-        for (Curso c : cursoController.listarCursos()){
-            System.out.printf("ID: %d | Título: %s | Carga Horária: %d Horas| Tipo(CAI, TEC): %s | Tolerância: %d Minutos|\n",
-                    c.getIdCurso(), c.getTitulo(), c.getCargaHoraria(), c.getTipo(), c.getTolerancia());
+    private void listarCursos() {
+        List<Curso> cursos = controller.listarCursos();
+        if (cursos.isEmpty()) {
+            System.out.println("\nNenhum curso encontrad@!");
+        } else {
+            System.out.println("\n--- LISTA DE CURSOS ---");
+            for (Curso c : cursos) {
+                System.out.printf("ID: %d | Título: %s | Carga Horária: %d Horas | Tipo: %s | Tolerância: %s min\n",
+                        c.getIdCurso(), c.getTitulo(), c.getCargaHoraria(), c.getTipo(), c.getTolerancia().getMinute());
+            }
         }
     }
 
-    private static String scannerPrompt(String msg) {
+    private String scannerPromptString(String msg) {
         System.out.print(msg);
-        return scanner.nextLine();
+        return scanner.nextLine().trim();
     }
 
-    private static int scannerPromptInt(String msg) {
-        System.out.print(msg);
-        return Integer.parseInt(scanner.nextLine());
+    private int scannerPromptInt(String msg, String erroMsg) {
+        int numero = 0;
+        boolean valido = false;
+        while (!valido) {
+            try {
+                System.out.print(msg);
+                numero = Integer.parseInt(scanner.nextLine().trim());
+                valido = true;
+            } catch (NumberFormatException e) {
+                System.out.println(erroMsg);
+            }
+        }
+        return numero;
+    }
+
+    private String scannerPromptTipo() {
+        String tipo = "";
+        boolean valido = false;
+        while (!valido) {
+            System.out.print("\tTipo do curso (1=CAI, 2=TEC): ");
+            tipo = scanner.nextLine().trim();
+            switch (tipo) {
+                case "1" -> {
+                    tipo = "CAI";
+                    valido = true;
+                }
+                case "2" -> {
+                    tipo = "TEC";
+                    valido = true;
+                }
+                default -> System.out.println("Opção inválida! Digite '1' para CAI ou '2' para TEC.");
+            }
+        }
+        return tipo;
     }
 }
