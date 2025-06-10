@@ -1,6 +1,8 @@
 package com.senai.view;
 
 import com.senai.control.usuario.UsuarioController;
+import com.senai.model.usuario.AQV;
+import com.senai.model.usuario.Coordenador;
 import com.senai.model.usuario.aluno.Aluno;
 import com.senai.model.usuario.Professor;
 
@@ -43,36 +45,64 @@ public class UsuarioView {
     }
 
     private void cadastrar() {
-        String tipo = scannerPrompt("\nTipo (1=Aluno, 2=Professor): ");
-        String nome = scannerPrompt("Nome: ");
-        String login = scannerPrompt("Login: ");
-        String senha = scannerPrompt("Senha: ");
-        String dadoExtra = tipo.equals("1")
-                ? scannerPrompt("ID do cartão RFID: ")
-                : scannerPrompt("Disciplina: ");
+        String tipo = scannerPrompt("\nTipo " +
+                "\n\t1 - Aluno" +
+                "\n\t2 - Professor" +
+                "\n\t3 - Coordenador" +
+                "\n\t4 - AQV");
 
-        System.out.println("\n" + controller.cadastrarUsuario(tipo, nome, dadoExtra, login, senha) + "\n");
+        String nome = scannerPrompt("\tNome: ");
+        String login = scannerPrompt("\tLogin: ");
+        String senha = scannerPrompt("\tSenha: ");
+
+        if (tipo.equals("1")) {
+            int idade = scannerPromptInt("\tIdade: ");
+            String rfid = scannerPrompt("\tID do cartão RFID: ");
+            System.out.println("\n" + controller.cadastrarUsuario(tipo, nome, login, senha, idade, rfid) + "\n");
+        } else if (tipo.equals("2")) {
+            String disciplina = scannerPrompt("\tDisciplina: ");
+            System.out.println("\n" + controller.cadastrarUsuario(tipo, nome, login, senha, disciplina) + "\n");
+        } else if (tipo.equals("3")) {
+            String departamento = scannerPrompt("\tDepartamento: ");
+            System.out.println("\n" + controller.cadastrarUsuario(tipo, nome, login, senha, departamento) + "\n");
+        } else if (tipo.equals("4")) {
+            System.out.println("\n" + controller.cadastrarUsuario(tipo, nome, login, senha) + "\n");
+        }
     }
+
 
     private void atualizar() {
         String tipo = scannerPrompt("\nTipo " +
                 "\n\t1 - Aluno" +
-                "\n\t2 -Professor");
+                "\n\t2 - Professor" +
+                "\n\t3 - Coordenador" +
+                "\n\t4 - AQV");
         int id = scannerPromptInt("\nID: ");
         String nome = scannerPrompt("\tNovo nome: ");
         String login = scannerPrompt("\tNovo Login: ");
         String senha = scannerPrompt("\tNova Senha: ");
-        String dadoExtra = tipo.equals("1")
-                ? scannerPrompt("\tNovo RFID: ")
-                : scannerPrompt("\tNova disciplina: ");
 
-        System.out.println("\n" + controller.atualizarUsuario(tipo, id, nome, dadoExtra, login, senha) + "\n");
+        if (tipo.equals("1")) {
+            int idade = scannerPromptInt("\tNova idade: ");
+            String rfid = scannerPrompt("\tNovo RFID: ");
+            System.out.println("\n" + controller.atualizarUsuario(tipo, id, nome, login, senha, idade, rfid) + "\n");
+        } else if (tipo.equals("2")) {
+            String disciplina = scannerPrompt("\tNova disciplina: ");
+            System.out.println("\n" + controller.atualizarUsuario(tipo, id, nome, login, senha, disciplina) + "\n");
+        } else if (tipo.equals("3")) {
+            String departamento = scannerPrompt("\tNovo departamento: ");
+            System.out.println("\n" + controller.atualizarUsuario(tipo, id, nome, login, senha, departamento) + "\n");
+        } else if (tipo.equals("4")) {
+            System.out.println("\n" + controller.atualizarUsuario(tipo, id, nome, login, senha) + "\n");
+        }
     }
 
     private void remover() {
         String tipo = scannerPrompt("\nTipo " +
                 "\n\t1 - Aluno" +
-                "\n\t2 -Professor");
+                "\n\t2 - Professor" +
+                "\n\t3 - AQV" +
+                "\n\t4 - Coordenador");
         int id = scannerPromptInt("ID: ");
         System.out.println("\n" + controller.removerUsuario(tipo, id) + "\n");
     }
@@ -86,6 +116,18 @@ public class UsuarioView {
         System.out.println("\n--- Professores Cadastrados ---");
         for (Professor p : controller.listarProfessores()) {
             System.out.printf("ID: %d | Nome: %s | Disciplina: %s\n", p.getId(), p.getNome(), p.getDisciplina());
+        }
+        System.out.println();
+
+        System.out.println("\n--- AQVs Cadastrados ---");
+        for (AQV aqv : controller.listarAqvs()) {
+            System.out.printf("ID: %d | Nome: %s | Disciplina: %s\n", aqv.getId(), aqv.getNome(), aqv.getTipo());
+        }
+        System.out.println();
+
+        System.out.println("\n--- Coordenadores Cadastrados ---");
+        for (Coordenador coordenador : controller.listarCoordenadores()) {
+            System.out.printf("ID: %d | Nome: %s | Disciplina: %s\n", coordenador.getId(), coordenador.getNome(), coordenador.getTipo());
         }
         System.out.println();
     }

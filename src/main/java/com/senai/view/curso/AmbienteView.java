@@ -49,17 +49,17 @@ public class AmbienteView {
 
         private static void cadastrar() {
             String nome = scannerPrompt("Nome do Ambiente: ");
-            String tipo = scannerPrompt("Tipo do Ambiente (Sala/Laboratório): ");
+            String tipo = scannerPrompt("\tTipo do Ambiente (Sala/Laboratório): ");
             System.out.println(ambienteController.cadastrarAmbiente(nome, tipo));
         }
 
         private static void atualizar() {
             listar();
-            int idAmbiente = scannerPromptInt("ID do Ambiente: ");
+            int idAmbiente = scannerPromptInt("\nID do Ambiente: ");
             Optional<Ambiente> ambienteOpt = ambienteController.buscarPorId(idAmbiente);
             if (ambienteOpt.isPresent()) {
-                String nome = scannerPrompt("Novo nome do Ambiente: ");
-                String tipo = scannerPrompt("Novo tipo do Ambiente (Sala/Laboratório): ");
+                String nome = scannerPrompt("\tNovo nome do Ambiente: ");
+                String tipo = scannerPrompt("\tNovo tipo do Ambiente (Sala/Laboratório): ");
                 System.out.println(ambienteController.atualizarAmbiente(idAmbiente, nome, tipo));
             } else {
                 System.out.println("Ambiente com ID " + idAmbiente + " não encontrado!");
@@ -75,7 +75,7 @@ public class AmbienteView {
         public static void listar() {
             List<Ambiente> ambientes = ambienteController.listarAmbientes();
             if (ambientes.isEmpty()) {
-                System.out.println("Nenhum ambiente cadastrado!");
+                System.out.println("\nNenhum ambiente cadastrado!");
             } else {
                 System.out.println("\nLista de Ambientes:");
                 for (Ambiente a : ambientes) {

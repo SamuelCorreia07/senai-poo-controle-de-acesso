@@ -72,4 +72,3 @@ public class ProfessorDAO {
         return professores.stream().filter(professor -> professor.getLogin().equals(login)).findFirst();
     }
 }
-

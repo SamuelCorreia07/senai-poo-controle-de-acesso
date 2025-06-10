@@ -8,7 +8,6 @@ public class Professor extends Usuario {
         this.disciplina = disciplina;
     }
 
-    // Getters e Setters
     public String getDisciplina() {
         return disciplina;
     }

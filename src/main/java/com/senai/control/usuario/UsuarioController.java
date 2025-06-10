@@ -52,21 +52,25 @@ enum TipoUsuario {
 
 public class UsuarioController {
 
-    public String cadastrarUsuario(String tipo, String nome, String dadoExtra, String login, String senha) {
+    public String cadastrarUsuario(String tipo, String nome, String login, String senha, Object... dados) {
         TipoUsuario tipoUsuario = TipoUsuario.fromString(tipo);
         Object dao = tipoUsuario.getDao();
 
         if (dao instanceof AlunoDAO) {
             AlunoDAO alunoDAO = (AlunoDAO) dao;
-            alunoDAO.inserir(new Aluno(0, nome, login, senha));
+            int idade = (int) dados[0];
+            String rfid = (String) dados[1];
+            alunoDAO.inserir(new Aluno(0, nome, login, CriptografiaUtil.hash(senha), idade, rfid));
             return "\nAluno cadastrado com sucesso.";
         } else if (dao instanceof ProfessorDAO) {
             ProfessorDAO professorDAO = (ProfessorDAO) dao;
-            professorDAO.inserir(new Professor(0, nome, dadoExtra, login, CriptografiaUtil.hash(senha)));
+            String disciplina = (String) dados[0];
+            professorDAO.inserir(new Professor(0, nome, login, CriptografiaUtil.hash(senha), disciplina));
             return "\nProfessor cadastrado com sucesso.";
         } else if (dao instanceof CoordenadorDAO) {
             CoordenadorDAO coordenadorDAO = (CoordenadorDAO) dao;
-            coordenadorDAO.inserir(new Coordenador(0, nome, dadoExtra, login, CriptografiaUtil.hash(senha)));
+            String departamento = (String) dados[0];
+            coordenadorDAO.inserir(new Coordenador(0, nome, login, CriptografiaUtil.hash(senha), departamento));
             return "\nCoordenador cadastrado com sucesso.";
         } else if (dao instanceof AQVDAO) {
             AQVDAO aqvDAO = (AQVDAO) dao;
@@ -77,26 +81,30 @@ public class UsuarioController {
         return "\nErro no cadastro.";
     }
 
-    public String atualizarUsuario(String tipo, int id, String nome, String dadoExtra, String login, String senha) {
+    public String atualizarUsuario(String tipo, int id, String nome, String login, String senha, Object... dados) {
         TipoUsuario tipoUsuario = TipoUsuario.fromString(tipo);
         Object dao = tipoUsuario.getDao();
 
         if (dao instanceof AlunoDAO) {
             AlunoDAO alunoDAO = (AlunoDAO) dao;
-            alunoDAO.atualizar(new Aluno(id, nome, login, senha));
-            return "\nAluno atualizado.";
+            int idade = (int) dados[0];
+            String rfid = (String) dados[1];
+            alunoDAO.atualizar(new Aluno(id, nome, login, senha, idade, rfid));
+            return "\nAluno atualizado com sucesso.";
         } else if (dao instanceof ProfessorDAO) {
             ProfessorDAO professorDAO = (ProfessorDAO) dao;
-            professorDAO.atualizar(new Professor(id, nome, dadoExtra, login, CriptografiaUtil.hash(senha)));
-            return "\nProfessor atualizado.";
+            String disciplina = (String) dados[0];
+            professorDAO.atualizar(new Professor(id, nome, login, senha, disciplina));
+            return "\nProfessor atualizado com sucesso.";
         } else if (dao instanceof CoordenadorDAO) {
             CoordenadorDAO coordenadorDAO = (CoordenadorDAO) dao;
-            coordenadorDAO.atualizar(new Coordenador(id, nome, dadoExtra, login, CriptografiaUtil.hash(senha)));
-            return "\nCoordenador atualizado.";
+            String departamento = (String) dados[0];
+            coordenadorDAO.atualizar(new Coordenador(id, nome, login, senha, departamento));
+            return "\nCoordenador atualizado com sucesso.";
         } else if (dao instanceof AQVDAO) {
             AQVDAO aqvDAO = (AQVDAO) dao;
-            aqvDAO.atualizar(new AQV(id, nome, dadoExtra, login, CriptografiaUtil.hash(senha)));
-            return "\nAQV atualizado.";
+            aqvDAO.atualizar(new AQV(id, nome, login, senha));
+            return "\nAQV atualizado com sucesso.";
         }
 
         return "\nErro na atualização.";
