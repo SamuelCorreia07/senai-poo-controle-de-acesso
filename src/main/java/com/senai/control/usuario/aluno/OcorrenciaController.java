@@ -1,5 +1,6 @@
 package com.senai.control.usuario.aluno;
 
+import com.senai.model.turma.DAO.json.TurmaDAO;
 import com.senai.model.usuario.aluno.Ocorrencia;
 import com.senai.model.usuario.aluno.dao.json.OcorrenciaDAO;
 
@@ -8,6 +9,7 @@ import java.util.Optional;
 
 public class OcorrenciaController {
     private final OcorrenciaDAO ocorrenciaDAO = new OcorrenciaDAO();
+    private final TurmaDAO turmaDAO = new TurmaDAO();
 
     public String cadastrarOcorrencia(String tipo, String descricao) {
         if (tipo.equals("1")) {
