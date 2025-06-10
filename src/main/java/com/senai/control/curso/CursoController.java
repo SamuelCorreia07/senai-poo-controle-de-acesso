@@ -11,12 +11,12 @@ import java.util.Optional;
 public class CursoController {
     private final CursoDAO cursoDAO = new CursoDAO();
 
-    public String cadastrarCurso(String titulo, int cargaHoraria, String tipo, LocalTime tolerancia) {
+    public String cadastrarCurso(String titulo, int cargaHoraria, String tipo, int tolerancia) {
         cursoDAO.inserir(new Curso(0, titulo, new ArrayList<>(), cargaHoraria, tipo, tolerancia));
         return "Curso cadastrado com sucesso!";
     }
 
-    public String atualizarCurso(int idCurso, String titulo, int cargaHoraria, String tipo, LocalTime tolerancia) {
+    public String atualizarCurso(int idCurso, String titulo, int cargaHoraria, String tipo, int tolerancia) {
         Optional<Curso> encontrado = cursoDAO.buscarPorId(idCurso);
         if (encontrado.isPresent()) {
             Curso atualizado = encontrado.get();

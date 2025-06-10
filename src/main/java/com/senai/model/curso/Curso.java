@@ -9,9 +9,9 @@ public class Curso {
     private List<UC> ucs;
     private int cargaHoraria;
     private String tipo;
-    private LocalTime tolerancia;
+    private int tolerancia;
 
-    public Curso(int idCurso, String titulo, List<UC> ucs, int cargaHoraria, String tipo, LocalTime tolerancia) {
+    public Curso(int idCurso, String titulo, List<UC> ucs, int cargaHoraria, String tipo, int tolerancia) {
         this.idCurso = idCurso;
         this.titulo = titulo;
         this.ucs = ucs;
@@ -52,11 +52,11 @@ public class Curso {
         this.tipo = tipo;
     }
 
-    public LocalTime getTolerancia() {
+    public int getTolerancia() {
         return tolerancia;
     }
 
-    public void setTolerancia(LocalTime tolerancia) {
+    public void setTolerancia(int tolerancia) {
         this.tolerancia = tolerancia;
     }
 

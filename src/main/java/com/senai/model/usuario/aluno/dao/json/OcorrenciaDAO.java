@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.senai.model.usuario.aluno.Ocorrencia;
-import com.senai.util.LocalDateTimeAdapter;
+import com.senai.util.LocalDateAdapter;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public class OcorrenciaDAO {
     private final String caminho = "json_data/ocorrencias.json";
-    private final Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).setPrettyPrinting().create();
+    private final Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateAdapter()).setPrettyPrinting().create();
     private final List<Ocorrencia> ocorrencias;
 
     public OcorrenciaDAO() {ocorrencias = carregar();}

@@ -1,15 +1,27 @@
 package com.senai.control.usuario.aluno;
 
 import com.senai.model.turma.DAO.json.TurmaDAO;
+import com.senai.model.turma.Turma;
+import com.senai.model.turma.horario.DAO.HorarioDAO;
+import com.senai.model.turma.horario.Horario;
+import com.senai.model.usuario.Professor;
+import com.senai.model.usuario.aluno.Aluno;
 import com.senai.model.usuario.aluno.Ocorrencia;
+import com.senai.model.usuario.aluno.dao.json.AlunoDAO;
 import com.senai.model.usuario.aluno.dao.json.OcorrenciaDAO;
+import com.senai.model.usuario.dao.json.ProfessorDAO;
+import com.senai.websocket.WebSocketSender;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
 public class OcorrenciaController {
     private final OcorrenciaDAO ocorrenciaDAO = new OcorrenciaDAO();
     private final TurmaDAO turmaDAO = new TurmaDAO();
+    private final AlunoDAO alunoDAO = new AlunoDAO();
+    private final HorarioDAO horarioDAO = new HorarioDAO();
+    private final ProfessorDAO professorDAO = new ProfessorDAO();
 
     public String cadastrarOcorrencia(String tipo, String descricao) {
         if (tipo.equals("1")) {
@@ -21,6 +33,45 @@ public class OcorrenciaController {
         } else {
             return "Tipo inválido. Use 1 para Entrada ou 2 para Saída.";
         }
+    }
+
+    public String processarEntrada(String rfid) {
+        Optional<Aluno> alunoOpt = alunoDAO.buscarPorRfid(rfid);
+        if (alunoOpt.isEmpty()) {
+            return "[ACESSO NEGADO] Aluno não encontrado para RFID: " + rfid;
+        }
+
+        Aluno aluno = alunoOpt.get();
+
+        Optional<Turma> turmaOpt = turmaDAO.buscarPorAluno(aluno);
+
+        if (turmaOpt.isEmpty()) {
+            return "[ACESSO] Aluno: " + aluno.getNome() + " - Nenhuma turma atribuída.";
+        }
+
+        Optional<Horario> horarioOpt = horarioDAO.buscarHorarioDaTurma(turmaOpt.get().getIdTurma());
+
+        if (horarioOpt.isEmpty()) {
+            return "[ACESSO] Aluno: " + aluno.getNome() + " - Nenhum horário atribuído.";
+        }
+
+        Horario horario = horarioOpt.get();
+
+        LocalTime horarioEntrada = turmaOpt.get().getHorarioEntrada();
+        int tolerancia = turmaOpt.get().getCurso().getTolerancia();
+
+        boolean atrasado = aluno.estaAtrasado(horarioEntrada,tolerancia);
+
+        if (atrasado) {
+            Optional<Professor> professorOpt = professorDAO.buscarPorId(horario.getIdProfessor());
+
+            professorOpt.ifPresent(professor -> {
+                String msg = "[ATRASO] Aluno " + aluno.getNome() + " chegou atrasado.";
+                WebSocketSender.enviarMensagem(msg);
+            });
+            return "[ATRASO DETECTADO] Aluno: " + aluno.getNome();
+        }
+        return "[ENTRADA AUTORIZADA] Aluno: " + aluno.getNome();
     }
 
     public String atualizarOcorrencia(int id, String tipo, String descricao) {

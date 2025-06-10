@@ -1,6 +1,8 @@
 package com.senai.model.usuario.aluno;
 
 import com.senai.model.usuario.Usuario;
+
+import java.time.LocalTime;
 import java.util.Objects;
 
 public class Aluno extends Usuario {
@@ -27,6 +29,10 @@ public class Aluno extends Usuario {
 
     public void setIdCartaoRfid(String idCartaoRfid) {
         this.idCartaoRfid = idCartaoRfid;
+    }
+
+    public boolean estaAtrasado(LocalTime horarioEntrada, int tolerancia) {
+        return LocalTime.now().isAfter(horarioEntrada.plusMinutes(tolerancia));
     }
 
     @Override

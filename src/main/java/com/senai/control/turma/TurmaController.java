@@ -59,7 +59,7 @@ public class TurmaController {
     public Curso buscarCursoPorId(int idCurso) {
         List<UC> ucs = new ArrayList<>();
 
-        LocalTime tolerancia = LocalTime.of(0, 20);
+        int tolerancia = 20;
 
         return new Curso(idCurso, "Desenvolvimento de Sistemas", ucs, 100, "TEC", tolerancia);
     }

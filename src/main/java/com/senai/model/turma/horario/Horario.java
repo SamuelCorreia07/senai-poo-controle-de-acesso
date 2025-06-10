@@ -5,19 +5,19 @@ import java.time.format.DateTimeFormatter;
 
 public class Horario {
     private int id;
-    private int idAluno;
+    private int idTurma;
     private int idProfessor;
     private LocalTime horaInicio;
 
-    public Horario(int id, int idAluno, int idProfessor, LocalTime horaInicio) {
+    public Horario(int id, int idTurma, int idProfessor, LocalTime horaInicio) {
         this.id = id;
-        this.idAluno = idAluno;
+        this.idTurma = idTurma;
         this.idProfessor = idProfessor;
         this.horaInicio = horaInicio;
     }
 
-    public Horario(int idAluno, int idProfessor, LocalTime horaInicio) {
-        this.idAluno = idAluno;
+    public Horario(int idTurma, int idProfessor, LocalTime horaInicio) {
+        this.idTurma = idTurma;
         this.idProfessor = idProfessor;
         this.horaInicio = horaInicio;
     }
@@ -27,8 +27,8 @@ public class Horario {
         return id;
     }
 
-    public int getIdAluno() {
-        return idAluno;
+    public int getIdTurma() {
+        return idTurma;
     }
 
     public int getIdProfessor() {
@@ -44,8 +44,8 @@ public class Horario {
         this.id = id;
     }
 
-    public void setIdAluno(int idAluno) {
-        this.idAluno = idAluno;
+    public void setIdTurma(int idTurma) {
+        this.idTurma = idTurma;
     }
 
     public void setIdProfessor(int idProfessor) {
@@ -62,6 +62,6 @@ public class Horario {
     }
 
     public boolean validarHorario() {
-        return horaInicio != null && idAluno > 0 && idProfessor > 0;
+        return horaInicio != null && idTurma > 0 && idProfessor > 0;
     }
 }
