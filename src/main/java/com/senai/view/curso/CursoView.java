@@ -52,8 +52,7 @@ public class CursoView {
         int cargaHoraria = scannerPromptInt("\tCarga horária do curso: ", "Por favor, insira um número válido.");
         String tipo = scannerPromptTipo();
 
-        int toleranciaMinutos = scannerPromptInt("\tTolerância (minutos): ", "Por favor, insira um número válido.");
-        LocalTime tolerancia = LocalTime.of(0, toleranciaMinutos);
+        int tolerancia = scannerPromptInt("\tTolerância (minutos): ", "Por favor, insira um número válido.");
 
         String resultado = controller.cadastrarCurso(titulo, cargaHoraria, tipo, tolerancia);
         System.out.println(resultado);
@@ -66,8 +65,7 @@ public class CursoView {
         int cargaHoraria = scannerPromptInt("\tNova carga horária: ", "Por favor, insira um número válido.");
         String tipo = scannerPromptTipo();
 
-        int toleranciaMinutos = scannerPromptInt("\tNova tolerância (minutos): ", "Por favor, insira um número válido.");
-        LocalTime tolerancia = LocalTime.of(0, toleranciaMinutos);
+        int tolerancia = scannerPromptInt("\tNova tolerância (minutos): ", "Por favor, insira um número válido.");
 
         String resultado = controller.atualizarCurso(id, titulo, cargaHoraria, tipo, tolerancia);
         System.out.println(resultado);
@@ -94,7 +92,7 @@ public class CursoView {
             System.out.println("\n--- LISTA DE CURSOS ---");
             for (Curso c : cursos) {
                 System.out.printf("ID: %d | Título: %s | Carga Horária: %d Horas | Tipo: %s | Tolerância: %s min\n",
-                        c.getIdCurso(), c.getTitulo(), c.getCargaHoraria(), c.getTipo(), c.getTolerancia().getMinute());
+                        c.getIdCurso(), c.getTitulo(), c.getCargaHoraria(), c.getTipo(), c.getTolerancia());
             }
         }
     }
