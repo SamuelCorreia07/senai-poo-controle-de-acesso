@@ -1,0 +1,23 @@
+[
+  {
+    "idTurma": 1,
+    "nome": "DEVM",
+    "curso": {
+      "idCurso": 1,
+      "titulo": "Desenvolvimento de Sistemas",
+      "ucs": [],
+      "cargaHoraria": 100,
+      "tipo": "TEC",
+      "tolerancia": 20
+    },
+    "subturmas": [
+      {
+        "idSubTurma": 0,
+        "alunos": []
+      }
+    ],
+    "dataInicio": "29/07/2024",
+    "qtdSemestre": 4,
+    "horarioEntrada": "08:00"
+  }
+]

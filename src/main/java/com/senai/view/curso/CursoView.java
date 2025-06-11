@@ -11,11 +11,6 @@ public class CursoView {
     private final Scanner scanner = new Scanner(System.in);
     private final CursoController controller = new CursoController();
 
-    public static void main(String[] args) {
-        CursoView view = new CursoView();
-        view.menuCursoView();
-    }
-
     public void menuCursoView() {
         String opcao;
         String menu = """

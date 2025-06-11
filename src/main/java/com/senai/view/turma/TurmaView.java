@@ -12,11 +12,6 @@ public class TurmaView {
     private final Scanner scanner = new Scanner(System.in);
     private final TurmaController controller = new TurmaController();
 
-    public static void main(String[] args) {
-        TurmaView view = new TurmaView();
-        view.menuTurmaView();
-    }
-
     // Exibição do menu de opções
     public void menuTurmaView() {
         String opcao;

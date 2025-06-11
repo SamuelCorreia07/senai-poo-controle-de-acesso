@@ -29,7 +29,6 @@ public class HorarioDAO {
             Type listType = new TypeToken<List<Horario>>() {}.getType();
             return gson.fromJson(reader, listType);
         } catch (IOException e) {
-            System.out.println("Erro ao carregar os horários: " + e.getMessage());
             return new ArrayList<>();
         }
     }
@@ -38,7 +37,7 @@ public class HorarioDAO {
         try (FileWriter writer = new FileWriter(caminho)) {
             gson.toJson(lista, writer);
         } catch (IOException e) {
-            System.out.println("Erro ao salvar os horários: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

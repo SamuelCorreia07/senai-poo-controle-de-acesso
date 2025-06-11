@@ -45,65 +45,94 @@ public class UsuarioView {
     }
 
     private void cadastrar() {
-        String tipo = scannerPrompt("\nTipo " +
-                "\n\t1 - Aluno" +
-                "\n\t2 - Professor" +
-                "\n\t3 - Coordenador" +
-                "\n\t4 - AQV");
+        String opcao = scannerPrompt(
+                """
+                Tipo:
+                    1 - Aluno
+                    2 - Professor
+                    3 - Coordenador
+                    4 - AQV
+                
+                """);
 
         String nome = scannerPrompt("\tNome: ");
         String login = scannerPrompt("\tLogin: ");
         String senha = scannerPrompt("\tSenha: ");
 
-        if (tipo.equals("1")) {
+        if (opcao.equals("1")) {
+            String tipo = "Aluno";
             int idade = scannerPromptInt("\tIdade: ");
             String rfid = scannerPrompt("\tID do cartão RFID: ");
             System.out.println("\n" + controller.cadastrarUsuario(tipo, nome, login, senha, idade, rfid) + "\n");
-        } else if (tipo.equals("2")) {
+        } else if (opcao.equals("2")) {
+            String tipo = "Professor";
             String disciplina = scannerPrompt("\tDisciplina: ");
             System.out.println("\n" + controller.cadastrarUsuario(tipo, nome, login, senha, disciplina) + "\n");
-        } else if (tipo.equals("3")) {
+        } else if (opcao.equals("3")) {
+            String tipo = "Coordenador";
             String departamento = scannerPrompt("\tDepartamento: ");
             System.out.println("\n" + controller.cadastrarUsuario(tipo, nome, login, senha, departamento) + "\n");
-        } else if (tipo.equals("4")) {
+        } else if (opcao.equals("4")) {
+            String tipo = "AQV";
             System.out.println("\n" + controller.cadastrarUsuario(tipo, nome, login, senha) + "\n");
         }
     }
 
 
     private void atualizar() {
-        String tipo = scannerPrompt("\nTipo " +
-                "\n\t1 - Aluno" +
-                "\n\t2 - Professor" +
-                "\n\t3 - Coordenador" +
-                "\n\t4 - AQV");
+        String opcao = scannerPrompt("""
+                Tipo:
+                    1 - Aluno
+                    2 - Professor
+                    3 - Coordenador
+                    4 - AQV
+                
+                """);
+        String tipo;
         int id = scannerPromptInt("\nID: ");
         String nome = scannerPrompt("\tNovo nome: ");
         String login = scannerPrompt("\tNovo Login: ");
         String senha = scannerPrompt("\tNova Senha: ");
 
-        if (tipo.equals("1")) {
+        if (opcao.equals("1")) {
+            tipo = "Aluno";
             int idade = scannerPromptInt("\tNova idade: ");
             String rfid = scannerPrompt("\tNovo RFID: ");
             System.out.println("\n" + controller.atualizarUsuario(tipo, id, nome, login, senha, idade, rfid) + "\n");
-        } else if (tipo.equals("2")) {
+        } else if (opcao.equals("2")) {
+            tipo = "Professor";
             String disciplina = scannerPrompt("\tNova disciplina: ");
             System.out.println("\n" + controller.atualizarUsuario(tipo, id, nome, login, senha, disciplina) + "\n");
-        } else if (tipo.equals("3")) {
+        } else if (opcao.equals("3")) {
+            tipo = "Coordenador";
             String departamento = scannerPrompt("\tNovo departamento: ");
             System.out.println("\n" + controller.atualizarUsuario(tipo, id, nome, login, senha, departamento) + "\n");
-        } else if (tipo.equals("4")) {
+        } else if (opcao.equals("4")) {
+            tipo = "AQV";
             System.out.println("\n" + controller.atualizarUsuario(tipo, id, nome, login, senha) + "\n");
         }
     }
 
     private void remover() {
-        String tipo = scannerPrompt("\nTipo " +
-                "\n\t1 - Aluno" +
-                "\n\t2 - Professor" +
-                "\n\t3 - AQV" +
-                "\n\t4 - Coordenador");
+        String opcao = scannerPrompt("""
+                Tipo:
+                    1 - Aluno
+                    2 - Professor
+                    3 - Coordenador
+                    4 - AQV
+                
+                """);
+        String tipo = null;
         int id = scannerPromptInt("ID: ");
+        if (opcao.equals("1")) {
+            tipo = "Aluno";
+        } else if (opcao.equals("2")) {
+            tipo = "Professor";
+        } else if (opcao.equals("3")) {
+            tipo = "Coordenador";
+        } else if (opcao.equals("4")) {
+            tipo = "AQV";
+        }
         System.out.println("\n" + controller.removerUsuario(tipo, id) + "\n");
     }
 

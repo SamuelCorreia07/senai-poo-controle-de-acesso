@@ -1,7 +1,6 @@
 package com.senai.control;
 import com.senai.model.usuario.Usuario;
-import com.senai.model.usuario.dao.AdministradorDAO;
-import com.senai.model.usuario.dao.AdministradorDAO;
+import com.senai.model.usuario.dao.json.AdministradorDAO;
 import com.senai.model.usuario.aluno.dao.json.AlunoDAO;
 import com.senai.model.usuario.dao.json.ProfessorDAO;
 import com.senai.model.usuario.dao.json.CoordenadorDAO;

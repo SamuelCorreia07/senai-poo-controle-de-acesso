@@ -1,6 +1,6 @@
 package com.senai.view;
 
-import com.senai.control.HorarioController;
+import com.senai.control.turma.HorarioController;
 import com.senai.model.turma.horario.Horario;
 
 import java.time.LocalTime;
@@ -45,9 +45,8 @@ public class HorarioView {
     private void cadastrarHorario() {
         int idTurma = scannerPromptInt("\tID do aluno: ", "\nPor favor, insira um ID válido.");
         int idProfessor = scannerPromptInt("\tID do professor: ", "\nPor favor, insira um ID válido.");
-        LocalTime hora = scannerPromptHora("\tHora de início (HH:mm): ");
 
-        String resultado = controller.cadastrarHorario(idTurma, idProfessor, hora);
+        String resultado = controller.cadastrarHorario(idTurma, idProfessor);
         System.out.println(resultado);  // Exibe o resultado
     }
 
@@ -55,9 +54,8 @@ public class HorarioView {
         int id = scannerPromptInt("\tID do horário: ", "\nPor favor, insira um ID válido.");
         int idTurma = scannerPromptInt("\tNovo ID da turma: ", "\nPor favor, insira um ID válido.");
         int idProfessor = scannerPromptInt("\tNovo ID do professor: ", "\nPor favor, insira um ID válido.");
-        LocalTime hora = scannerPromptHora("\tNova hora de início (HH:mm): ");
 
-        String resultado = controller.atualizarHorario(id, idTurma, idProfessor, hora);
+        String resultado = controller.atualizarHorario(id, idTurma, idProfessor);
         System.out.println(resultado);
     }
 
@@ -81,8 +79,8 @@ public class HorarioView {
             System.out.println("\nNenhum horário cadastrad@!");
         } else {
             for (Horario h : horarios) {
-                System.out.printf("ID: %d | Turma ID: %d | Professor ID: %d | Início: %s%n",
-                        h.getId(), h.getIdTurma(), h.getIdProfessor(), h.getHoraInicio());
+                System.out.printf("ID: %d | Turma ID: %d | Professor ID: %d",
+                        h.getId(), h.getIdTurma(), h.getIdProfessor());
             }
         }
     }
@@ -93,9 +91,8 @@ public class HorarioView {
             System.out.printf("""
             ID da Turma: %d
             ID do Professor: %d
-            Hora de Início: %s
             
-            """, h.getIdTurma(), h.getIdProfessor(), h.getHoraInicioFormatada());
+            """, h.getIdTurma(), h.getIdProfessor());
         }
     }
 
