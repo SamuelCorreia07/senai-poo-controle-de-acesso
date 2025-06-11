@@ -1,0 +1,10 @@
+[
+  {
+    "idCurso": 1,
+    "titulo": "Desenvolvimento de Sistemas",
+    "ucs": [],
+    "cargaHoraria": 1500,
+    "tipo": "TEC",
+    "tolerancia": 20
+  }
+]

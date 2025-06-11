@@ -22,6 +22,7 @@ public class CursoView {
                 |       2 - Atualizar curso                                 |
                 |       3 - Remover curso                                   |
                 |       4 - Listar cursos                                   |
+                |       5 - Inserir UC em um curso                          |
                 |       0 - Voltar                                          |
                 |___________________________________________________________|
                 
@@ -36,6 +37,7 @@ public class CursoView {
                 case "2" -> atualizarCurso();
                 case "3" -> removerCurso();
                 case "4" -> listarCursos();
+                case "5" -> inserirUC();
                 case "0" -> System.out.println("\nVoltando ao menu principal...");
                 default -> System.out.println("\nOpção inválida!");
             }
@@ -90,6 +92,17 @@ public class CursoView {
                         c.getIdCurso(), c.getTitulo(), c.getCargaHoraria(), c.getTipo(), c.getTolerancia());
             }
         }
+    }
+
+    private void inserirUC() {
+        listarCursos();
+        int idCurso = scannerPromptInt("\n\tID do curso a atualizar: ", "Por favor, insira um ID válido.");
+        String nome = scannerPromptString("\tNome da UC: ");
+        int cargaHoraria = scannerPromptInt("\tCarga horária da UC: ", "Por favor, insira um número válido.");
+        int qtdSemestres = scannerPromptInt("\tQuantidade de semestres da UC: ", "Por favor, insira um número válido.");
+
+        String resultado = controller.inserirUC(idCurso, nome, cargaHoraria, qtdSemestres);
+        System.out.println(resultado);
     }
 
     private String scannerPromptString(String msg) {

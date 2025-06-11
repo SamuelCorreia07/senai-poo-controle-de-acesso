@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.senai.model.curso.Curso;
+import com.senai.model.curso.UC;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -62,6 +63,17 @@ public class CursoDAO {
 
     public void deletar(int id){
         cursos.removeIf(curso -> curso.getIdCurso() == id);
+        salvarJson();
+    }
+
+    public void inserirUC(Curso curso, UC uc) {
+        int idUC = curso.getUcs().stream().mapToInt(UC::getId).max().orElse(0) + 1;
+        uc.setId(idUC);
+        for (int i = 0; i < curso.getUcs().size(); i++) {
+            if (curso.getUcs().get(i).getId() == uc.getId()) {
+                curso.getUcs().set(i, uc);
+            }
+        }
         salvarJson();
     }
 

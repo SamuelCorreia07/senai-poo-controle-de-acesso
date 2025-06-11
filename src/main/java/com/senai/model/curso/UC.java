@@ -12,6 +12,14 @@ public class UC {
     private int cargaHoraria;
     private int qtdSemestres;
 
+    public UC(int id, String nome, int cargaHoraria, int qtdSemestres) {
+        this.id = id;
+        this.nome = nome;
+        this.professores = new ArrayList<>();
+        this.cargaHoraria = cargaHoraria;
+        this.qtdSemestres = qtdSemestres;
+    }
+
     public int getId() {
         return id;
     }

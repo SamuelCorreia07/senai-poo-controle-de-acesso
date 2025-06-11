@@ -14,7 +14,7 @@ public class TurmaController {
     private final TurmaDAO turmaDAO = new TurmaDAO();
 
     public String cadastrarTurma(String nome, Curso curso, String dataInicio, int qtdSemestre, LocalTime horarioEntrada) {
-        // Criando uma nova turma
+        // Criando uma turma
         Turma novaTurma = new Turma(0, nome, curso, dataInicio, qtdSemestre, horarioEntrada, new ArrayList<>());
 
         turmaDAO.inserir(novaTurma);

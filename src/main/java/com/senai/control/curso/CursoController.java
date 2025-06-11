@@ -2,6 +2,7 @@ package com.senai.control.curso;
 
 import com.senai.model.curso.Curso;
 import com.senai.model.curso.DAO.json.CursoDAO;
+import com.senai.model.curso.UC;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -43,5 +44,17 @@ public class CursoController {
 
     public List<Curso> listarCursos() {
         return cursoDAO.listar();
+    }
+
+    public String inserirUC(int idCurso, String nome, int cargaHoraria, int qtdSemestres) {
+        Optional<Curso> encontrado = cursoDAO.buscarPorId(idCurso);
+        if (encontrado.isPresent()) {
+            Curso atualizado = encontrado.get();
+            UC uc = new UC(0, nome, cargaHoraria, qtdSemestres);
+            cursoDAO.inserirUC(atualizado, uc);
+            return "UC inserida em curso de ID " + idCurso + " com sucesso!";
+        } else {
+            return "Curso com ID " + idCurso + " não encontrado.";
+        }
     }
 }
