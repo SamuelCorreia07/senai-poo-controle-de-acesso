@@ -1,7 +1,6 @@
-package com.senai.model.usuario.dao.mysql;
+package com.senai.model.curso.DAO.mysql;
 
 import com.senai.model.ConexaoMySQL.ConexaoMySQL;
-import com.senai.model.curso.Ambiente;
 import com.senai.model.curso.Curso;
 
 import java.sql.*;
