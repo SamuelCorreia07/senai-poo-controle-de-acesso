@@ -11,12 +11,12 @@ import java.util.Optional;
 public class CursoController {
     private final CursoDAO cursoDAO = new CursoDAO();
 
-    public String cadastrarCurso(String titulo, int cargaHoraria, String tipo, LocalTime tolerancia) {
+    public String cadastrarCurso(String titulo, int cargaHoraria, String tipo, int tolerancia) {
         cursoDAO.inserir(new Curso(0, titulo, new ArrayList<>(), cargaHoraria, tipo, tolerancia));
-        return "Curso cadastrado.";
+        return "Curso cadastrado com sucesso!";
     }
 
-    public String atualizarCurso(int idCurso, String titulo, int cargaHoraria, String tipo, LocalTime tolerancia ) {
+    public String atualizarCurso(int idCurso, String titulo, int cargaHoraria, String tipo, int tolerancia) {
         Optional<Curso> encontrado = cursoDAO.buscarPorId(idCurso);
         if (encontrado.isPresent()) {
             Curso atualizado = encontrado.get();
@@ -26,18 +26,22 @@ public class CursoController {
             atualizado.setTolerancia(tolerancia);
             cursoDAO.atualizar(atualizado);
             return "Curso atualizado com sucesso!";
-        } else return "Curso com ID " + idCurso + " não encontrado.";
+        } else {
+            return "Curso com ID " + idCurso + " não encontrado.";
+        }
     }
 
     public String removerCurso(int idCurso) {
         Optional<Curso> encontrado = cursoDAO.buscarPorId(idCurso);
         if (encontrado.isPresent()) {
             cursoDAO.deletar(idCurso);
-            return "Curso removido.";
-        } else return "Curso com ID " + idCurso + " não encontrado.";
+            return "Curso removido com sucesso!";
+        } else {
+            return "Curso com ID " + idCurso + " não encontrado.";
+        }
     }
 
-    public List<Curso> listarCursos(){
+    public List<Curso> listarCursos() {
         return cursoDAO.listar();
     }
 }

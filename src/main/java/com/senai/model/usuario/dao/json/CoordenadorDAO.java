@@ -43,6 +43,12 @@ public class CoordenadorDAO {
     public void inserir(Coordenador coordenador) {
         int nextId = coordenadores.stream().mapToInt(Coordenador::getId).max().orElse(0) + 1;
         coordenador.setId(nextId);
+
+        if (coordenador.getDepartamento() == null || coordenador.getDepartamento().isEmpty()) {
+            System.out.println("Departamento não informado!");
+            return;
+        }
+
         coordenadores.add(coordenador);
         salvar(coordenadores);
     }
@@ -64,5 +70,9 @@ public class CoordenadorDAO {
 
     public Optional<Coordenador> buscarPorId(int id) {
         return coordenadores.stream().filter(c -> c.getId() == id).findFirst();
+    }
+
+    public Optional<Coordenador> buscarPorLogin(String login) {
+        return coordenadores.stream().filter(a -> a.getLogin().equals(login)).findFirst();
     }
 }

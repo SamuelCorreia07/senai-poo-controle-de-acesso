@@ -2,14 +2,12 @@ package com.senai.model.usuario;
 
 public class AQV extends Usuario {
 
-    public AQV(int id, String nome) {
-        super(id, nome);
+    public AQV(int id, String nome, String login, String senha) {
+        super(id, nome, login, senha);
     }
 
     @Override
-    public String toString() {
-        return "AQV: "+
-                "ID: " + getId() +
-                "Nome: " + getNome();
+    public String getTipo() {
+        return "AQV";
     }
 }

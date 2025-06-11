@@ -3,10 +3,22 @@ package com.senai.model.usuario;
 public abstract class Usuario {
     private int id;
     private String nome;
+    private String login;
+    private String senha;
 
-    public Usuario(int id, String nome) {
+    public Usuario(int id, String nome, String login, String senha) {
         this.id = id;
         this.nome = nome;
+        this.login = login;
+        this.senha = senha;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -17,11 +29,26 @@ public abstract class Usuario {
         this.nome = nome;
     }
 
-    public String getId() {
-        return id;
+    public String getLogin() {
+        return login;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public abstract String getTipo();
+
+    @Override
+    public String toString() {
+        return "Usuario [id=" + id + ", nome=" + nome + ", login=" + login + "]";
     }
 }

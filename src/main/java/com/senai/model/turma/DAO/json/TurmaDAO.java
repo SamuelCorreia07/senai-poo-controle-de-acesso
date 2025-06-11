@@ -1,17 +1,20 @@
 package com.senai.model.turma.DAO.json;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.senai.model.curso.Curso;
 
 import com.senai.model.turma.Subturma;
 import com.senai.model.turma.Turma;
 import com.senai.model.usuario.aluno.Aluno;
+import com.senai.util.LocalTimeAdapter;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +22,7 @@ import java.util.Optional;
 public class TurmaDAO {
     private List<Turma> turmas;
     private final String caminho = "json_data/turmas.json";
-    private final Gson gson = new Gson();
+    private final Gson gson = new GsonBuilder().registerTypeAdapter(LocalTime.class, new LocalTimeAdapter()).setPrettyPrinting().create();
 
     private List<Turma> carregar(){
         try(FileReader reader = new FileReader(caminho)){

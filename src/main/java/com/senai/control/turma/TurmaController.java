@@ -1,8 +1,7 @@
 package com.senai.control.turma;
 
-
-
 import com.senai.model.curso.Curso;
+import com.senai.model.curso.UC;
 import com.senai.model.turma.Turma;
 import com.senai.model.turma.DAO.json.TurmaDAO;
 
@@ -15,33 +14,53 @@ public class TurmaController {
     private final TurmaDAO turmaDAO = new TurmaDAO();
 
     public String cadastrarTurma(String nome, Curso curso, String dataInicio, int qtdSemestre, LocalTime horarioEntrada) {
-        turmaDAO.inserir(new Turma(0, nome, curso, dataInicio, qtdSemestre, horarioEntrada, new ArrayList<>()));
-        return "Turma cadastrada.";
+        // Criando uma nova turma
+        Turma novaTurma = new Turma(0, nome, curso, dataInicio, qtdSemestre, horarioEntrada, new ArrayList<>());
+
+        turmaDAO.inserir(novaTurma);
+        return "Turma cadastrada com sucesso!";
     }
 
     public String atualizarTurma(int idTurma, String nome, Curso curso, String dataInicio, int qtdSemestre, LocalTime horarioEntrada) {
-        Optional<Turma> encontrada = turmaDAO.buscarPorId(idTurma);
-        if (encontrada.isPresent()) {
-            Turma atualizada = encontrada.get();
-            atualizada.setNome(nome);
-            atualizada.setCurso(curso);
-            atualizada.setDataInicio(dataInicio);
-            atualizada.setQtdSemestre(qtdSemestre);
-            atualizada.setHorarioEntrada(horarioEntrada);
-            turmaDAO.atualizar(atualizada);
-            return "Turma atualizada.";
-        } else return "Turma com ID " + idTurma + " não encontrada.";
+        Optional<Turma> turmaOptional = turmaDAO.buscarPorId(idTurma);
+
+        if (turmaOptional.isPresent()) {
+            Turma turmaAtualizada = turmaOptional.get();
+
+            turmaAtualizada.setNome(nome);
+            turmaAtualizada.setCurso(curso);
+            turmaAtualizada.setDataInicio(dataInicio);
+            turmaAtualizada.setQtdSemestre(qtdSemestre);
+            turmaAtualizada.setHorarioEntrada(horarioEntrada);
+
+            turmaDAO.atualizar(turmaAtualizada);
+            return "Turma atualizada com sucesso!";
+        } else {
+            return "Turma com ID " + idTurma + " não encontrada.";
+        }
     }
 
     public String removerTurma(int idTurma) {
-        Optional<Turma> encontrada = turmaDAO.buscarPorId(idTurma);
-        if (encontrada.isPresent()) {
+        Optional<Turma> turmaOptional = turmaDAO.buscarPorId(idTurma);
+
+        if (turmaOptional.isPresent()) {
             turmaDAO.deletar(idTurma);
-            return "Turma removida.";
-        } else return "Turma com ID " + idTurma + " não encontrada.";
+            return "Turma removida com sucesso!";
+        } else {
+            return "Turma com ID " + idTurma + " não encontrada.";
+        }
     }
 
-    public List<Turma> listarTurmas(){
+    public List<Turma> listarTurmas() {
         return turmaDAO.listar();
+    }
+
+    // Método para buscar um curso por ID
+    public Curso buscarCursoPorId(int idCurso) {
+        List<UC> ucs = new ArrayList<>();
+
+        int tolerancia = 20;
+
+        return new Curso(idCurso, "Desenvolvimento de Sistemas", ucs, 100, "TEC", tolerancia);
     }
 }
