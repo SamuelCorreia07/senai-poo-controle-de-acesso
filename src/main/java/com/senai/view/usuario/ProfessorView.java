@@ -11,11 +11,6 @@ public class ProfessorView {
     private final Scanner scanner = new Scanner(System.in);
     private final ProfessorController controller = new ProfessorController();
 
-    public static void main(String[] args) {
-        ProfessorView view = new ProfessorView();
-        view.menuProfessorView();
-    }
-
     public void menuProfessorView() {
         String opcao;
         String menu = """

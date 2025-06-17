@@ -10,14 +10,12 @@ public class UC {
     private String nome;
     private List<Professor> professores;
     private int cargaHoraria;
-    private int qtdSemestres;
 
-    public UC(int id, String nome, int cargaHoraria, int qtdSemestres) {
+    public UC(int id, String nome, int cargaHoraria) {
         this.id = id;
         this.nome = nome;
         this.professores = new ArrayList<>();
         this.cargaHoraria = cargaHoraria;
-        this.qtdSemestres = qtdSemestres;
     }
 
     public int getId() {
@@ -50,13 +48,5 @@ public class UC {
 
     public void setCargaHoraria(int cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
-    }
-
-    public int getQtdSemestres() {
-        return qtdSemestres;
-    }
-
-    public void setQtdSemestres(int qtdSemestres) {
-        this.qtdSemestres = qtdSemestres;
     }
 }

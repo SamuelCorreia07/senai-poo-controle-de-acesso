@@ -10,11 +10,6 @@ public class AqvView {
     private final AQVController controller = new AQVController();
     private final Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        AqvView view = new AqvView();
-        view.menu();
-    }
-
     private void menu() {
         int opcao;
         do {

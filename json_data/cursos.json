@@ -2,7 +2,22 @@
   {
     "idCurso": 1,
     "titulo": "Desenvolvimento de Sistemas",
-    "ucs": [],
+    "ucs": [
+      {
+        "id": 1,
+        "nome": "PBEND",
+        "professores": [
+          {
+            "disciplina": "PBEND",
+            "id": 1,
+            "nome": "Rafael",
+            "login": "rafael",
+            "senha": "79063e8037fff16d297a1fe65136f1251126cddb2cc9870ecf8d653835538e85"
+          }
+        ],
+        "cargaHoraria": 105
+      }
+    ],
     "cargaHoraria": 1500,
     "tipo": "TEC",
     "tolerancia": 20

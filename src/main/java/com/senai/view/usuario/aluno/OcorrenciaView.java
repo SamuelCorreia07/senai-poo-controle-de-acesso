@@ -9,10 +9,6 @@ public class OcorrenciaView {
     private final Scanner scanner = new Scanner(System.in);
     private final OcorrenciaController controller = new OcorrenciaController();
 
-    public static void main(String[] args) {
-        new OcorrenciaView().menu();
-    }
-
     private void menu() {
         String opcao;
         String menuOcorrencia = """

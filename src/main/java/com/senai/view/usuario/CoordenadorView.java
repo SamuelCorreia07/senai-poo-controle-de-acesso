@@ -11,10 +11,6 @@ public class CoordenadorView {
     private final Scanner scanner = new Scanner(System.in);
     private final CoordenadorController controller = new CoordenadorController();
 
-    public static void main(String[] args) {
-        CoordenadorView view = new CoordenadorView();
-        view.menuCoordenadorView();
-    }
 
     public void menuCoordenadorView() {
         String opcao;
