@@ -16,7 +16,7 @@ O sistema simula um ambiente escolar onde o acesso é controlado por RFID, e dif
     * Em caso de atraso, notifica os professores em tempo real via **WebSocket**.
 
 * **Sistema de Login Baseado em Perfis:**
-    * Múltiplos tipos de usuários: **Aluno, Professor, Coordenador, AQV (Agente de Qualidade de Vida) e Administrador**.
+    * Múltiplos tipos de usuários: **Aluno, Professor, Coordenador, AQV (Assistente de Qualidade de Vida) e Administrador**.
     * Menus de console dinâmicos que se adaptam ao perfil do usuário logado.
     * As senhas são armazenadas de forma segura utilizando hash SHA-256.
 
@@ -43,10 +43,11 @@ O sistema simula um ambiente escolar onde o acesso é controlado por RFID, e dif
 
 ## 🧑‍💻 Equipe de Desenvolvimento
 
-* [Nome do Aluno 1]
-* [Nome do Aluno 2]
-* [Nome do Aluno 3]
-* *(Adicione os nomes dos integrantes do grupo aqui)*
+* [Victor Themoteo Mordachini]
+* [Samuel Correia Moreira]
+* [Pedro Henricky Santos Pina]
+* [Nayara Soares]
+* [Nicolas Luis Moura de Almeida]
 
 ---
 
